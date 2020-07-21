@@ -4,7 +4,9 @@ import './ScreenMyProfile.scss';
 export const ScreenMyProfile = () => {
   return (
     <div className="screenMyProfile">
-      ScreenMyProfile
+      <div className="container">
+        ScreenMyProfile
+      </div>
     </div>
   );
 }

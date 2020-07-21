@@ -6,6 +6,7 @@ body {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
+  position: relative;
 }
 
 *,
@@ -16,6 +17,7 @@ body {
 
 #root {
   height: inherit;
+  position: inherit;
 }
 
 a {
@@ -41,4 +43,12 @@ h6 {
   margin: 0;
   font-size: inherit;
   font-family: "Modak", cursive;
+}
+
+.container {
+  max-width: 980px;
+  width: 100%;
+  padding: 0 10px;
+  margin: 0 auto;
+  height: inherit;
 }
