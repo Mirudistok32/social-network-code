@@ -1,0 +1,19 @@
+.icon-setting {
+  display: flex;
+  align-self: flex-start;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover {
+    svg {
+      transition: all 0.23s ease-in-out;
+      fill: snow;
+    }
+  }
+  svg {
+    height: inherit;
+    width: inherit;
+    fill: #2d2d2d;
+  }
+}

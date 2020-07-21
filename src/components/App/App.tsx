@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import { ScreenMyProfile } from '../ScreenMyProfile';
 import { Route, Switch } from 'react-router-dom';
-import { Header } from '../Header/Header';
+import { Header } from '../Header';
 
 export const App = () => {
   return (
