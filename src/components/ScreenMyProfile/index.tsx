@@ -1,11 +1,18 @@
 import React from 'react';
 import './ScreenMyProfile.scss';
+import { VideoBackgound } from '../VideoBackgound';
+import { LeftColumn } from '../LeftColumn';
+import { RightColumn } from '../RightColumn';
 
 export const ScreenMyProfile = () => {
   return (
-    <div className="screenMyProfile">
+    <div className="screen-my-profile">
+      <VideoBackgound />
       <div className="container">
-        ScreenMyProfile
+        {/* Левая колонка */}
+        <LeftColumn />
+        <RightColumn />
+        {/* Правая колонка */}
       </div>
     </div>
   );

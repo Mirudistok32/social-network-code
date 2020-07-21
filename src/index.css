@@ -8,6 +8,7 @@ body {
   font-weight: 400;
   position: relative;
   background-color: #6b8cf11f;
+  padding-bottom: 10px;
 }
 
 *,
@@ -52,4 +53,6 @@ h6 {
   padding: 0 10px;
   margin: 0 auto;
   height: inherit;
+  position: relative;
+  z-index: 100;
 }
