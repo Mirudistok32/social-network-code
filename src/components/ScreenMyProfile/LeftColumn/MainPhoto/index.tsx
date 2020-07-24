@@ -1,6 +1,6 @@
 import React from 'react';
 import './MainPhoto.scss';
-import avatarDefault from '../../assets/images/octopus.svg'
+import avatarDefault from '../../../../assets/images/octopus.svg'
 // import avatarDefault from '../../assets/images/default-icon.jpg'
 
 export type MainPhotoType = {

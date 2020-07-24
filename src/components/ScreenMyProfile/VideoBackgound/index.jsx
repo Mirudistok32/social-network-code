@@ -1,6 +1,6 @@
 import React from 'react';
 import './VideoBackgound.scss';
-import videoSrc from './../../assets/video/Nebula Red - 31420.webm';
+import videoSrc from '../../../assets/video/Sea - 13704.webm';
 
 export const VideoBackgound = ({ video = videoSrc }) => {
   return (

@@ -1,9 +1,7 @@
 .list-friends {
   width: 100%;
-  max-height: 175px;
-  overflow: hidden;
   border-radius: 15px;
-  padding: 5px 10px;
+  padding: 5px;
   background-color: snow;
   color: #2d2d2d;
   margin-bottom: 25px;
@@ -15,7 +13,7 @@
     font-weight: 400;
   }
   &__title-line {
-    height: 2px;
+    height: 4px;
     width: 100%;
     background-color: #2d2d2d;
     border-radius: 5px;
@@ -25,6 +23,7 @@
   &__elements {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
   }
 }

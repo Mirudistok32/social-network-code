@@ -20,6 +20,13 @@
     margin-right: 100px;
     font-style: normal;
   }
+  &__link{
+    transition: all 0.23s ease-in-out;
+    padding: 0 5px;
+    &:hover{
+      background-color: #2d2d2d91;
+    }
+  }
   &__bottom-line {
     height: 3px;
     background-color: snow;

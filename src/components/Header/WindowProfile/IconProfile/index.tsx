@@ -1,6 +1,6 @@
 import React from 'react';
 import './IconProfile.scss';
-import iconProfileDefault from '../../assets/images/default-icon.jpg'
+import iconProfileDefault from '../../../../assets/images/default-icon.jpg'
 
 export type IconProfileType = {
   icon?: string
