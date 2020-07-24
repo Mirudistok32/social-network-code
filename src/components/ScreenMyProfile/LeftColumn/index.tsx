@@ -1,7 +1,7 @@
 import React from 'react';
 import './LeftColumn.scss';
-import { MainPhoto } from '../MainPhoto';
-import { ListFriends } from '../ListFriends';
+import { MainPhoto } from './MainPhoto';
+import { ListFriends } from './ListFriends';
 
 export const LeftColumn = () => {
   return (

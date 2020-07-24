@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.scss';
-import { Logo } from '../Logo/Logo';
-import { WindowProfile } from '../WindowProfile/WindowProfile';
+import { Logo } from './Logo/Logo';
+import { WindowProfile } from './WindowProfile/WindowProfile';
 
 export const Header = () => {
   return (

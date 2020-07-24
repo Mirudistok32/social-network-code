@@ -1,6 +1,6 @@
 import React from 'react';
 import './PanelNavInfo.scss';
-import { PanelNavInfoElement } from '../PanelNavInfoElement';
+import { PanelNavInfoElement } from './PanelNavInfoElement';
 
 export type PanelNavInfoType = {
   count?: number

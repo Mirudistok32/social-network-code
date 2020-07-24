@@ -1,8 +1,8 @@
 import React from 'react';
 import './WindowProfile.scss';
-import { IconProfile } from '../IconProfile';
-import { UserSetting } from '../IconSetting';
-import { UserName } from '../UserName';
+import { IconProfile } from './IconProfile';
+import { UserSetting } from './UserSetting';
+import { UserName } from './UserName';
 
 export const WindowProfile = () => {
   return (

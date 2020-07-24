@@ -1,6 +1,6 @@
 import React from 'react';
 import './PanelNavInfoElement.scss';
-import { PanelNavInfoType } from '../PanelNavInfo';
+import { PanelNavInfoType } from '..';
 
 export const PanelNavInfoElement: React.FC<PanelNavInfoType> = ({ count }) => {
   return (
