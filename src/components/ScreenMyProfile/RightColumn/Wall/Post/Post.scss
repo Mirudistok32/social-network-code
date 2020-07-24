@@ -1,0 +1,43 @@
+.post {
+  &__user {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  &__user-box {
+    display: flex;
+  }
+  &__user-delete{
+    display: flex;
+    justify-content: center;
+    padding-right: 10px;
+  }
+  &__user-img {
+    display: block;
+    height: 55px;
+    width: 55px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: all 0.23s ease-in-out;
+    &:hover {
+      box-shadow: 0 0 0 1px snow, 0 0 5px 0px #399179, 0 0 10px 0px #22cfa1;
+    }
+    img {
+      height: inherit;
+      width: inherit;
+    }
+  }
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+  }
+  &__user-name {
+    color: #2d2d2d;
+    font-weight: 600;
+  }
+  &__content {
+    padding: 0 5px;
+  }
+}

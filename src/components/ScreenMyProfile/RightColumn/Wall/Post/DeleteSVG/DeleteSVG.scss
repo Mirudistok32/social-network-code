@@ -1,0 +1,12 @@
+.delete-svg {
+  svg {
+    height: 10px;
+    width: 10px;
+    fill: #2d2d2d62;
+    transition: all 0.23s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      fill: #2d2d2d;
+    }
+  }
+}

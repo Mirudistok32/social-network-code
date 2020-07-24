@@ -8,9 +8,9 @@ export type ListFriendsElement = {
   photo?: string
 }
 
-export const ListFriendsElement: React.FC<ListFriendsElement> = ({ name = "Anonumus", id = 13, photo = imgDefault }) => {
+export const ListFriendsElement: React.FC<ListFriendsElement> = ({ name = "Anonimus", id = 13, photo = imgDefault }) => {
   return (
-    <a href='/' className="list-friends-element">
+    <a href={`/${id}`} className="list-friends-element">
       <div className="list-friends-element__photo-box">
         <img className="list-friends-element__photo" src={photo} alt="" />
       </div>
