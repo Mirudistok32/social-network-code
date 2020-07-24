@@ -1,0 +1,44 @@
+.info-user {
+  width: 100%;
+  padding: 15px;
+  max-height: 350px;
+//   height: 100%;
+  border-radius: 15px;
+  background-color: rgba(119, 114, 114, 0.76);
+  color: snow;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  &__row {
+    font-family: "Lato", sans-serif;
+    font-style: italic;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__requestData {
+    margin-right: 100px;
+    font-style: normal;
+  }
+  &__bottom-line {
+    height: 3px;
+    background-color: snow;
+    border-radius: 15px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  &__show-all {
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.23s ease-in-out;
+    cursor: pointer;
+    padding: 5px 15px;
+    border-radius: 15px;
+    max-width: 300px;
+    align-self: center;
+    &:hover {
+      background-color: snow;
+      color: #2d2d2d;
+    }
+  }
+}

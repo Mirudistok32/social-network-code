@@ -1,0 +1,37 @@
+import React from 'react';
+import './InfoUser.scss';
+
+export type InfoUserType = {
+  bithday?: string,
+  city?: string,
+  website?: string
+}
+
+type DefaultInfoUserType = {
+  defaultBithday?: string,
+  defaultCity?: string,
+  defaultWebsite?: string
+}
+
+const defaultData: DefaultInfoUserType = {
+  defaultBithday: '22.07.2020',
+  defaultCity: 'Хогвартс',
+  defaultWebsite: 'https://github.com/Mirudistok32'
+}
+
+export const InfoUser: React.FC<InfoUserType> = ({
+  bithday = defaultData.defaultBithday,
+  city = defaultData.defaultCity,
+  website = defaultData.defaultWebsite }) => {
+
+
+  return (
+    <div className="info-user">
+      <div className="info-user__row-bithday info-user__row"><span>День рождения:</span><span className="info-user__requestData">{bithday}</span></div>
+      <div className="info-user__row-city info-user__row"><span>Город:</span><span className="info-user__requestData">{city}</span></div>
+      <div className="info-user__row-website info-user__row"><span>Сайт:</span><span className="info-user__requestData">{website}</span></div>
+      <div className="info-user__bottom-line"></div>
+      <span className="info-user__show-all"><span>Смотреть всю информацию</span></span>
+    </div>
+  );
+}
