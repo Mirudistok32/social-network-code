@@ -1,0 +1,31 @@
+.list-navigation {
+  border-radius: 5px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__item {
+    margin: 0 5px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__item-link {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    transition: all 0.23s ease-in-out;
+    svg {
+      transition: all 0.23s ease-in-out;
+      fill: #2d2d2d;
+    }
+    &:hover {
+      svg {
+        fill: snow;
+      }
+    }
+  }
+}
