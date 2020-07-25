@@ -1,0 +1,13 @@
+.screen-messages {
+  height: 100%;
+  padding: 10px 0;
+  .container {
+    height: inherit;
+  }
+  .container__box {
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 15px;
+  }
+}

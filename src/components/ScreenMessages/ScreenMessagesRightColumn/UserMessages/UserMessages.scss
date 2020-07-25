@@ -1,0 +1,42 @@
+.user-messages {
+  display: flex;
+  // background-color: #2d2d2d7c;
+  border-radius: 5px;
+  padding: 10px 15px;
+  transition: all 0.23s ease-in-out;
+  &:hover {
+    background-color: #2d2d2d7c;
+  }
+  &__img-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    margin-right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: all 0.23s ease-in-out;
+    &:hover {
+      box-shadow: 0 0 0 1px snow, 0 0 5px 0px #399179, 0 0 10px 0px #22cfa1;
+    }
+  }
+  &__img {
+    height: inherit;
+    width: inherit;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    transition: all 0.23s ease-in-out;
+    width: 100%;
+    padding: 1px;
+  }
+  &__name {
+    font-weight: 500;
+    font-size: 18px;
+  }
+  &__text {
+    padding-left: 3px;
+  }
+}

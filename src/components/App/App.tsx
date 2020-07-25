@@ -3,6 +3,7 @@ import './App.scss';
 import { ScreenMyProfile } from '../ScreenMyProfile';
 import { Route, Switch } from 'react-router-dom';
 import { Header } from '../Header';
+import { ScreenMessages } from '../ScreenMessages';
 
 
 export const App = () => {
@@ -10,7 +11,10 @@ export const App = () => {
     <div className="app">
       <Header />
       <Switch >
-        <Route path='/' render={() => <ScreenMyProfile />} />
+        <Route exact path='/' render={() => <ScreenMyProfile />} />
+        {/* ScreenMessages */}
+        <Route exact path='/messages' render={() => <ScreenMessages />} />
+        <Route exact path='/messages/:id' render={() => <ScreenMessages />} />
       </Switch>
     </div>
   );

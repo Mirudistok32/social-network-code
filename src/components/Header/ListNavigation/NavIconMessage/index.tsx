@@ -4,7 +4,7 @@ import './NavIconMessage.scss';
 export const NavIconMessage = () => {
   return (
     <div className="nav-icon-message">
-      <svg id="Capa_1" enable-background="new 0 0 511.072 511.072" height="512" viewBox="0 0 511.072 511.072" width="512"
+      <svg viewBox="0 0 511.072 511.072"
         xmlns="http://www.w3.org/2000/svg">
         <g id="Speech_Bubble_48_">
           <g>
