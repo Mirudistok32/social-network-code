@@ -13,7 +13,7 @@ export type UserMessagesType = {
 export const UserMessages: React.FC<UserMessagesType> = ({ avatar = avatarDefault, name = "Anonimus", text = "Как дела?", id = 13 }) => {
   return (
     <div className="user-messages">
-      <NavLink className="user-messages__img-link" to="/">
+      <NavLink className="user-messages__img-link" to={`/profile/${id}`} >
         <img className="user-messages__img" src={avatar} alt="avatar" />
       </NavLink>
       <NavLink className="user-messages__content" to={`/messages/${id}`}>
@@ -24,6 +24,6 @@ export const UserMessages: React.FC<UserMessagesType> = ({ avatar = avatarDefaul
           {text}
         </div>
       </NavLink>
-    </div>
+    </div >
   );
 }

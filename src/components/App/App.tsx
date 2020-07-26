@@ -11,6 +11,7 @@ export const App = () => {
     <div className="app">
       <Header />
       <Switch >
+        <Route exact path='/profile/:id' render={() => <ScreenMyProfile />} />
         <Route exact path='/' render={() => <ScreenMyProfile />} />
         {/* ScreenMessages */}
         <Route exact path='/messages/' render={() => <ScreenMessages />} />
