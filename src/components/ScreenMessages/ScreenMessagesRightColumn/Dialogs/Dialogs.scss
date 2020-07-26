@@ -1,0 +1,118 @@
+.dialogs {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding-right: 30px;
+    border-bottom: 1px solid #2d2d2d57;
+  }
+  &__back {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: transparent;
+    color: #2d2d2da8;
+    transition: all 0.23s ease-in-out;
+    padding: 5px 10px;
+    &:hover {
+      background-color: #2d2d2da8;
+      color: snow;
+      svg {
+        fill: snow;
+      }
+    }
+    svg {
+      transition: all 0.23s ease-in-out;
+      display: flex;
+      align-items: center;
+      fill: #2d2d2da8;
+      height: 15px;
+      width: 15px;
+      margin-right: 10px;
+    }
+  }
+  &__name {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 5px;
+  }
+  &__avatar-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: all 0.23s ease-in-out;
+    &:hover {
+      box-shadow: 0 0 0 1px snow, 0 0 5px 0px #399179, 0 0 10px 0px #22cfa1;
+    }
+  }
+  &__avatar-img {
+    height: inherit;
+    width: inherit;
+  }
+  &__content {
+    height: 100%;
+    background-color: #39917a48;
+    position: relative;
+    padding: 10px 30px;
+  }
+  &__footer {
+    height: 60px;
+    width: 751px;
+    position: fixed;
+    bottom: 0;
+    background-color: #399179;
+  }
+  &__footer-form {
+    display: flex;
+    height: 100%;
+    padding: 5px;
+  }
+  &__footer-input,
+  &__footer-btn {
+    border-style: none;
+    outline: none;
+  }
+  &__footer-input {
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 15px;
+    transition: all 0.23s ease-in-out;
+    margin-right: 10px;
+    resize: none;
+    &:focus {
+      box-shadow: 0 0 3px 1px #2d2d2d;
+    }
+  }
+  &__footer-btn {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.23s ease-in-out;
+    padding: 1px 10px;
+    border-radius: 15px;
+    background-color: rgba(255, 250, 250, 0.13);
+    &:hover {
+      background-color: #2d2d2d;
+      color: snow;
+      box-shadow: 0 0 10px 1px #2d2d2d, 0 0 0px 1px snow;
+    }
+  }
+}

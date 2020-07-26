@@ -13,7 +13,7 @@ export const App = () => {
       <Switch >
         <Route exact path='/' render={() => <ScreenMyProfile />} />
         {/* ScreenMessages */}
-        <Route exact path='/messages' render={() => <ScreenMessages />} />
+        <Route exact path='/messages/' render={() => <ScreenMessages />} />
         <Route exact path='/messages/:id' render={() => <ScreenMessages />} />
       </Switch>
     </div>
