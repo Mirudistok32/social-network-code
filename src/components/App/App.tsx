@@ -4,6 +4,7 @@ import { ScreenMyProfile } from '../ScreenMyProfile';
 import { Route, Switch } from 'react-router-dom';
 import { Header } from '../Header';
 import { ScreenMessages } from '../ScreenMessages';
+import { ScreenFriends } from '../ScreenFriends';
 
 
 export const App = () => {
@@ -16,6 +17,7 @@ export const App = () => {
         {/* ScreenMessages */}
         <Route exact path='/messages/' render={() => <ScreenMessages />} />
         <Route exact path='/messages/:id' render={() => <ScreenMessages />} />
+        <Route exact path='/friends/' render={() => <ScreenFriends />} />
       </Switch>
     </div>
   );

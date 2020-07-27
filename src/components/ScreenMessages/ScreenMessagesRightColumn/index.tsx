@@ -17,6 +17,7 @@ export const ScreenMessagesRightColumn = () => {
           <UserMessages />
           <UserMessages />
         </div>} />
+        {/* /firends <Friends />*/}
       </Switch>
     </div>
   );
