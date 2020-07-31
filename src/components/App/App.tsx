@@ -18,6 +18,7 @@ export const App = () => {
         <Route exact path='/messages/' render={() => <ScreenMessages />} />
         <Route exact path='/messages/:id' render={() => <ScreenMessages />} />
         <Route exact path='/friends/' render={() => <ScreenFriends />} />
+        <Route exact path='/users/' render={() => <ScreenFriends />} />
       </Switch>
     </div>
   );

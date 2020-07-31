@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { NavIconMessage } from '../../Header/ListNavigation/NavIconMessage';
 import { NavIconHome } from './NavIconHome';
 import { NavIconFriends } from './NavIconFriends';
+import { NavIconUsers } from './NavIconUsers';
 
 
 export const ScreenMessagesLeftColumn = () => {
@@ -18,6 +19,9 @@ export const ScreenMessagesLeftColumn = () => {
         </li>
         <li className="screen-messages-left-column__element">
           <NavLink to='/friends'><NavIconFriends />Друзья</NavLink>
+        </li>
+        <li className="screen-messages-left-column__element">
+          <NavLink to='/users'><NavIconUsers />Все пользователи</NavLink>
         </li>
       </ul>
     </div>
