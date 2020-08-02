@@ -11,7 +11,7 @@ export type UserMessagesType = {
   link?: string
 }
 
-export const UserMessages: React.FC<UserMessagesType> = ({ avatar = avatarDefault, name = "Anonimus", text = "Как дела?", id = 13, link = "/messages/" }) => {
+export const UserMessages: React.FC<UserMessagesType> = ({ avatar = avatarDefault, name = "Anonimus", text = "Как дела?", id = "13", link = "/messages/" }) => {
   return (
     <div className="user-messages">
       <NavLink className="user-messages__img-link" to={`/profile/${id}`} >

@@ -1,13 +1,17 @@
-import { createStore, combineReducers, } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import ReduxThunk from "redux-thunk";
 import { usersReducer } from "./users-reducer";
 import { profileReducer } from "./profile-reducer";
 import { authReducer } from "./auth-reducer";
 
-const reducers = combineReducers({
+const rootReducers = combineReducers({
     usersReducer,
     profileReducer,
     authReducer
 })
 
-const store = createStore(reducers)
+type RootReducersType = typeof rootReducers
+export type AppStateType = ReturnType<RootReducersType>;
+
+const store = createStore(rootReducers, applyMiddleware(ReduxThunk))
 export default store

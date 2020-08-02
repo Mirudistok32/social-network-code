@@ -3,8 +3,8 @@ const initialState = {
 
 }
 
-type ItitialStateType = typeof initialState
+type InitialStateType = typeof initialState
 
-export const authReducer = (state = initialState, action: any): ItitialStateType => {
+export const authReducer = (state = initialState, action: any): InitialStateType => {
     return state
 }

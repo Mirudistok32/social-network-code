@@ -4,8 +4,8 @@ const initialState = {
 
 }
 
-type ItitialStateType = typeof initialState
+type InitialStateType = typeof initialState
 
-export const profileReducer = (state = initialState, action: any): ItitialStateType => {
+export const profileReducer = (state = initialState, action: any): InitialStateType => {
     return state
 } 

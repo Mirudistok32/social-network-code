@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Header } from '../Header';
 import { ScreenMessages } from '../ScreenMessages';
 import { ScreenFriends } from '../ScreenFriends';
+import { ScreenUsers } from '../ScreenUsers';
 
 
 export const App = () => {
@@ -18,7 +19,7 @@ export const App = () => {
         <Route exact path='/messages/' render={() => <ScreenMessages />} />
         <Route exact path='/messages/:id' render={() => <ScreenMessages />} />
         <Route exact path='/friends/' render={() => <ScreenFriends />} />
-        <Route exact path='/users/' render={() => <ScreenFriends />} />
+        <Route exact path='/users/' render={() => <ScreenUsers />} />
       </Switch>
     </div>
   );
