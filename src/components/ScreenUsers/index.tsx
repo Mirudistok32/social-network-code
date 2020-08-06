@@ -17,7 +17,7 @@ export const ScreenUsers: React.FC<DialogsType> = ({ name = "Anonimus", avatar =
       <div className="container">
         <div className="container__box">
           <ScreenMessagesLeftColumn />
-          <ScreenUsersRightColumn />
+          <ScreenUsersRightColumn title="Все самураи" />
         </div>
       </div>
     </div>

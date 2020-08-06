@@ -21,7 +21,7 @@ export const ScreenMessagesLeftColumn = () => {
           <NavLink to='/friends'><NavIconFriends />Друзья</NavLink>
         </li>
         <li className="screen-messages-left-column__element">
-          <NavLink to='/users'><NavIconUsers />Все пользователи</NavLink>
+          <NavLink to='/users'><NavIconUsers />Самураи</NavLink>
         </li>
       </ul>
     </div>

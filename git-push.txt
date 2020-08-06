@@ -1,1 +1,2 @@
 git push https://github.com/Mirudistok32/social-network-code.git
+git pull https://github.com/Mirudistok32/social-network-code.git
