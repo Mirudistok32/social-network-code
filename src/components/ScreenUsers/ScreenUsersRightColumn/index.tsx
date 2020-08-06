@@ -26,9 +26,12 @@ export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users, page
 
   let pagesBtn = pages.map(i => {
     let classSpanActive = 'screen__pagination'
+    //Если текущая страница равна текущему элементу, то устанавливаем выделяющий ее класс
     if (currentPage === i) {
       classSpanActive += ' screen__pagination-active'
     }
+
+    //Получаю из пропсов функцию для установления текущего пользователя по клику
     const setCurrentPage = () => {
       onSetCurrentPage(i)
     }

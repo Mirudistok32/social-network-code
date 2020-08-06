@@ -28,16 +28,20 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = ({
   setUsersThunk,
   setCurrentPage }) => {
 
+    //Делаю запрос на сервер для получения всех users/ и устанавливаю в стейт 
   useEffect(() => {
     setUsersThunk(currentPage, pageSize)
   }, [currentPage, pageSize, setUsersThunk]) //Не понимаю, почему надо прописывать три зависимости
 
+
+  //Считаю количество всего страниц с пользователями
   let allPagesCount = Math.ceil(totalUsersCount / pageSize)
   let pages = []
   for (let i = 1; i <= allPagesCount; i++) {
     pages.push(i)
   }
 
+  //Устанавливаю по клику, какая страница сейчас является текущей
   const onSetCurrentPage = (i: number) => {
     setCurrentPage(i)
   }
