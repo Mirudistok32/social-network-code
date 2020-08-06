@@ -1,3 +1,7 @@
+import { usersAPI } from "../api/users-api";
+import { ThunkAction } from "redux-thunk";
+import { AppStateType, InferActionsTypes } from "./store";
+
 export type PhotosType = {
   small: string | null
   large: string | null
@@ -13,14 +17,15 @@ export type UserType = {
 
 const initialState = {
   users: [] as Array<UserType>,
-  pageSize: 10,
-  currentPage: 1,
-  totalUsersCount: 0,
+  pageSize: 10 as number,
+  currentPage: 1 as number,
+  totalUsersCount: 0 as number,
 }
 
 type InitialStateType = typeof initialState
+type ActionsTypes = InferActionsTypes<typeof actions>
 
-export const usersReducer = (state = initialState, action: any): InitialStateType => {
+export const usersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
   switch (action.type) {
     case 'SN/USERS/SET_USERS': {
       return { ...state, users: action.users }
@@ -32,5 +37,16 @@ export const usersReducer = (state = initialState, action: any): InitialStateTyp
 
 
 export const actions = {
-  setUsers: (users: Array<UserType>) => ({ type: 'SN/USERS/SET_USERS', users } as const)
+  setUsers: (users: Array<UserType>) => ({ type: 'SN/USERS/SET_USERS', users } as const),
 }
+
+
+export const setUsersThunk = (currentPage: number, pageSize: number):
+  ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes> =>
+  async (dispatch) => {
+
+    let data = await usersAPI.getUsers(currentPage, pageSize)
+
+    dispatch(actions.setUsers(data.items))
+
+  }

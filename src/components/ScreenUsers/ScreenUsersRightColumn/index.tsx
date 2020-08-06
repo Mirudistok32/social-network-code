@@ -1,12 +1,22 @@
 import React from 'react';
 import './ScreenUsersRightColumn.scss';
 import { UserMessages } from '../../ScreenMessages/ScreenMessagesRightColumn/UserMessages';
+import { UserType } from '../../../redux/users-reducer';
 
 type PropsType = {
-  title: string
+  title?: string
+  users: Array<UserType>
 }
 
-export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title }) => {
+export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users }) => {
+
+  let usersList = users.map(i => <UserMessages
+    key={i.id}
+    link={`/profile/`}
+    id={i.id}
+    name={i.name}
+    status={i.status} />)
+
   return (
     <div className="screen-friends-right-column">
       <div className="screen-friends-right-column__header">
@@ -18,7 +28,9 @@ export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title }) => {
       </div>
       <div className="screen-friends-right-column__users">
         <div className="screen-friends-right-column__user">
-          <UserMessages link={`/profile/`}  />
+          {
+            usersList
+          }
         </div>
       </div>
     </div>

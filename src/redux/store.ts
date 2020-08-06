@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import ReduxThunk from "redux-thunk";
+import thunkMiddleware from "redux-thunk";
 import { usersReducer } from "./users-reducer";
 import { profileReducer } from "./profile-reducer";
 import { authReducer } from "./auth-reducer";
@@ -13,5 +13,8 @@ const rootReducers = combineReducers({
 type RootReducersType = typeof rootReducers
 export type AppStateType = ReturnType<RootReducersType>;
 
-const store = createStore(rootReducers, applyMiddleware(ReduxThunk))
+type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never
+export type InferActionsTypes<T extends { [key: string]: (...args: any[]) => any }> = ReturnType<PropertiesTypes<T>>
+
+const store = createStore(rootReducers, applyMiddleware(thunkMiddleware))
 export default store

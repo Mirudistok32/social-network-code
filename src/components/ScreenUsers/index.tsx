@@ -2,7 +2,7 @@ import React from 'react';
 import './ScreenUsers.scss';
 import avatarDefault from '../../assets/images/default-icon.jpg'
 import { ScreenMessagesLeftColumn } from '../ScreenMessages/ScreenMessagesLiftColumn';
-import { ScreenUsersRightColumn } from './ScreenUsersRightColumn';
+import { ContainerScreenUsersRightColumn } from './ScreenUsersRightColumn/ContainerScreenUsersRightColumn';
 
 
 export type DialogsType = {
@@ -17,7 +17,7 @@ export const ScreenUsers: React.FC<DialogsType> = ({ name = "Anonimus", avatar =
       <div className="container">
         <div className="container__box">
           <ScreenMessagesLeftColumn />
-          <ScreenUsersRightColumn title="Все самураи" />
+          <ContainerScreenUsersRightColumn />
         </div>
       </div>
     </div>
