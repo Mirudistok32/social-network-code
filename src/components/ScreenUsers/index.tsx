@@ -2,7 +2,7 @@ import React from 'react';
 import './ScreenUsers.scss';
 import avatarDefault from '../../assets/images/default-icon.jpg'
 import { ScreenMessagesLeftColumn } from '../ScreenMessages/ScreenMessagesLiftColumn';
-import { ContainerScreenUsersRightColumn } from './ScreenUsersRightColumn/ContainerScreenUsersRightColumn';
+import ContainerScreenUsersRightColumn from './ScreenUsersRightColumn/ContainerScreenUsersRightColumn';
 
 
 export type DialogsType = {

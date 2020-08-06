@@ -6,15 +6,17 @@ import { AppStateType } from '../../../redux/store';
 import { setUsersThunk, UserType } from './../../../redux/users-reducer'
 
 
-type OwnerType = {}
 type MapStateType = {
   users: Array<UserType>
 }
-type MapDispatchType = {}
+type MapDispatchType = {
+  setUsersThunk: (currentPage: number, pageSize: number) => void
+}
+type OwnerType = {}
 
-type PropsType = OwnerType & MapStateType & MapDispatchType;
+type PropsType = MapStateType & MapDispatchType & OwnerType;
 
-export const ContainerScreenUsersRightColumn: React.FC<PropsType> = ({ users }) => {
+const ContainerScreenUsersRightColumn: React.FC<PropsType> = ({ users, setUsersThunk }) => {
 
   setUsersThunk(1, 10)
 
@@ -30,5 +32,5 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export default compose(
-  connect<MapStateType, MapDispatchType, OwnerType, AppStateType>(mapStateToProps, {})
+  connect<MapStateType, MapDispatchType, OwnerType, AppStateType>(mapStateToProps, { setUsersThunk })
 )(ContainerScreenUsersRightColumn)

@@ -10,12 +10,16 @@ type PropsType = {
 
 export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users }) => {
 
+  // console.log(users);
   let usersList = users.map(i => <UserMessages
     key={i.id}
     link={`/profile/`}
     id={i.id}
     name={i.name}
-    status={i.status} />)
+    status={i.status}
+    photoLarge={i.photos.large}
+    photoSmall={i.photos.small}
+  />)
 
   return (
     <div className="screen-friends-right-column">

@@ -14,8 +14,8 @@ export const ScreenMessagesRightColumn = () => {
         <Route exact path="/messages/:id" render={() => <Dialogs />} />
         {/* UserMessages */}
         <Route path="/messages/" render={() => <div className="screen-messages-right-column__users">
-          <UserMessages />
-          <UserMessages />
+          <UserMessages name={`Васька`} status={`Самурайскую честь не купить низакакие деньги!`} photoSmall={null} photoLarge={null} />
+          <UserMessages name={`Торвальдс`} status={`До конца!`} photoSmall={null} photoLarge={null} />
         </div>} />
         {/* /firends <Friends />*/}
       </Switch>

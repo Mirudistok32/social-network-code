@@ -15,7 +15,7 @@ export const ScreenFriendsRightColumn = () => {
       </div>
       <div className="screen-friends-right-column__users">
         <div className="screen-friends-right-column__user">
-          <UserMessages />
+          <UserMessages name={'Такие дела'} status={"Ни за что не отступлю!"} photoLarge={null} photoSmall={null} />
         </div>
       </div>
     </div>
