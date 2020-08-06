@@ -1,37 +1,61 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScreenUsersRightColumn } from '.';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../../redux/store';
-import { setUsersThunk, UserType } from './../../../redux/users-reducer'
+import { setUsersThunk, UserType, actions } from './../../../redux/users-reducer'
 
 
 type MapStateType = {
   users: Array<UserType>
+  totalUsersCount: number
+  currentPage: number
+  pageSize: number
 }
 type MapDispatchType = {
   setUsersThunk: (currentPage: number, pageSize: number) => void
+  setCurrentPage: (currentPage: number) => void
 }
 type OwnerType = {}
 
 type PropsType = MapStateType & MapDispatchType & OwnerType;
 
-const ContainerScreenUsersRightColumn: React.FC<PropsType> = ({ users, setUsersThunk }) => {
+const ContainerScreenUsersRightColumn: React.FC<PropsType> = ({
+  users,
+  totalUsersCount,
+  currentPage,
+  pageSize,
+  setUsersThunk,
+  setCurrentPage }) => {
 
-  //Возможно нужно использовать useEffect ?
-  setUsersThunk(1, 10)
+  useEffect(() => {
+    setUsersThunk(currentPage, pageSize)
+  }, [currentPage, pageSize, setUsersThunk]) //Не понимаю, почему надо прописывать три зависимости
+
+  let allPagesCount = Math.ceil(totalUsersCount / pageSize)
+  let pages = []
+  for (let i = 1; i <= allPagesCount; i++) {
+    pages.push(i)
+  }
+
+  const onSetCurrentPage = (i: number) => {
+    setCurrentPage(i)
+  }
 
   return (
-    <ScreenUsersRightColumn users={users} />
+    <ScreenUsersRightColumn users={users} pages={pages} currentPage={currentPage} onSetCurrentPage={onSetCurrentPage} />
   );
 }
 
 const mapStateToProps = (state: AppStateType) => {
   return {
-    users: state.usersReducer.users
+    users: state.usersReducer.users,
+    totalUsersCount: state.usersReducer.totalUsersCount,
+    currentPage: state.usersReducer.currentPage,
+    pageSize: state.usersReducer.pageSize
   }
 }
 
 export default compose(
-  connect<MapStateType, MapDispatchType, OwnerType, AppStateType>(mapStateToProps, { setUsersThunk })
+  connect<MapStateType, MapDispatchType, OwnerType, AppStateType>(mapStateToProps, { setUsersThunk, setCurrentPage: actions.setCurrentPage })
 )(ContainerScreenUsersRightColumn)

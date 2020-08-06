@@ -17,9 +17,9 @@ export type UserType = {
 
 const initialState = {
   users: [] as Array<UserType>,
-  pageSize: 10 as number,
-  currentPage: 1 as number,
-  totalUsersCount: 0 as number,
+  pageSize: 9,
+  currentPage: 1,
+  totalUsersCount: 0,
 }
 
 type InitialStateType = typeof initialState
@@ -30,7 +30,12 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
     case 'SN/USERS/SET_USERS': {
       return { ...state, users: action.users }
     }
-
+    case 'SN/USERS/SET_TOTAL_USERS_COUNT': {
+      return { ...state, totalUsersCount: action.totalUsersCount }
+    }
+    case 'SN/USERS/SET_CURRENT_PAGE': {
+      return { ...state, currentPage: action.currentPage }
+    }
     default: return state;
   }
 };
@@ -38,6 +43,8 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
 
 export const actions = {
   setUsers: (users: Array<UserType>) => ({ type: 'SN/USERS/SET_USERS', users } as const),
+  setTotalUsersCount: (totalUsersCount: number) => ({ type: 'SN/USERS/SET_TOTAL_USERS_COUNT', totalUsersCount } as const),
+  setCurrentPage: (currentPage: number) => ({ type: 'SN/USERS/SET_CURRENT_PAGE', currentPage } as const)
 }
 
 
@@ -48,5 +55,6 @@ export const setUsersThunk = (currentPage: number, pageSize: number):
   return async (dispatch) => {
     let data = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(actions.setUsers(data.items))
+    dispatch(actions.setTotalUsersCount(data.totalCount))
   }
 }
