@@ -18,6 +18,7 @@ type PropsType = MapStateType & MapDispatchType & OwnerType;
 
 const ContainerScreenUsersRightColumn: React.FC<PropsType> = ({ users, setUsersThunk }) => {
 
+  //Возможно нужно использовать useEffect ?
   setUsersThunk(1, 10)
 
   return (
