@@ -11,13 +11,13 @@ type MapStateType = ReturnType<typeof mapStateToProps> //Автоматичес�
 type MapDispatchType = {
   setProfileThunk: (id: string) => void
 }
+// RouteComponentProps<PathParamsType> - то что подает нам роутер
 type PathParamsType = {
   userId: string
 }
-// RouteComponentProps<PathParamsType> - то что подает нам роутер
 type PropsType = OwnerType & MapStateType & MapDispatchType & RouteComponentProps<PathParamsType>
 
-const ContainerScreenMyProfile: React.FC<PropsType> = ({ setProfileThunk, match }) => {
+const ContainerScreenMyProfile: React.FC<PropsType> = ({ setProfileThunk, match, profile }) => {
 
   // console.log(props);
   let userId = match.params.userId
@@ -26,13 +26,13 @@ const ContainerScreenMyProfile: React.FC<PropsType> = ({ setProfileThunk, match 
     setProfileThunk(userId)
   }, [userId, setProfileThunk]) //Не понимаю почему две зависимости надо
 
-  
+
   return (<ScreenMyProfile />);
 }
 
 const mapStateToProps = (state: AppStateType) => {
   return {
-
+    profile: state.profileReducer.profile
   }
 }
 
