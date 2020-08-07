@@ -3,10 +3,15 @@ import { ScreenUsersRightColumn } from '.';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../../redux/store';
-import { setUsersThunk, actions } from './../../../redux/users-reducer'
+import { setUsersThunk, actions, UserType } from './../../../redux/users-reducer'
 
 
-type MapStateType = ReturnType<typeof mapStateToProps> // автоматически типизируем с помощью ReturnType
+type MapStateType = {
+  users: Array<UserType>
+  totalUsersCount: number
+  currentPage: number
+  pageSize: number
+}
 type MapDispatchType = {
   setUsersThunk: (currentPage: number, pageSize: number) => void
   setCurrentPage: (currentPage: number) => void
@@ -23,7 +28,7 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = ({
   setUsersThunk,
   setCurrentPage }) => {
 
-    //Делаю запрос на сервер для получения всех users/ и устанавливаю в стейт 
+  //Делаю запрос на сервер для получения всех users/ и устанавливаю в стейт 
   useEffect(() => {
     setUsersThunk(currentPage, pageSize)
   }, [currentPage, pageSize, setUsersThunk]) //Не понимаю, почему надо прописывать три зависимости

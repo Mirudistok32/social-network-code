@@ -5,9 +5,12 @@ import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/store';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { setProfileThunk } from '../../redux/profile-reducer'
+import { GetProfileType } from '../../api/api';
 
 type OwnerType = {}
-type MapStateType = ReturnType<typeof mapStateToProps> //Автоматически типизируем с помощью ReturnType
+type MapStateType = {
+  profile: GetProfileType | null
+}
 type MapDispatchType = {
   setProfileThunk: (id: string) => void
 }
@@ -27,10 +30,10 @@ const ContainerScreenMyProfile: React.FC<PropsType> = ({ setProfileThunk, match,
   }, [userId, setProfileThunk]) //Не понимаю почему две зависимости надо
 
 
-  return (<ScreenMyProfile />);
+  return (<ScreenMyProfile profile={profile} />);
 }
 
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType): MapStateType => {
   return {
     profile: state.profileReducer.profile
   }
