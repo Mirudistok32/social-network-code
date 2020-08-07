@@ -26,8 +26,10 @@ const actions = {
 }
 
 
-export const setProfileThunk = (id: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes> => {
+export const setProfileThunk = (id: number): ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes> => {
+    
     return async (dispatch) => {
+        
         const profile = await profileAPI.getProfile(id)
         dispatch(actions.setProfile(profile))
     }

@@ -3,13 +3,10 @@ import './ScreenMyProfile.scss';
 import { VideoBackgound } from './VideoBackgound';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
-import { GetProfileType } from '../../api/api';
+// import { GetProfileContactsType } from '../../api/api';
+// import { PhotosType } from '../../redux/users-reducer';
 
-interface IProps {
-  profile: GetProfileType | null
-}
-
-export const ScreenMyProfile: React.FC<IProps> = ({ profile }) => {
+export const ScreenMyProfile = () => {
   return (
     <div className="screen-my-profile">
       <VideoBackgound />

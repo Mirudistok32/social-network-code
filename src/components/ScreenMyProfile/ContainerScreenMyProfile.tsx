@@ -12,7 +12,7 @@ type MapStateType = {
   profile: GetProfileType | null
 }
 type MapDispatchType = {
-  setProfileThunk: (id: string) => void
+  setProfileThunk: (id: number) => void
 }
 // RouteComponentProps<PathParamsType> - то что подает нам роутер
 type PathParamsType = {
@@ -23,14 +23,20 @@ type PropsType = OwnerType & MapStateType & MapDispatchType & RouteComponentProp
 const ContainerScreenMyProfile: React.FC<PropsType> = ({ setProfileThunk, match, profile }) => {
 
   // console.log(props);
-  let userId = match.params.userId
+  let userIdOfURL: number = +match.params.userId
+  if (!userIdOfURL) {
+    userIdOfURL = 9747
+  }
 
   useEffect(() => {
-    setProfileThunk(userId)
-  }, [userId, setProfileThunk]) //Не понимаю почему две зависимости надо
+    setProfileThunk(userIdOfURL)
+  }, [userIdOfURL, setProfileThunk]) //Не понимаю почему две зависимости надо
 
+  console.log(profile); //Приходит null
+  return (<>
+    <ScreenMyProfile />;
+  </>)
 
-  return (<ScreenMyProfile profile={profile} />);
 }
 
 const mapStateToProps = (state: AppStateType): MapStateType => {

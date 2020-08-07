@@ -8,11 +8,11 @@ export type UserMessagesType = {
   photoSmall: string | null
   name: string,
   status: string,
-  id?: string,
+  id: string,
   link?: string
 }
 
-export const UserMessages: React.FC<UserMessagesType> = ({ photoLarge, photoSmall, name = "Anonimus", status = "Как дела?", id = "13", link = "/messages/" }) => {
+export const UserMessages: React.FC<UserMessagesType> = ({ photoLarge, photoSmall, name = "Anonimus", status = "Как дела?", id, link = "/messages/" }) => {
 
   let photo = photoSmall ? photoSmall : photoLarge ? photoLarge : avatarDefault
 

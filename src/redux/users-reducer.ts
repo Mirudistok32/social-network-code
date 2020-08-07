@@ -51,7 +51,6 @@ export const actions = {
 export const setUsersThunk = (currentPage: number, pageSize: number):
   ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes> => {
   // постоянно вызывается
-  console.log('setUsersThunk')
   return async (dispatch) => {
     let data = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(actions.setUsers(data.items))

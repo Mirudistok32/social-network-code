@@ -11,7 +11,7 @@ export type DialogsType = {
   id?: string
 }
 
-export const ScreenUsers: React.FC<DialogsType> = ({ name = "Anonimus", avatar = avatarDefault, id = "77" }) => {
+export const ScreenUsers: React.FC<DialogsType> = ({ name = "Anonimus", avatar = avatarDefault, id }) => {
   return (
     <div className="screen-friends">
       <div className="container">

@@ -1,6 +1,6 @@
 import React from 'react';
 import './ScreenFriendsRightColumn.scss';
-import { UserMessages } from '../../ScreenMessages/ScreenMessagesRightColumn/UserMessages';
+// import { UserMessages } from '../../ScreenMessages/ScreenMessagesRightColumn/UserMessages';
 
 
 export const ScreenFriendsRightColumn = () => {
@@ -15,7 +15,7 @@ export const ScreenFriendsRightColumn = () => {
       </div>
       <div className="screen-friends-right-column__users">
         <div className="screen-friends-right-column__user">
-          <UserMessages name={'Такие дела'} status={"Ни за что не отступлю!"} photoLarge={null} photoSmall={null} />
+          Должен быть самурай
         </div>
       </div>
     </div>

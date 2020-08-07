@@ -11,7 +11,7 @@ export type DialogsType = {
   id?: string
 }
 
-export const Dialogs: React.FC<DialogsType> = ({ name = "Anonimus", avatar = avatarDefault, id = "77" }) => {
+export const Dialogs: React.FC<DialogsType> = ({ name = "Anonimus", avatar = avatarDefault, id}) => {
   return (
     <div className="dialogs">
       <div className="dialogs__header">
