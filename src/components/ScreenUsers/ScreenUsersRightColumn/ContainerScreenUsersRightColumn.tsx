@@ -3,15 +3,10 @@ import { ScreenUsersRightColumn } from '.';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../../redux/store';
-import { setUsersThunk, UserType, actions } from './../../../redux/users-reducer'
+import { setUsersThunk, actions } from './../../../redux/users-reducer'
 
 
-type MapStateType = {
-  users: Array<UserType>
-  totalUsersCount: number
-  currentPage: number
-  pageSize: number
-}
+type MapStateType = ReturnType<typeof mapStateToProps> // автоматически типизируем с помощью ReturnType
 type MapDispatchType = {
   setUsersThunk: (currentPage: number, pageSize: number) => void
   setCurrentPage: (currentPage: number) => void
@@ -60,6 +55,6 @@ const mapStateToProps = (state: AppStateType) => {
   }
 }
 
-export default compose(
+export default compose<React.ComponentType>(
   connect<MapStateType, MapDispatchType, OwnerType, AppStateType>(mapStateToProps, { setUsersThunk, setCurrentPage: actions.setCurrentPage })
 )(ContainerScreenUsersRightColumn)
