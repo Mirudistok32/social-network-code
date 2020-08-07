@@ -3,33 +3,33 @@ import './Post.scss';
 import defaultAvatar from '../../../../../assets/images/default-icon.jpg'
 import { DeleteSVG } from './DeleteSVG'
 import { NavLink } from 'react-router-dom';
+import { PhotosType } from '../../../../../redux/users-reducer';
 
 
 export type PostType = {
-  avatar?: string,
-  name?: string,
-  link?: string,
+  photos: PhotosType
+  fullName: string,
   text?: string,
   userId: number
 }
 
 export const Post: React.FC<PostType> = ({
-  avatar = defaultAvatar,
-  name = "Anonimus",
-  link = "/",
+  photos,
+  fullName = "Anonimus",
   text = 'Успех приходит лишь к тем, кто не боится столкнуться с трудностями и пожертвовать своими благами. Джеймс Аллен',
   userId }) => {
 
+  let photoURL = photos.small ? photos.small : photos.large ? photos.large : defaultAvatar
 
   return (
     <div className="post">
       <div className="post__user">
         <div className="post__user-box">
           <NavLink className="post__user-img" to={`/profile/${userId}`}>
-            <img src={defaultAvatar} alt="" />
+            <img src={photoURL} alt="" />
           </NavLink>
           <div className="post__user-info">
-            <NavLink to={`/profile/${userId}`} className="post__user-name">{name}</NavLink>
+            <NavLink to={`/profile/${userId}`} className="post__user-name">{fullName}</NavLink>
           </div>
         </div>
         <div className="post__user-delete">

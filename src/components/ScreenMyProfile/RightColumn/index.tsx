@@ -6,14 +6,16 @@ import { PanelNavInfo } from './PanelNavInfo';
 import { Wall } from './Wall';
 import { WhatNews } from './WhatNews';
 import { GetProfileContactsType } from '../../../api/api';
+import { PhotosType } from '../../../redux/users-reducer';
 
 interface IProps {
   fullName: string
   contacts: GetProfileContactsType
   userId: number
+  photos: PhotosType
 }
 
-export const RightColumn: React.FC<IProps> = ({ fullName, contacts, userId }) => {
+export const RightColumn: React.FC<IProps> = ({ fullName, contacts, userId, photos }) => {
   return (
     <div className="right-column">
       {/* Name+Status */}
@@ -25,7 +27,7 @@ export const RightColumn: React.FC<IProps> = ({ fullName, contacts, userId }) =>
       {/* What is news? */}
       <WhatNews />
       {/* Wall */}
-      <Wall userId={userId} />
+      <Wall userId={userId} photos={photos} fullName={fullName}/>
     </div>
   );
 }
