@@ -9,7 +9,6 @@ export const Header = () => {
     <div className="header">
       <div className="container">
         <Logo />
-        {/* ListNavigation */}
         <ListNavigation />
         <WindowProfile />
       </div>
