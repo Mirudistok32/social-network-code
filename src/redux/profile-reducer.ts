@@ -5,7 +5,8 @@ import { ThunkAction } from "redux-thunk"
 
 
 const initialState = {
-    profile: null as GetProfileType | null
+    profile: null as GetProfileType | null,
+    status: ''
 }
 
 type InitialStateType = typeof initialState
@@ -16,20 +17,26 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
         case 'SN/PROFILE/SET_PROFILE': {
             return { ...state, profile: action.profile }
         }
+        case 'SN/PROFILE/SET_STATUS_PROFILE': {
+            return { ...state, status: action.status }
+        }
     }
     return state
 }
 
 
 const actions = {
-    setProfile: (profile: GetProfileType) => ({ type: 'SN/PROFILE/SET_PROFILE', profile } as const)
+    setProfile: (profile: GetProfileType) => ({ type: 'SN/PROFILE/SET_PROFILE', profile } as const),
+    setStatusProfile: (status: string) => ({ type: 'SN/PROFILE/SET_STATUS_PROFILE', status } as const)
 }
 
 
 export const setProfileThunk = (id: number): ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes> => {
-    
+
     return async (dispatch) => {
         const profile = await profileAPI.getProfile(id)
+        const status = await profileAPI.getStatusProfile(id)
         dispatch(actions.setProfile(profile))
+        dispatch(actions.setStatusProfile(status))
     }
 }
