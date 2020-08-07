@@ -58,9 +58,11 @@ export const setUsersThunk = (currentPage: number, pageSize: number):
   // постоянно вызывается
   return async (dispatch) => {
     dispatch(actions.setIsPreloading(true))
+
     let data = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(actions.setUsers(data.items))
     dispatch(actions.setTotalUsersCount(data.totalCount))
+    
     dispatch(actions.setIsPreloading(false))
   }
 }

@@ -53,7 +53,8 @@ export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users, page
       <div className="screen-friends-right-column__users">
         <div className="screen-friends-right-column__user">
           {
-            isPreloading ? <Loading /> : usersList
+            //Пока isPreloading будет true, то отрисовывай прелоудер(загрузку)
+            isPreloading ? <Loading /> : usersList 
           }
         </div>
       </div>
