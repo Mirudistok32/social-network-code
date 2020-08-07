@@ -10,13 +10,16 @@ type PropsType = {
 }
 
 export const ScreenMyProfile: React.FC<PropsType> = ({ profile }) => {
+
+  let { photos, fullName, contacts, lookingForAJob, lookingForAJobDescription, userId } = profile
+
   return (
     <div className="screen-my-profile">
       <VideoBackgound />
       <div className="container">
         {/* Левая колонка */}
-        <LeftColumn photos={profile.photos} />
-        <RightColumn />
+        <LeftColumn photos={photos} />
+        <RightColumn fullName={fullName} contacts={contacts} userId={userId}/>
         {/* Правая колонка */}
       </div>
     </div>

@@ -10,7 +10,7 @@ export type PostType = {
   name?: string,
   link?: string,
   text?: string,
-  id?: string
+  userId: number
 }
 
 export const Post: React.FC<PostType> = ({
@@ -18,18 +18,18 @@ export const Post: React.FC<PostType> = ({
   name = "Anonimus",
   link = "/",
   text = 'Успех приходит лишь к тем, кто не боится столкнуться с трудностями и пожертвовать своими благами. Джеймс Аллен',
-  id }) => {
+  userId }) => {
 
 
   return (
     <div className="post">
       <div className="post__user">
         <div className="post__user-box">
-          <NavLink className="post__user-img" to={`/profile/${id}`}>
+          <NavLink className="post__user-img" to={`/profile/${userId}`}>
             <img src={defaultAvatar} alt="" />
           </NavLink>
           <div className="post__user-info">
-            <NavLink to={`/profile/${id}`} className="post__user-name">{name}</NavLink>
+            <NavLink to={`/profile/${userId}`} className="post__user-name">{name}</NavLink>
           </div>
         </div>
         <div className="post__user-delete">

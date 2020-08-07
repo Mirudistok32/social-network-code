@@ -13,7 +13,7 @@ export const LeftColumn: React.FC<PropsType> = ({ photos }) => {
   return (
     <div className='left-column'>
       {/* Главное фото */}
-      <MainPhoto />
+      <MainPhoto photos={photos} />
       {/* Список друзей */}
       <ListFriends />
     </div>

@@ -16,6 +16,12 @@
     display: flex;
     justify-content: space-between;
   }
+  &__row-info{
+    margin-left: 10px;
+  }
+  &__row-active{
+    min-height: 20px;
+  }
   &__requestData {
     margin-right: 100px;
     font-style: normal;
