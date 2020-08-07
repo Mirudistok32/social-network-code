@@ -2,16 +2,18 @@ import React from 'react';
 import './ScreenUsersRightColumn.scss';
 import { UserMessages } from '../../ScreenMessages/ScreenMessagesRightColumn/UserMessages';
 import { UserType } from '../../../redux/users-reducer';
+import { Loading } from '../../../utils/Loading/Loading';
 
 type PropsType = {
   title?: string
   users: Array<UserType>
   pages: Array<number>
   currentPage: number
+  isPreloading: boolean
   onSetCurrentPage: (currentPage: number) => void
 }
 
-export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users, pages, currentPage, onSetCurrentPage }) => {
+export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users, pages, currentPage, onSetCurrentPage, isPreloading }) => {
 
   // console.log(users);
   let usersList = users.map(i => <UserMessages
@@ -51,7 +53,7 @@ export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users, page
       <div className="screen-friends-right-column__users">
         <div className="screen-friends-right-column__user">
           {
-            usersList
+            isPreloading ? <Loading /> : usersList
           }
         </div>
       </div>

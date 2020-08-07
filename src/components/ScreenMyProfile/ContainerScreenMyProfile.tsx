@@ -5,41 +5,39 @@ import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/store';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { setProfileThunk } from '../../redux/profile-reducer'
-import { GetProfileType } from '../../api/api';
+import { Loading } from '../../utils/Loading/Loading';
 
 type OwnerType = {}
-type MapStateType = {
-  profile: GetProfileType | null
-}
+type MapStateType = ReturnType<typeof mapStateToProps>
 type MapDispatchType = {
   setProfileThunk: (id: number) => void
 }
 // RouteComponentProps<PathParamsType> - то что подает нам роутер
 type PathParamsType = {
-  userId: string
+  id: string
 }
 type PropsType = OwnerType & MapStateType & MapDispatchType & RouteComponentProps<PathParamsType>
 
 const ContainerScreenMyProfile: React.FC<PropsType> = ({ setProfileThunk, match, profile }) => {
 
-  // console.log(props);
-  let userIdOfURL: number = +match.params.userId
-  if (!userIdOfURL) {
-    userIdOfURL = 9747
-  }
+  let userIdOfURL: number = +match.params.id //Не забывать смотреть название параметров в match
 
   useEffect(() => {
     setProfileThunk(userIdOfURL)
   }, [userIdOfURL, setProfileThunk]) //Не понимаю почему две зависимости надо
 
-  console.log(profile); //Приходит null
+
+  let watchingComponent = !profile ? <Loading /> : <ScreenMyProfile profile={profile} />
+
   return (<>
-    <ScreenMyProfile />;
+    {
+      watchingComponent
+    }
   </>)
 
 }
 
-const mapStateToProps = (state: AppStateType): MapStateType => {
+const mapStateToProps = (state: AppStateType) => {
   return {
     profile: state.profileReducer.profile
   }

@@ -3,16 +3,19 @@ import './ScreenMyProfile.scss';
 import { VideoBackgound } from './VideoBackgound';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
-// import { GetProfileContactsType } from '../../api/api';
-// import { PhotosType } from '../../redux/users-reducer';
+import { GetProfileType } from '../../api/api';
 
-export const ScreenMyProfile = () => {
+type PropsType = {
+  profile: GetProfileType
+}
+
+export const ScreenMyProfile: React.FC<PropsType> = ({ profile }) => {
   return (
     <div className="screen-my-profile">
       <VideoBackgound />
       <div className="container">
         {/* Левая колонка */}
-        <LeftColumn />
+        <LeftColumn photos={profile.photos} />
         <RightColumn />
         {/* Правая колонка */}
       </div>

@@ -9,7 +9,7 @@ export type ListFriendsElement = {
   photo?: string
 }
 
-export const ListFriendsElement: React.FC<ListFriendsElement> = ({ name = "Anonimus", id = 13, photo = imgDefault }) => {
+export const ListFriendsElement: React.FC<ListFriendsElement> = ({ name = "Anonimus", id, photo = imgDefault }) => {
   return (
     <NavLink to={`/profile/${id}`} className="list-friends-element">
       <div className="list-friends-element__photo-box">

@@ -20,6 +20,7 @@ const initialState = {
   pageSize: 9,
   currentPage: 1,
   totalUsersCount: 0,
+  isPreloading: false
 }
 
 type InitialStateType = typeof initialState
@@ -36,6 +37,9 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
     case 'SN/USERS/SET_CURRENT_PAGE': {
       return { ...state, currentPage: action.currentPage }
     }
+    case 'SN/USERS/SET_IS_PRELOADING': {
+      return { ...state, isPreloading: action.isPreloading }
+    }
     default: return state;
   }
 };
@@ -44,7 +48,8 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
 export const actions = {
   setUsers: (users: Array<UserType>) => ({ type: 'SN/USERS/SET_USERS', users } as const),
   setTotalUsersCount: (totalUsersCount: number) => ({ type: 'SN/USERS/SET_TOTAL_USERS_COUNT', totalUsersCount } as const),
-  setCurrentPage: (currentPage: number) => ({ type: 'SN/USERS/SET_CURRENT_PAGE', currentPage } as const)
+  setCurrentPage: (currentPage: number) => ({ type: 'SN/USERS/SET_CURRENT_PAGE', currentPage } as const),
+  setIsPreloading: (isPreloading: boolean) => ({ type: 'SN/USERS/SET_IS_PRELOADING', isPreloading } as const)
 }
 
 
@@ -52,8 +57,10 @@ export const setUsersThunk = (currentPage: number, pageSize: number):
   ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes> => {
   // постоянно вызывается
   return async (dispatch) => {
+    dispatch(actions.setIsPreloading(true))
     let data = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(actions.setUsers(data.items))
     dispatch(actions.setTotalUsersCount(data.totalCount))
+    dispatch(actions.setIsPreloading(false))
   }
 }

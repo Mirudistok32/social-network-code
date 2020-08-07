@@ -11,6 +11,7 @@ type MapStateType = {
   totalUsersCount: number
   currentPage: number
   pageSize: number
+  isPreloading: boolean
 }
 type MapDispatchType = {
   setUsersThunk: (currentPage: number, pageSize: number) => void
@@ -25,6 +26,7 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = ({
   totalUsersCount,
   currentPage,
   pageSize,
+  isPreloading,
   setUsersThunk,
   setCurrentPage }) => {
 
@@ -47,7 +49,9 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = ({
   }
 
   return (
-    <ScreenUsersRightColumn users={users} pages={pages} currentPage={currentPage} onSetCurrentPage={onSetCurrentPage} />
+    <>
+      <ScreenUsersRightColumn users={users} pages={pages} currentPage={currentPage} onSetCurrentPage={onSetCurrentPage} isPreloading={isPreloading}/>
+    </>
   );
 }
 
@@ -56,7 +60,8 @@ const mapStateToProps = (state: AppStateType) => {
     users: state.usersReducer.users,
     totalUsersCount: state.usersReducer.totalUsersCount,
     currentPage: state.usersReducer.currentPage,
-    pageSize: state.usersReducer.pageSize
+    pageSize: state.usersReducer.pageSize,
+    isPreloading: state.usersReducer.isPreloading
   }
 }
 
