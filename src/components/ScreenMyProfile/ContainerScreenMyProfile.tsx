@@ -18,7 +18,7 @@ type PathParamsType = {
 }
 type PropsType = OwnerType & MapStateType & MapDispatchType & RouteComponentProps<PathParamsType>
 
-const ContainerScreenMyProfile: React.FC<PropsType> = ({ setProfileThunk, match, profile }) => {
+const ContainerScreenMyProfile: React.FC<PropsType> = ({ setProfileThunk, match, profile, status }) => {
 
   let userIdOfURL: number = +match.params.id //Не забывать смотреть название параметров в match
 
@@ -27,7 +27,7 @@ const ContainerScreenMyProfile: React.FC<PropsType> = ({ setProfileThunk, match,
   }, [userIdOfURL, setProfileThunk]) //Не понимаю почему две зависимости надо
 
   //Если профиля еще нет(null), то крути прелоудер(загрузку), а когда профиль придет, то отрисовывай рабочую компаненту
-  let watchingComponent = !profile ? <Loading /> : <ScreenMyProfile profile={profile} />
+  let watchingComponent = !profile ? <Loading /> : <ScreenMyProfile profile={profile} status={status}/>
 
   return (<>
     {
@@ -39,7 +39,8 @@ const ContainerScreenMyProfile: React.FC<PropsType> = ({ setProfileThunk, match,
 
 const mapStateToProps = (state: AppStateType) => {
   return {
-    profile: state.profileReducer.profile
+    profile: state.profileReducer.profile,
+    status: state.profileReducer.status
   }
 }
 

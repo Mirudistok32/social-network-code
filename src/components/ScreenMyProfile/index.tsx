@@ -7,9 +7,10 @@ import { GetProfileType } from '../../api/api';
 
 type PropsType = {
   profile: GetProfileType
+  status: string
 }
 
-export const ScreenMyProfile: React.FC<PropsType> = ({ profile }) => {
+export const ScreenMyProfile: React.FC<PropsType> = ({ profile, status }) => {
 
   //lookingForAJob, lookingForAJobDescription no use
   let { photos, fullName, contacts, userId } = profile
@@ -20,7 +21,7 @@ export const ScreenMyProfile: React.FC<PropsType> = ({ profile }) => {
       <div className="container">
         {/* Левая колонка */}
         <LeftColumn photos={photos} />
-        <RightColumn fullName={fullName} contacts={contacts} userId={userId} photos={photos}/>
+        <RightColumn fullName={fullName} contacts={contacts} userId={userId} photos={photos} status={status}/>
         {/* Правая колонка */}
       </div>
     </div>

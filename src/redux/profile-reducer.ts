@@ -34,8 +34,8 @@ const actions = {
 export const setProfileThunk = (id: number): ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes> => {
 
     return async (dispatch) => {
-        const profile = await profileAPI.getProfile(id)
         const status = await profileAPI.getStatusProfile(id)
+        const profile = await profileAPI.getProfile(id)
         dispatch(actions.setProfile(profile))
         dispatch(actions.setStatusProfile(status))
     }

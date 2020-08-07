@@ -13,13 +13,14 @@ interface IProps {
   contacts: GetProfileContactsType
   userId: number
   photos: PhotosType
+  status: string
 }
 
-export const RightColumn: React.FC<IProps> = ({ fullName, contacts, userId, photos }) => {
+export const RightColumn: React.FC<IProps> = ({ fullName, contacts, userId, photos, status }) => {
   return (
     <div className="right-column">
       {/* Name+Status */}
-      <NameStatus fullName={fullName} />
+      <NameStatus fullName={fullName} status={status}/>
       {/* Info about user */}
       <InfoUser contacts={contacts} />
       {/* Panel info */}

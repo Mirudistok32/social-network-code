@@ -14,8 +14,19 @@
     font-weight: 500;
     margin-bottom: 5px;
     display: block;
+    cursor: default;
   }
   &__status {
-      display: block;
+    display: block;
+    background-color: transparent;
+    min-height: 15px;
+    margin: 0 50px;
+    border-radius: 5px;
+    cursor: text;
+    transition: all 0.23s ease-in-out;
+    padding: 1px;
+    // &:hover {
+    //   background-color: #2d2d2d5e;
+    // }
   }
 }
