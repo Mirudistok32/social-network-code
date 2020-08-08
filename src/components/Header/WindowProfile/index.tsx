@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import './WindowProfile.scss';
 import { IconProfile } from './IconProfile';
 import { UserSettingButton } from './UserSettingButton';
@@ -11,11 +11,12 @@ type PropsType = {
   photos: PhotosType
   userId: number
   isActiveWindow: boolean
+  setActiveWindowCallback: () => void
 }
 
 export const WindowProfile: React.FC<PropsType> = (props) => {
 
-  const { fullName, photos, userId, isActiveWindow } = props
+  const { fullName, photos, userId, isActiveWindow, setActiveWindowCallback } = props
 
   return (
     <div className='window-profile'>
@@ -24,7 +25,7 @@ export const WindowProfile: React.FC<PropsType> = (props) => {
       {/* icon-my-profile */}
       <IconProfile photos={photos} id={userId} />
       {/* icon-setting */}
-      <UserSettingButton  />
+      <UserSettingButton setActiveWindowCallback={setActiveWindowCallback} />
       <UserSetting isActiveWindow={isActiveWindow} />
     </div>
   );

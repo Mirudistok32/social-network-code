@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import s from './UserSettingButton.module.scss';
 
 type PropsType = {
+  setActiveWindowCallback: () => void
 }
 
 export const UserSettingButton: React.FC<PropsType> = (props) => {
 
+  const { setActiveWindowCallback } = props
+
+  //Проверял работу объекта событий e. Пока оставлю так
+  const onClick = () => {
+    setActiveWindowCallback()
+  }
+
   return (
-    <span className={s[`icon-setting`]} data-spanUserSettingButton>
+    <span className={s[`icon-setting`]} onClick={onClick} data-spanusersettingbutton  >
       <svg viewBox="0 0 512 512"
         xmlns="http://www.w3.org/2000/svg">
         <g>

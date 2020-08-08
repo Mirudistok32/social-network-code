@@ -7,6 +7,7 @@ import { AppStateType } from '../../../redux/store';
 import { setProfileThunk } from '../../../redux/profile-reducer';
 import { GetProfileType } from '../../../api/api';
 import defaultPhoto from '../../../assets/images/default-icon.jpg';
+import { actionsHeaderReducer } from '../../../redux/header-reducer';
 
 //Костыль
 //Создаю профиль по-умолчанию, он будет стоять, пока не придет настоящий профиль с сервера
@@ -40,18 +41,23 @@ type MapStateType = {
 }
 type MapDispatchType = {
   setProfileThunk: (id: number) => void
+  setActiveWindow: (isActiveWindow: boolean) => void
 }
 type PropsType = OwnerType & MapDispatchType & MapStateType
 
 const ContainerWindowProfile: React.FC<PropsType> = (props) => {
 
   //Деструктуризация из пропсов
-  const { id, profile, isActiveWindow, setProfileThunk } = props
+  const { id, profile, isActiveWindow, setProfileThunk, setActiveWindow } = props
 
 
   //Функция, которая регулирует включения и выключения окна настроек в WindowProfile(в окне профиля),
   //Прокидываю ее в пропсы до элемента кнопки 'открытия настройки'(шестиренки), от куда буду получать объект события e
-  const setActiveWindowCallback = (e: any) => { }
+  const setActiveWindowCallback = () => {
+    
+    // Временно поставил toggle значение 
+    setActiveWindow(!isActiveWindow)
+  }
 
   // Как это обойти?
   // Ведь по-умолчанию, id в state равен null
@@ -84,6 +90,7 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
       fullName={fullName}
       userId={userId}
       isActiveWindow={isActiveWindow}
+      setActiveWindowCallback={setActiveWindowCallback}
     />
   );
 }
@@ -97,6 +104,7 @@ const mapStateToProps = (state: AppStateType): MapStateType => ({
 
 export default compose<React.ComponentType>(
   connect<MapStateType, MapDispatchType, OwnerType, AppStateType>(mapStateToProps, {
-    setProfileThunk: setProfileThunk
+    setProfileThunk: setProfileThunk,
+    setActiveWindow: actionsHeaderReducer.setActiveWindow
   })
 )(ContainerWindowProfile);

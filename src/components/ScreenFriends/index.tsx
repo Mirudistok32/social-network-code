@@ -1,6 +1,6 @@
 import React from 'react';
 import './ScreenFriends.scss';
-import avatarDefault from '../../assets/images/default-icon.jpg'
+// import avatarDefault from '../../assets/images/default-icon.jpg'
 import { ScreenMessagesLeftColumn } from '../ScreenMessages/ScreenMessagesLiftColumn';
 import { ScreenFriendsRightColumn } from './ScreenFriendsRightColumn';
 
@@ -13,7 +13,7 @@ export type DialogsType = {
 
 export const ScreenFriends: React.FC<DialogsType> = (props) => {
 
-  const { name = "Anonimus", avatar = avatarDefault } = props
+  // const { } = props
   
   return (
     <div className="screen-friends">
