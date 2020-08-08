@@ -54,7 +54,6 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
   //Функция, которая регулирует включения и выключения окна настроек в WindowProfile(в окне профиля),
   //Прокидываю ее в пропсы до элемента кнопки 'открытия настройки'(шестиренки), от куда буду получать объект события e
   const setActiveWindowCallback = () => {
-    
     // Временно поставил toggle значение 
     setActiveWindow(!isActiveWindow)
   }
@@ -62,12 +61,11 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
   // Как это обойти?
   // Ведь по-умолчанию, id в state равен null
   let idd: number = Number(id)
+
   //Запрашиваб свой профиль
   useEffect(() => {
     setProfileThunk(idd)
   }, [setProfileThunk, idd])
-
-
 
 
 
