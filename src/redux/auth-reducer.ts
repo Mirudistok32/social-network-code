@@ -47,7 +47,7 @@ export const setDataMeThunk = (): ThunkAction<Promise<void>, AppStateType, unkno
 
         let dataMe = await authAPI.getAuthMe()
 
-        //А если код 1, т.е. мы не авторизованы?
+        //А если код 1, т.е. если мы не авторизованы?
         if (dataMe.resultCode === 0) {
             dispatch(actions.setDataMe(dataMe))
         }
