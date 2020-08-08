@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import s from './UserSettingButton.module.scss';
 
 type PropsType = {
