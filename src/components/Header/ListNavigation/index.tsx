@@ -3,7 +3,12 @@ import './ListNavigation.scss';
 import { NavIconMessage } from './NavIconMessage';
 import { NavLink } from 'react-router-dom';
 
-export const ListNavigation = ({ count = 1000 }) => {
+
+type PropsType = {
+
+}
+export const ListNavigation: React.FC<PropsType> = (props) => {
+
   return (
     <ul className="list-navigation">
       <li className="list-navigation__item" >

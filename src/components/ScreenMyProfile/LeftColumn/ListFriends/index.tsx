@@ -6,7 +6,10 @@ export type ListFriendsType = {
   count?: number
 }
 
-export const ListFriends: React.FC<ListFriendsType> = ({ count = 1000 }) => {
+export const ListFriends: React.FC<ListFriendsType> = (props) => {
+
+  const { count = 1000 } = props
+
   return (
     <div className="list-friends">
       <div className="list-friends__title">

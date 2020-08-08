@@ -6,7 +6,10 @@ export type NameStatusType = {
   status: string
 }
 
-export const NameStatus: React.FC<NameStatusType> = ({ fullName = 'Anonimus', status }) => {
+export const NameStatus: React.FC<NameStatusType> = (props) => {
+
+  const { fullName = 'Anonimus', status } = props
+
   return (
     <div className="name-status">
       <span className='name-status__name'>{fullName}</span>

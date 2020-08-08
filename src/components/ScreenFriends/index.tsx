@@ -11,7 +11,10 @@ export type DialogsType = {
   id?: string
 }
 
-export const ScreenFriends: React.FC<DialogsType> = ({ name = "Anonimus", avatar = avatarDefault }) => {
+export const ScreenFriends: React.FC<DialogsType> = (props) => {
+
+  const { name = "Anonimus", avatar = avatarDefault } = props
+  
   return (
     <div className="screen-friends">
       <div className="container">

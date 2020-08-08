@@ -6,7 +6,10 @@ export type PanelNavInfoType = {
   count?: number
 }
 
-export const PanelNavInfo: React.FC<PanelNavInfoType> = ({ count = 1000 }) => {
+export const PanelNavInfo: React.FC<PanelNavInfoType> = (props) => {
+
+  const { count = 1000 } = props
+
   return (
     <div className="panelnav-info">
       <ul className="panelnav-info__list">

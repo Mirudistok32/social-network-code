@@ -9,7 +9,10 @@ type PropsType = {
 }
 
 
-export const LeftColumn: React.FC<PropsType> = ({ photos }) => {
+export const LeftColumn: React.FC<PropsType> = (props) => {
+
+  const { photos } = props
+
   return (
     <div className='left-column'>
       {/* Главное фото */}

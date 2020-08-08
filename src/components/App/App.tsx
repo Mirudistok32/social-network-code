@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
-import { Route, Switch } from 'react-router-dom';
-import { Header } from '../Header';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import ContainerHeader  from '../Header/ContainerHeader';
 import { ScreenMessages } from '../ScreenMessages';
 import { ScreenFriends } from '../ScreenFriends';
 import { ScreenUsers } from '../ScreenUsers';
@@ -11,15 +11,17 @@ import ContainerScreenMyProfile from '../ScreenMyProfile/ContainerScreenMyProfil
 export const App = () => {
   return (
     <div className="app">
-      <Header />
+      <ContainerHeader />
       <Switch >
-        <Route exact path='/profile/:id' render={() => <ContainerScreenMyProfile />} />
-        <Route exact path='/' render={() => <ContainerScreenMyProfile />} />
+        <Route exact path='/profile/:id?' render={() => <ContainerScreenMyProfile />} />
+        <Route exact path='/' render={() => <div>Начальная страница</div>} />
         {/* ScreenMessages */}
         <Route exact path='/messages/' render={() => <ScreenMessages />} />
         <Route exact path='/messages/:id' render={() => <ScreenMessages />} />
         <Route exact path='/friends/' render={() => <ScreenFriends />} />
         <Route exact path='/users/' render={() => <ScreenUsers />} />
+
+        <Redirect to="/" />
       </Switch>
     </div>
   );

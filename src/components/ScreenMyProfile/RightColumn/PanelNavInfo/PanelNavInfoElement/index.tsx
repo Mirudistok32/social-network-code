@@ -3,7 +3,10 @@ import './PanelNavInfoElement.scss';
 import { PanelNavInfoType } from '..';
 import { NavLink } from 'react-router-dom';
 
-export const PanelNavInfoElement: React.FC<PanelNavInfoType> = ({ count }) => {
+export const PanelNavInfoElement: React.FC<PanelNavInfoType> = (props) => {
+
+  const { count } = props
+
   return (
     <li className="panelnav-info-element__item">
       <NavLink to="/friends/">

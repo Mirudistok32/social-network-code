@@ -13,11 +13,14 @@ export type PostType = {
   userId: number
 }
 
-export const Post: React.FC<PostType> = ({
-  photos,
-  fullName = "Anonimus",
-  text = 'Успех приходит лишь к тем, кто не боится столкнуться с трудностями и пожертвовать своими благами. Джеймс Аллен',
-  userId }) => {
+const defaultSettings = {
+  texts: 'Успех приходит лишь к тем, кто не боится столкнуться с трудностями и пожертвовать своими благами. Джеймс Аллен',
+  name: "Anonimus"
+}
+
+export const Post: React.FC<PostType> = (props) => {
+
+  const { photos, fullName = defaultSettings.name, text = defaultSettings.texts, userId } = props
 
   let photoURL = photos.small ? photos.small : photos.large ? photos.large : defaultAvatar
 

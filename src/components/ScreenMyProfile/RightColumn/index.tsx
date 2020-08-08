@@ -16,11 +16,15 @@ interface IProps {
   status: string
 }
 
-export const RightColumn: React.FC<IProps> = ({ fullName, contacts, userId, photos, status }) => {
+export const RightColumn: React.FC<IProps> = (props) => {
+ 
+  //Деструктуризируем свойства из пропса
+  const { fullName, contacts, userId, photos, status } = props
+
   return (
     <div className="right-column">
       {/* Name+Status */}
-      <NameStatus fullName={fullName} status={status}/>
+      <NameStatus fullName={fullName} status={status} />
       {/* Info about user */}
       <InfoUser contacts={contacts} />
       {/* Panel info */}
@@ -28,7 +32,7 @@ export const RightColumn: React.FC<IProps> = ({ fullName, contacts, userId, phot
       {/* What is news? */}
       <WhatNews />
       {/* Wall */}
-      <Wall userId={userId} photos={photos} fullName={fullName}/>
+      <Wall userId={userId} photos={photos} fullName={fullName} />
     </div>
   );
 }

@@ -9,23 +9,10 @@ export type PropsType = {
   contacts: GetProfileContactsType
 }
 
-// type DefaultInfoUserType = {
-//   defaultBithday?: string,
-//   defaultCity?: string,
-//   defaultWebsite?: string
-// }
+export const InfoUser: React.FC<PropsType> = (props) => {
 
-// const defaultData: DefaultInfoUserType = {
-//   defaultBithday: '22.07.2020',
-//   defaultCity: 'Хогвартс',
-//   defaultWebsite: 'https://github.com/Mirudistok32'
-// }
-
-export const InfoUser: React.FC<PropsType> = ({
-  bithday,
-  city,
-  contacts }) => {
-
+  //Деструктуризируем свойства из пропса
+  const { bithday, city, contacts } = props
   let { facebook, github, instagram, mainLink, twitter, vk, website, youtube } = contacts
 
   //Хук, который отвечает за открытия всей информации при нажатии на кнопку"Смотреть всю информацию"

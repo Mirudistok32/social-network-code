@@ -9,7 +9,10 @@ type PropsType = {
   fullName: string
 }
 
-export const Wall: React.FC<PropsType> = ({ userId, photos, fullName }) => {
+export const Wall: React.FC<PropsType> = (props) => {
+
+  const { userId, photos, fullName } = props
+
   return (
     <div className="wall">
       {/* WallList */}

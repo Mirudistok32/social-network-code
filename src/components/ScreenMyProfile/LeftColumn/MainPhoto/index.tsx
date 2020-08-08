@@ -8,7 +8,9 @@ export type PropsType = {
   photos: PhotosType
 }
 
-export const MainPhoto: React.FC<PropsType> = ({ photos }) => {
+export const MainPhoto: React.FC<PropsType> = (props) => {
+
+  const { photos } = props
 
   let photoURL = photos.small ? photos.small : photos.large ? photos.large : avatarDefault
 
