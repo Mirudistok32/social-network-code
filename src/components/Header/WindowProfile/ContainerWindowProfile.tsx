@@ -1,0 +1,110 @@
+import React, { useEffect, useState, MouseEvent } from 'react';
+import './WindowProfile.scss';
+import { WindowProfile } from '.';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { AppStateType } from '../../../redux/store';
+import { setProfileThunk } from '../../../redux/profile-reducer';
+import { GetProfileType } from '../../../api/api';
+import defaultPhoto from '../../../assets/images/default-icon.jpg';
+
+//Костыль
+//Создаю профиль по-умолчанию, он будет стоять, пока не придет настоящий профиль с сервера
+const defaultProfile: GetProfileType = {
+  fullName: '',
+  lookingForAJob: false,
+  lookingForAJobDescription: '',
+  photos: {
+    large: defaultPhoto,
+    small: defaultPhoto
+  },
+  userId: 0,
+  contacts: {
+    facebook: '',
+    github: '',
+    instagram: '',
+    mainLink: '',
+    twitter: '',
+    vk: '',
+    website: '',
+    youtube: ''
+  }
+}
+
+
+type OwnerType = {}
+type MapStateType = {
+  id: number | null
+  profile: GetProfileType | null
+}
+type MapDispatchType = {
+  setProfileThunk: (id: number) => void
+}
+type PropsType = OwnerType & MapDispatchType & MapStateType
+
+const ContainerWindowProfile: React.FC<PropsType> = (props) => {
+
+  //Деструктуризация из пропсов
+  const { id, profile, setProfileThunk } = props
+
+  //При нажатии на кнопку 'открытия настроек'(значек шестиренки), будет изменять этот стэйт. Ругулирует появления окна настроек.
+  const [activeWindow, setActiveWindow] = useState(false)
+
+  //Функция, которая регулирует включения и выключения окна настроек в WindowProfile(в окне профиля),
+  //Прокидываю ее в пропсы до элемента кнопки 'открытия настройки'(шестиренки), от куда буду получать объект события e
+  const setActiveWindowCallback = (e: MouseEvent<HTMLSpanElement>) => {
+    setActiveWindow(true)
+  }
+
+  // Как это обойти?
+  // Ведь по-умолчанию, id в state равен null
+  let idd: number = Number(id)
+  //Запрашиваб свой профиль
+  useEffect(() => {
+    setProfileThunk(idd)
+  }, [setProfileThunk, idd])
+
+
+
+
+
+  // //Как регулировать приход из пропсов null?
+  // //Здесь я говорю, если profile не null(т.е. тот, который пришел с сервера), то закинь настоящие свойства в пропсы
+  // if (profile) {
+  //   const { photos, fullName, userId }: GetProfileType = profile
+  //   return <WindowProfile photos={photos} fullName={fullName} userId={userId} />
+  // }
+
+  //Нормально ли это? Или вариант выше лучше?
+  let photos = profile ? profile.photos : defaultProfile.photos,
+    fullName = profile ? profile.fullName : defaultProfile.fullName,
+    userId = profile ? profile.userId : defaultProfile.userId;
+
+
+  // Все пропсы, которые собираюсь прокинуть дальше, записываю в этот объект, 
+  // а потом с помощью оператора Spread, прокидываю в компоненту.
+  // Делаю это для эстетики
+  const spreadProps = {
+    photos,
+    fullName,
+    userId,
+    activeWindow,
+    setActiveWindowCallback,
+  }
+
+  return (
+    <WindowProfile {...spreadProps} />
+  );
+}
+
+const mapStateToProps = (state: AppStateType): MapStateType => ({
+  id: state.authReducer.id,
+  profile: state.profileReducer.profile
+})
+
+
+export default compose<React.ComponentType>(
+  connect<MapStateType, MapDispatchType, OwnerType, AppStateType>(mapStateToProps, {
+    setProfileThunk: setProfileThunk
+  })
+)(ContainerWindowProfile);

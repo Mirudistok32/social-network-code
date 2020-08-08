@@ -20,7 +20,7 @@ type PropsType = OwnerType & MapStateType & MapDispatchType & RouteComponentProp
 
 const ContainerScreenMyProfile: React.FC<PropsType> = (props) => {
 
-  //Деструктуризируем свойства из пропса
+  //Деструктуризируем свойства из пропс
   const { setProfileThunk, match, profile, status } = props
 
   let userIdOfURL: number = +match.params.id //Не забывать смотреть название параметров в match

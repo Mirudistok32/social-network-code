@@ -1,0 +1,47 @@
+.icon-setting {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  position: absolute;
+  min-height: 50px;
+  width: 100px;
+  background-color: snow;
+  top: 1px;
+  right: -50px;
+  transform: translateX(+50%);
+  padding: 2px 5px;
+  font-size: 14px;
+  box-shadow: 1px 1px 4px 0px #2d2d2d;
+  &-active {
+    display: flex;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  &__element {
+    width: inherit;
+    margin: 2px 0;
+    border-radius: 1px;
+    transition: all 0.23s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      background-color: #2d2d2d41;
+    }
+  }
+  &__line {
+    height: 2px;
+    width: 100%;
+    background-color: #2d2d2d65;
+  }
+  &__label {
+    border-style: none;
+    background-color: transparent;
+    padding: 3px;
+    border-radius: inherit;
+  }
+}

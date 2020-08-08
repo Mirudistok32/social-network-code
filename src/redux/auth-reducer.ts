@@ -8,7 +8,7 @@ const initialState = {
     id: null as number | null,
     data: null as GetAuthMeDataType | null,
     messages: null as Array<string> | null,
-    autorization: false,
+    isAutorization: false,
     isFetching: false
 }
 
@@ -23,7 +23,7 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
                 ...action.dataMe.data,
                 data: action.dataMe.data,
                 messages: action.dataMe.messages,
-                autorization: true
+                isAutorization: true
             }
         }
         case 'SN/AUTH/SET_IS_FETCHING': {
@@ -37,16 +37,17 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
 
 
 const actions = {
-    setDataMe: (dataMe: GetAuthMeType) => ({ type: 'SN/AUTH/SET_DATA_ME', dataMe } as const),
+    setDataMe: (dataMe: GetAuthMeType<GetAuthMeDataType>) => ({ type: 'SN/AUTH/SET_DATA_ME', dataMe } as const),
     setIsFetching: (is: boolean) => ({ type: 'SN/AUTH/SET_IS_FETCHING', is } as const)
 }
 
-const setDataMeThunk = (): ThunkAction<Promise<void>, AppStateType, unknown, ActionsType> => {
+export const setDataMeThunk = (): ThunkAction<Promise<void>, AppStateType, unknown, ActionsType> => {
     return async (dispatch) => {
         dispatch(actions.setIsFetching(true))
 
         let dataMe = await authAPI.getAuthMe()
 
+        //А если код 1, т.е. мы не авторизованы?
         if (dataMe.resultCode === 0) {
             dispatch(actions.setDataMe(dataMe))
         }

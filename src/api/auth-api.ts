@@ -6,14 +6,27 @@ export type GetAuthMeDataType = {
     login: string
 }
 
-export type GetAuthMeType = {
+export type LoginIn = {
+    id: number
+}
+export type LoginOut = {
+    id: number
+}
+
+export type GetAuthMeType<T> = {
     resultCode: number
     messages: Array<string>
-    data: GetAuthMeDataType
+    data: T
 }
 
 export const authAPI = {
     getAuthMe: () => {
-        return instance.get<GetAuthMeType>(`auth/me`).then(res => res.data)
+        return instance.get<GetAuthMeType<GetAuthMeDataType>>(`auth/me`).then(res => res.data)
+    },
+    loginIn: () => {
+        return instance.post<GetAuthMeType<LoginIn>>(`auth/login`).then(res => res.data)
+    },
+    loginOut: () => {
+        return instance.delete<GetAuthMeType<LoginOut>>(`auth/login`).then(res => res.data)
     }
 };

@@ -1,0 +1,16 @@
+.login {
+  border-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  height: 100%;
+  background-color: transparent;
+  transition: all 0.23s ease-in-out;
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #2d2d2d2a;
+    color: snow;
+  }
+}

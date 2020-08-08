@@ -1,10 +1,10 @@
 .window-profile {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 5px 10px;
-  max-width: 160px;
-  width: 100%;
+  max-width: 200px;
   background-color: transparent;
   transition: all 0.23s ease-in-out;
   border-radius: 10px;

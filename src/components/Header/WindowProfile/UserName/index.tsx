@@ -2,11 +2,14 @@ import React from 'react';
 import './UserName.scss';
 
 export type UserNameType = {
-  name?: string
+  fullName: string
 }
 
-export const UserName: React.FC<UserNameType> = ({ name = "Anonimus" }) => {
+export const UserName: React.FC<UserNameType> = (props) => {
+
+  const { fullName } = props
+
   return (
-    <span className="user-name">{name}</span>
+    <span className="user-name">{fullName}</span>
   );
 }
