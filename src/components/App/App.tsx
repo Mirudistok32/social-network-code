@@ -10,7 +10,7 @@ import ContainerScreenMyProfile from '../ScreenMyProfile/ContainerScreenMyProfil
 
 export const App = () => {
   return (
-    <div className="app">
+    <div className="app" >
       <ContainerHeader />
       <Switch >
         <Route exact path='/profile/:id?' render={() => <ContainerScreenMyProfile />} />

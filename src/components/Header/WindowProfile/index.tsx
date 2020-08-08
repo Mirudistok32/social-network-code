@@ -10,13 +10,12 @@ type PropsType = {
   fullName: string
   photos: PhotosType
   userId: number
-  activeWindow: boolean
-  setActiveWindowCallback: (e: MouseEvent<HTMLSpanElement>) => void
+  isActiveWindow: boolean
 }
 
 export const WindowProfile: React.FC<PropsType> = (props) => {
 
-  const { fullName, photos, userId, setActiveWindowCallback, activeWindow } = props
+  const { fullName, photos, userId, isActiveWindow } = props
 
   return (
     <div className='window-profile'>
@@ -25,8 +24,8 @@ export const WindowProfile: React.FC<PropsType> = (props) => {
       {/* icon-my-profile */}
       <IconProfile photos={photos} id={userId} />
       {/* icon-setting */}
-      <UserSettingButton onClick={setActiveWindowCallback} />
-      <UserSetting activeWindow={activeWindow} />
+      <UserSettingButton  />
+      <UserSetting isActiveWindow={isActiveWindow} />
     </div>
   );
 }

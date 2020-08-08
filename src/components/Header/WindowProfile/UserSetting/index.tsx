@@ -2,15 +2,15 @@ import React from 'react';
 import s from './UserSetting.module.scss';
 
 type PropsType = {
-  activeWindow: boolean
+  isActiveWindow: boolean
 }
 
 export const UserSetting: React.FC<PropsType> = (props) => {
 
-  const { activeWindow } = props
+  const { isActiveWindow } = props
 
   let mainStylesIconSetting = s[`icon-setting`]
-  if (activeWindow) {
+  if (isActiveWindow) {
     mainStylesIconSetting += ` ${s[`icon-setting-active`]}`
   }
 

@@ -1,16 +1,13 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import s from './UserSettingButton.module.scss';
 
 type PropsType = {
-  onClick: (e: MouseEvent<HTMLSpanElement>) => void
 }
 
 export const UserSettingButton: React.FC<PropsType> = (props) => {
 
-  const { onClick } = props
-
   return (
-    <span className={s[`icon-setting`]} onClick={(e) => onClick(e)} data-spanUserSettingButton>
+    <span className={s[`icon-setting`]} data-spanUserSettingButton>
       <svg viewBox="0 0 512 512"
         xmlns="http://www.w3.org/2000/svg">
         <g>
