@@ -11,7 +11,7 @@ export type UserMessagesType = {
   id: number,
   link?: string
   follow: boolean
-  isFetching: boolean
+  isFetchings: Array<number>
   setFollow: (id: number) => void
   setUnfollow: (id: number) => void
 }
@@ -27,12 +27,12 @@ export const UsersItem: React.FC<UserMessagesType> = (props) => {
     id,
     link = "/messages/",
     follow,
-    isFetching,
+    isFetchings,
     setFollow,
     setUnfollow } = props
 
 
-  
+  //Функции подписки и отписки
   const onFollow = () => {
     setFollow(id)
   }
@@ -42,16 +42,18 @@ export const UsersItem: React.FC<UserMessagesType> = (props) => {
 
   //Классы кнопок
   let userMessagesButton = s['user-messages__btn']
-  if (isFetching) {
+  if (isFetchings.some(i => i === id)) {
     userMessagesButton += ` ${s['user-messages__btn-disabled']}`
   }
 
   //Проверяем есть ли фото, а иначе ставим по дефолту
   let photo = photoSmall ? photoSmall : photoLarge ? photoLarge : avatarDefault
 
+
+  //Проверяем подписанны мы на пользователя или нет.
   let followBtn = follow ?
-    <button className={userMessagesButton} disabled={isFetching} onClick={onUnfollow}>Отписаться</button> :
-    <button className={userMessagesButton} disabled={isFetching} onClick={onFollow}>Подписаться</button>
+    <button className={userMessagesButton} disabled={isFetchings.some(i => i === id)} onClick={onUnfollow}>Отписаться</button> :
+    <button className={userMessagesButton} disabled={isFetchings.some(i => i === id)} onClick={onFollow}>Подписаться</button>
 
 
   return (

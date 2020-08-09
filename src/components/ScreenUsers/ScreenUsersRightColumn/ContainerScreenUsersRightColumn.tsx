@@ -12,7 +12,7 @@ type MapStateType = {
   currentPage: number
   pageSize: number
   isPreloading: boolean
-  isFetching: boolean
+  isFetchings: Array<number>
 }
 type MapDispatchType = {
   setUsersThunk: (currentPage: number, pageSize: number) => void
@@ -33,7 +33,7 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = (props) => {
     currentPage,
     pageSize,
     isPreloading,
-    isFetching,
+    isFetchings,
     setCurrentPage,
     setUsersThunk,
     followThunk,
@@ -74,7 +74,7 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = (props) => {
         currentPage={currentPage}
         onSetCurrentPage={onSetCurrentPage}
         isPreloading={isPreloading}
-        isFetching={isFetching}
+        isFetchings={isFetchings}
         setFollow={setFollow}
         setUnfollow={setUnfollow}
       />
@@ -89,7 +89,7 @@ const mapStateToProps = (state: AppStateType) => {
     currentPage: state.usersReducer.currentPage,
     pageSize: state.usersReducer.pageSize,
     isPreloading: state.usersReducer.isPreloading,
-    isFetching: state.usersReducer.isFetching
+    isFetchings: state.usersReducer.isFetchings
   }
 }
 

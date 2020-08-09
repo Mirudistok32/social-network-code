@@ -21,7 +21,7 @@ const initialState = {
   currentPage: 1,
   totalUsersCount: 0,
   isPreloading: false, // Для индикатора загрузки
-  isFetching: false, // Пока идет запрос подписки или отписки
+  isFetchings: [] as Array<number>, // Пока идет запрос подписки или отписки
   // isFollow: false, //Для профиля
 }
 
@@ -46,8 +46,12 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
     // case 'SN/USERS/SET_FOLLOW': {
     //   return { ...state, isFollow: action.isFollow }
     // }
-    case 'SN/USERS/SET_IS_FETCHING': {
-      return { ...state, isFetching: action.isFetching }
+    case 'SN/USERS/SET_IS_FETCHINGS': {
+      return {
+        ...state, isFetchings: action.isFetging ?
+          [...state.isFetchings, action.id] :
+          state.isFetchings.filter(element => element !== action.id)
+      }
     }
     case 'SN/USERS/FOLLOW': {
       return {
@@ -80,7 +84,7 @@ export const actions = {
   setCurrentPage: (currentPage: number) => ({ type: 'SN/USERS/SET_CURRENT_PAGE', currentPage } as const),
   setIsPreloading: (isPreloading: boolean) => ({ type: 'SN/USERS/SET_IS_PRELOADING', isPreloading } as const),
   // setFollow: (isFollow: boolean) => ({ type: 'SN/USERS/SET_FOLLOW', isFollow } as const),
-  setIsFetching: (isFetching: boolean) => ({ type: 'SN/USERS/SET_IS_FETCHING', isFetching } as const),
+  setIsFetchings: (isFetging: boolean, id: number) => ({ type: 'SN/USERS/SET_IS_FETCHINGS', id, isFetging } as const),
   follow: (id: number) => ({ type: 'SN/USERS/FOLLOW', id } as const),
   unfollow: (id: number) => ({ type: 'SN/USERS/UNFOLLOW', id } as const),
 }
@@ -105,10 +109,13 @@ export const setUsersThunk = (currentPage: number, pageSize: number): ThunkType 
 //   dispatch(actions.setFollow(isFollowing))
 // }
 
+
+
+
 export const followThunk = (userId: number): ThunkType => async (dispatch) => {
 
   //Пока идет запрос, кнопка будет за disabled-на
-  dispatch(actions.setIsFetching(true))
+  dispatch(actions.setIsFetchings(true, userId))
 
   let follow = await usersAPI.follow(userId);
 
@@ -116,15 +123,15 @@ export const followThunk = (userId: number): ThunkType => async (dispatch) => {
     // Если запрос прошел успешно, то устанавливаю соответствующие значение в стэйт
     dispatch(actions.follow(userId))
     // Делаем кнопку снова активной
-    dispatch(actions.setIsFetching(false))
+    dispatch(actions.setIsFetchings(false, userId))
   }
+  //Никак не обрабатываю запрос, который не удался(т.е. код ошибки 1)
 
 }
-
 export const unfollowThunk = (userId: number): ThunkType => async (dispatch) => {
 
   //Пока идет запрос, кнопка будет за disabled-на
-  dispatch(actions.setIsFetching(true))
+  dispatch(actions.setIsFetchings(true, userId))
 
   let unfollow = await usersAPI.unfollow(userId);
 
@@ -132,6 +139,7 @@ export const unfollowThunk = (userId: number): ThunkType => async (dispatch) => 
     // Если запрос прошел успешно, то устанавливаю соответствующие значение в стэйт
     dispatch(actions.unfollow(userId))
     // Делаем кнопку снова активной
-    dispatch(actions.setIsFetching(false))
+    dispatch(actions.setIsFetchings(false, userId))
   }
+  //Никак не обрабатываю запрос, который не удался(т.е. код ошибки 1)
 } 

@@ -11,14 +11,14 @@ type PropsType = {
   currentPage: number
   isPreloading: boolean
   onSetCurrentPage: (currentPage: number) => void
-  isFetching: boolean
+  isFetchings: Array<number>
   setFollow: (id: number) => void
   setUnfollow: (id: number) => void
 }
 
 export const ScreenUsersRightColumn: React.FC<PropsType> = (props) => {
 
-  const { title, users, pages, currentPage, onSetCurrentPage, isPreloading, isFetching, setFollow, setUnfollow } = props
+  const { title, users, pages, currentPage, onSetCurrentPage, isPreloading, isFetchings, setFollow, setUnfollow } = props
 
   // console.log(users);
   let usersList = users.map(i => <UsersItem
@@ -30,7 +30,7 @@ export const ScreenUsersRightColumn: React.FC<PropsType> = (props) => {
     photoLarge={i.photos.large}
     photoSmall={i.photos.small}
     follow={i.followed}
-    isFetching={isFetching}
+    isFetchings={isFetchings}
     setFollow={setFollow}
     setUnfollow={setUnfollow}
   />)
