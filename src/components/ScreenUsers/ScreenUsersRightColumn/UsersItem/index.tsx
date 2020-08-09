@@ -45,6 +45,7 @@ export const UsersItem: React.FC<UserMessagesType> = (props) => {
   if (isFetchings.some(i => i === id)) {
     userMessagesButton += ` ${s['user-messages__btn-disabled']}`
   }
+ 
 
   //Проверяем есть ли фото, а иначе ставим по дефолту
   let photo = photoSmall ? photoSmall : photoLarge ? photoLarge : avatarDefault
