@@ -14,9 +14,9 @@ export const usersAPI = {
       )
       .then((res) => res.data);
   },
-  getFollow: (userId: number) => {
-    return instance.get<boolean>(`follow/${userId}`).then(res => res.data)
-  },
+  // getFollow: (userId: number) => {
+  //   return instance.get<boolean>(`follow/${userId}`).then(res => res.data)
+  // },
   follow: (userId: number) => {
     return instance.post<FollowingType>(`follow/${userId}`).then(res => res.data)
   },

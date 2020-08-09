@@ -18,9 +18,21 @@ export type UserMessagesType = {
 
 export const UsersItem: React.FC<UserMessagesType> = (props) => {
 
-  const { photoLarge, photoSmall, name = "Anonimus", status = "Как дела?", id, link = "/messages/", follow, isFetching, setFollow, setUnfollow } = props
+  //Деструктуризация свойств из пропсов
+  const {
+    photoLarge,
+    photoSmall,
+    name = "Anonimus",
+    status = "Как дела?",
+    id,
+    link = "/messages/",
+    follow,
+    isFetching,
+    setFollow,
+    setUnfollow } = props
 
 
+  
   const onFollow = () => {
     setFollow(id)
   }
@@ -38,8 +50,8 @@ export const UsersItem: React.FC<UserMessagesType> = (props) => {
   let photo = photoSmall ? photoSmall : photoLarge ? photoLarge : avatarDefault
 
   let followBtn = follow ?
-    <button className={userMessagesButton} disabled={isFetching} onClick={onFollow}>Отписаться</button> :
-    <button className={userMessagesButton} disabled={isFetching} onClick={onUnfollow}>Подписаться</button>
+    <button className={userMessagesButton} disabled={isFetching} onClick={onUnfollow}>Отписаться</button> :
+    <button className={userMessagesButton} disabled={isFetching} onClick={onFollow}>Подписаться</button>
 
 
   return (

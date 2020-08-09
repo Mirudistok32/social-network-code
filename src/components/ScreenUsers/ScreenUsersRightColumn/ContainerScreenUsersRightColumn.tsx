@@ -44,9 +44,12 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = (props) => {
     setUsersThunk(currentPage, pageSize)
   }, [currentPage, pageSize, setUsersThunk]) //Не понимаю, почему надо прописывать три зависимости
 
+
+  // Колбэк, который вызывает ThunkCreator, который в свою очередь делает запрос на сервер
   const setFollow = (id: number) => {
     followThunk(id)
   }
+  // Колбэк, который вызывает ThunkCreator, который в свою очередь делает запрос на сервер
   const setUnfollow = (id: number) => {
     unfollowThunk(id)
   }
@@ -73,7 +76,8 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = (props) => {
         isPreloading={isPreloading}
         isFetching={isFetching}
         setFollow={setFollow}
-        setUnfollow={setUnfollow} />
+        setUnfollow={setUnfollow}
+      />
     </>
   );
 }

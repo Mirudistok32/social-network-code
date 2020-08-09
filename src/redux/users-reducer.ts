@@ -21,8 +21,8 @@ const initialState = {
   currentPage: 1,
   totalUsersCount: 0,
   isPreloading: false, // Для индикатора загрузки
-  isFetching: false, // Пока идет запрос подписки и отписки
-  isFollow: false, //Для профиля
+  isFetching: false, // Пока идет запрос подписки или отписки
+  // isFollow: false, //Для профиля
 }
 
 type InitialStateType = typeof initialState
@@ -43,11 +43,31 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
     case 'SN/USERS/SET_IS_PRELOADING': {
       return { ...state, isPreloading: action.isPreloading }
     }
-    case 'SN/USERS/SET_FOLLOW': {
-      return { ...state, isFollow: action.isFollow }
-    }
+    // case 'SN/USERS/SET_FOLLOW': {
+    //   return { ...state, isFollow: action.isFollow }
+    // }
     case 'SN/USERS/SET_IS_FETCHING': {
       return { ...state, isFetching: action.isFetching }
+    }
+    case 'SN/USERS/FOLLOW': {
+      return {
+        ...state, users: state.users.map(u => {
+          if (u.id === action.id) {
+            return { ...u, followed: true }
+          }
+          return u
+        })
+      }
+    }
+    case 'SN/USERS/UNFOLLOW': {
+      return {
+        ...state, users: state.users.map(u => {
+          if (u.id === action.id) {
+            return { ...u, followed: false }
+          }
+          return u
+        })
+      }
     }
     default: return state;
   }
@@ -59,8 +79,10 @@ export const actions = {
   setTotalUsersCount: (totalUsersCount: number) => ({ type: 'SN/USERS/SET_TOTAL_USERS_COUNT', totalUsersCount } as const),
   setCurrentPage: (currentPage: number) => ({ type: 'SN/USERS/SET_CURRENT_PAGE', currentPage } as const),
   setIsPreloading: (isPreloading: boolean) => ({ type: 'SN/USERS/SET_IS_PRELOADING', isPreloading } as const),
-  setFollow: (isFollow: boolean) => ({ type: 'SN/USERS/SET_FOLLOW', isFollow } as const),
-  setIsFetching: (isFetching: boolean) => ({ type: 'SN/USERS/SET_IS_FETCHING', isFetching } as const)
+  // setFollow: (isFollow: boolean) => ({ type: 'SN/USERS/SET_FOLLOW', isFollow } as const),
+  setIsFetching: (isFetching: boolean) => ({ type: 'SN/USERS/SET_IS_FETCHING', isFetching } as const),
+  follow: (id: number) => ({ type: 'SN/USERS/FOLLOW', id } as const),
+  unfollow: (id: number) => ({ type: 'SN/USERS/UNFOLLOW', id } as const),
 }
 
 
@@ -77,31 +99,39 @@ export const setUsersThunk = (currentPage: number, pageSize: number): ThunkType 
   }
 }
 
-export const setFollowThunk = (userId: number): ThunkType => async (dispatch) => {
-  let isFollowing = await usersAPI.getFollow(userId);
+// export const setFollowThunk = (userId: number): ThunkType => async (dispatch) => {
+//   let isFollowing = await usersAPI.getFollow(userId);
 
-  dispatch(actions.setFollow(isFollowing))
-}
+//   dispatch(actions.setFollow(isFollowing))
+// }
 
 export const followThunk = (userId: number): ThunkType => async (dispatch) => {
- 
+
+  //Пока идет запрос, кнопка будет за disabled-на
   dispatch(actions.setIsFetching(true))
 
   let follow = await usersAPI.follow(userId);
 
   if (follow.resultCode === 0) {
+    // Если запрос прошел успешно, то устанавливаю соответствующие значение в стэйт
+    dispatch(actions.follow(userId))
+    // Делаем кнопку снова активной
     dispatch(actions.setIsFetching(false))
   }
 
 }
 
 export const unfollowThunk = (userId: number): ThunkType => async (dispatch) => {
- 
+
+  //Пока идет запрос, кнопка будет за disabled-на
   dispatch(actions.setIsFetching(true))
 
   let unfollow = await usersAPI.unfollow(userId);
 
   if (unfollow.resultCode === 0) {
+    // Если запрос прошел успешно, то устанавливаю соответствующие значение в стэйт
+    dispatch(actions.unfollow(userId))
+    // Делаем кнопку снова активной
     dispatch(actions.setIsFetching(false))
   }
 } 
