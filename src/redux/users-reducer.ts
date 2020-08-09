@@ -8,7 +8,7 @@ export type PhotosType = {
 }
 
 export type UserType = {
-  id: string
+  id: number
   name: string
   status: string
   photos: PhotosType
@@ -20,10 +20,9 @@ const initialState = {
   pageSize: 9,
   currentPage: 1,
   totalUsersCount: 0,
-  isPreloading: false,
-  isFetching: false,
-  isFollow: false,
-  follow: false,
+  isPreloading: false, // Для индикатора загрузки
+  isFetching: false, // Пока идет запрос подписки и отписки
+  isFollow: false, //Для профиля
 }
 
 type InitialStateType = typeof initialState
@@ -82,12 +81,27 @@ export const setFollowThunk = (userId: number): ThunkType => async (dispatch) =>
   let isFollowing = await usersAPI.getFollow(userId);
 
   dispatch(actions.setFollow(isFollowing))
-} 
-export const Follow = (userId: number): ThunkType => async (dispatch) => {
+}
+
+export const followThunk = (userId: number): ThunkType => async (dispatch) => {
+ 
+  dispatch(actions.setIsFetching(true))
+
   let follow = await usersAPI.follow(userId);
 
-} 
-export const Unfollow = (userId: number): ThunkType => async (dispatch) => {
+  if (follow.resultCode === 0) {
+    dispatch(actions.setIsFetching(false))
+  }
+
+}
+
+export const unfollowThunk = (userId: number): ThunkType => async (dispatch) => {
+ 
+  dispatch(actions.setIsFetching(true))
+
   let unfollow = await usersAPI.unfollow(userId);
 
+  if (unfollow.resultCode === 0) {
+    dispatch(actions.setIsFetching(false))
+  }
 } 

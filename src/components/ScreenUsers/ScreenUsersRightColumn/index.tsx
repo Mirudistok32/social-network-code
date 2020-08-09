@@ -11,9 +11,14 @@ type PropsType = {
   currentPage: number
   isPreloading: boolean
   onSetCurrentPage: (currentPage: number) => void
+  isFetching: boolean
+  setFollow: (id: number) => void
+  setUnfollow: (id: number) => void
 }
 
-export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users, pages, currentPage, onSetCurrentPage, isPreloading }) => {
+export const ScreenUsersRightColumn: React.FC<PropsType> = (props) => {
+
+  const { title, users, pages, currentPage, onSetCurrentPage, isPreloading, isFetching, setFollow, setUnfollow } = props
 
   // console.log(users);
   let usersList = users.map(i => <UsersItem
@@ -25,6 +30,9 @@ export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users, page
     photoLarge={i.photos.large}
     photoSmall={i.photos.small}
     follow={i.followed}
+    isFetching={isFetching}
+    setFollow={setFollow}
+    setUnfollow={setUnfollow}
   />)
 
   let pagesBtn = pages.map(i => {
@@ -55,7 +63,7 @@ export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users, page
         <div className="screen-friends-right-column__user">
           {
             //Пока isPreloading будет true, то отрисовывай прелоудер(загрузку)
-            isPreloading ? <Loading /> : usersList 
+            isPreloading ? <Loading /> : usersList
           }
         </div>
       </div>

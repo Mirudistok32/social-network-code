@@ -8,19 +8,38 @@ export type UserMessagesType = {
   photoSmall: string | null
   name: string,
   status: string,
-  id: string,
+  id: number,
   link?: string
   follow: boolean
+  isFetching: boolean
+  setFollow: (id: number) => void
+  setUnfollow: (id: number) => void
 }
 
 export const UsersItem: React.FC<UserMessagesType> = (props) => {
 
-  const { photoLarge, photoSmall, name = "Anonimus", status = "Как дела?", id, link = "/messages/", follow } = props
+  const { photoLarge, photoSmall, name = "Anonimus", status = "Как дела?", id, link = "/messages/", follow, isFetching, setFollow, setUnfollow } = props
 
+
+  const onFollow = () => {
+    setFollow(id)
+  }
+  const onUnfollow = () => {
+    setUnfollow(id)
+  }
+
+  //Классы кнопок
+  let userMessagesButton = s['user-messages__btn']
+  if (isFetching) {
+    userMessagesButton += ` ${s['user-messages__btn-disabled']}`
+  }
+
+  //Проверяем есть ли фото, а иначе ставим по дефолту
   let photo = photoSmall ? photoSmall : photoLarge ? photoLarge : avatarDefault
+
   let followBtn = follow ?
-    <button className={s['user-messages__btn']}>Отписаться</button> :
-    <button className={s['user-messages__btn']}>Подписаться</button>
+    <button className={userMessagesButton} disabled={isFetching} onClick={onFollow}>Отписаться</button> :
+    <button className={userMessagesButton} disabled={isFetching} onClick={onUnfollow}>Подписаться</button>
 
 
   return (
