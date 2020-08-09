@@ -24,6 +24,7 @@ export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users, page
     status={i.status}
     photoLarge={i.photos.large}
     photoSmall={i.photos.small}
+    follow={i.followed}
   />)
 
   let pagesBtn = pages.map(i => {

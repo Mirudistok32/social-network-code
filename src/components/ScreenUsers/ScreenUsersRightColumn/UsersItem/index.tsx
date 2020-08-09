@@ -1,5 +1,5 @@
 import React from 'react';
-import './UsersItem.scss';
+import s from './UsersItem.module.scss';
 import avatarDefault from '../../../../assets/images/default-icon.jpg'
 import { NavLink } from 'react-router-dom';
 
@@ -10,26 +10,35 @@ export type UserMessagesType = {
   status: string,
   id: string,
   link?: string
+  follow: boolean
 }
 
-export const UsersItem: React.FC<UserMessagesType> = ({ photoLarge, photoSmall, name = "Anonimus", status = "Как дела?", id, link = "/messages/" }) => {
+export const UsersItem: React.FC<UserMessagesType> = (props) => {
+
+  const { photoLarge, photoSmall, name = "Anonimus", status = "Как дела?", id, link = "/messages/", follow } = props
 
   let photo = photoSmall ? photoSmall : photoLarge ? photoLarge : avatarDefault
+  let followBtn = follow ?
+    <button className={s['user-messages__btn']}>Отписаться</button> :
+    <button className={s['user-messages__btn']}>Подписаться</button>
+
 
   return (
-    <div className="user-messages">
-      <NavLink className="user-messages__img-link" to={`/profile/${id}`} >
-        <img className="user-messages__img" src={photo} alt="avatar" />
+    <div className={s['user-messages']}>
+      <NavLink className={s['user-messages__img-link']} to={`/profile/${id}`} >
+        <img className={s['user-messages__img']} src={photo} alt="avatar" />
       </NavLink>
-      <NavLink className="user-messages__content" to={`${link}${id}`}>
-        <div className="user-messages__name">
+      <NavLink className={s['user-messages__content']} to={`${link}${id}`}>
+        <div className={s['user-messages__name']}>
           {name}
         </div>
-        <div className="user-messages__text">
+        <div className={s['user-messages__text']}>
           {status}
         </div>
       </NavLink>
-      <button>dsfs</button>
+      {
+        followBtn
+      }
     </div >
   );
 }
