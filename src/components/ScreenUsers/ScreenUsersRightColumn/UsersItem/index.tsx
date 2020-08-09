@@ -1,5 +1,5 @@
 import React from 'react';
-import './UserMessages.scss';
+import './UsersItem.scss';
 import avatarDefault from '../../../../assets/images/default-icon.jpg'
 import { NavLink } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ export type UserMessagesType = {
   link?: string
 }
 
-export const UserMessages: React.FC<UserMessagesType> = ({ photoLarge, photoSmall, name = "Anonimus", status = "Как дела?", id, link = "/messages/" }) => {
+export const UsersItem: React.FC<UserMessagesType> = ({ photoLarge, photoSmall, name = "Anonimus", status = "Как дела?", id, link = "/messages/" }) => {
 
   let photo = photoSmall ? photoSmall : photoLarge ? photoLarge : avatarDefault
 
@@ -29,6 +29,7 @@ export const UserMessages: React.FC<UserMessagesType> = ({ photoLarge, photoSmal
           {status}
         </div>
       </NavLink>
+      <button>dsfs</button>
     </div >
   );
 }

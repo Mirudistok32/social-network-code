@@ -1,6 +1,6 @@
 import React from 'react';
 import './ScreenUsersRightColumn.scss';
-import { UserMessages } from '../../ScreenMessages/ScreenMessagesRightColumn/UserMessages';
+import { UsersItem } from './UsersItem';
 import { UserType } from '../../../redux/users-reducer';
 import { Loading } from '../../../utils/Loading/Loading';
 
@@ -16,7 +16,7 @@ type PropsType = {
 export const ScreenUsersRightColumn: React.FC<PropsType> = ({ title, users, pages, currentPage, onSetCurrentPage, isPreloading }) => {
 
   // console.log(users);
-  let usersList = users.map(i => <UserMessages
+  let usersList = users.map(i => <UsersItem
     key={i.id}
     link={`/profile/`}
     id={i.id}
