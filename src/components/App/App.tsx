@@ -33,7 +33,7 @@ export const App = () => {
             <Route exact path='/friends/' render={() => <ScreenFriends />} />
             <Route exact path='/users/' render={() => <ScreenUsers />} />
 
-            <Route exact path='/main' render={() => <div>Вот так вот</div>} />
+            <Route exact path='/main' render={() => <div>Вот так вот</div>} /> {/* !!! Не забыть сделать компоненту*/}
             <Redirect to="/main" />
           </Switch>
         </>
@@ -41,7 +41,7 @@ export const App = () => {
       {
         !isAuth &&
         <Switch>
-          <Route exact path='/login' render={() => <Login />} />
+          <Route exact path='/login' render={() => <Login />} /> {/* !!! Не забыть сделать компоненту*/}
           <Redirect to="/login" />
         </Switch>
       }
