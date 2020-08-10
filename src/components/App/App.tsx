@@ -14,6 +14,9 @@ import { Login } from '../Login';
 
 export const App = () => {
 
+  //Проверяю, авторизован ли я или нет. Если да, 
+  // то отрисовываю все приложение, 
+  // а иначе перекидываем на страницу для гостей /login
   const isAuth = useSelector((state: AppStateType) => state.authReducer.isAutorization)
   const dispatch = useDispatch()
 
