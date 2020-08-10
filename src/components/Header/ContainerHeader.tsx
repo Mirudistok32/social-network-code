@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Header.scss';
 import { Header } from '.';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/store';
-import { setDataMeThunk } from '../../redux/auth-reducer';
 
 
 type OwnerType = {}
@@ -13,17 +12,12 @@ type MapStateType = {
   isAutorization: boolean
 }
 type MapDispatchType = {
-  setDataMeThunk: () => void
 }
 type PropsType = MapStateType & MapDispatchType & OwnerType
 
 const ContainerHeader: React.FC<PropsType> = (props) => {
 
-  const { isFetching, isAutorization, setDataMeThunk } = props
-
-  useEffect(() => {
-    setDataMeThunk()
-  }, [setDataMeThunk])
+  const { isFetching, isAutorization } = props
 
   return (
     <Header isFetching={isFetching} isAutorization={isAutorization} />
@@ -38,7 +32,7 @@ const mapStateToProps = (state: AppStateType): MapStateType => ({
 
 export default compose<React.ComponentType>(
   connect<MapStateType, MapDispatchType, OwnerType, AppStateType>(mapStateToProps, {
-    setDataMeThunk
+    
   })
 
 )(ContainerHeader);

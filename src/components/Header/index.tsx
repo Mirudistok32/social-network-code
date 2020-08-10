@@ -2,7 +2,6 @@ import React from 'react';
 import './Header.scss';
 import { Logo } from './Logo/Logo';
 import { ListNavigation } from './ListNavigation';
-import { Login } from './Login/Login';
 import ContainerWindowProfile from './WindowProfile/ContainerWindowProfile';
 
 
@@ -20,7 +19,7 @@ export const Header: React.FC<PropsType> = (props) => {
     <ListNavigation />
     <ContainerWindowProfile />
   </>
-  let autorizationFalse = !isAutorization && <Login />
+  let autorizationFalse = !isAutorization && ''
 
   return (
     <div className="header">

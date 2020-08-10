@@ -14,6 +14,7 @@ const initialState = {
 
 type InitialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof actions>
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
 
 export const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -29,6 +30,9 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
         case 'SN/AUTH/SET_IS_FETCHING': {
             return { ...state, isFetching: action.is }
         }
+        case 'SN/AUTH/SET_AUTORIZATION': {
+            return { ...state, isAutorization: action.isAutorization }
+        }
         default:
             return state
     }
@@ -38,10 +42,11 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
 
 const actions = {
     setDataMe: (dataMe: GetAuthMeType<GetAuthMeDataType>) => ({ type: 'SN/AUTH/SET_DATA_ME', dataMe } as const),
-    setIsFetching: (is: boolean) => ({ type: 'SN/AUTH/SET_IS_FETCHING', is } as const)
+    setIsFetching: (is: boolean) => ({ type: 'SN/AUTH/SET_IS_FETCHING', is } as const),
+    setAutorization: (isAutorization: boolean) => ({ type: 'SN/AUTH/SET_AUTORIZATION', isAutorization } as const)
 }
 
-export const setDataMeThunk = (): ThunkAction<Promise<void>, AppStateType, unknown, ActionsType> => {
+export const setDataMeThunk = (): ThunkType => {
     return async (dispatch) => {
         dispatch(actions.setIsFetching(true))
 
@@ -54,4 +59,16 @@ export const setDataMeThunk = (): ThunkAction<Promise<void>, AppStateType, unkno
 
         dispatch(actions.setIsFetching(false))
     }
+}
+
+
+//Санка для отправки запросы, который деактивирует авторизацию
+export const loginOutThunk = (): ThunkType => async (dispatch) => {
+
+    let data = await authAPI.loginOut()
+
+    if (data.resultCode === 0) {
+        dispatch(actions.setAutorization(false))
+    }
+
 }

@@ -50,7 +50,7 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
       return {
         ...state, isFetchings: action.isFetging ?
           [...state.isFetchings, action.id] :
-          state.isFetchings.filter(element => element !== action.id)
+          state.isFetchings.filter(id => id !== action.id)
       }
     }
     case 'SN/USERS/FOLLOW': {
