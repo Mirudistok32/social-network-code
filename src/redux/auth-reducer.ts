@@ -6,8 +6,6 @@ const initialState = {
     login: null as string | null,
     email: null as string | null,
     id: null as number | null,
-    data: null as GetAuthMeDataType | null,
-    messages: null as Array<string> | null,
     isAutorization: false,
     isFetching: false
 }
@@ -22,8 +20,6 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
             return {
                 ...state,
                 ...action.dataMe.data,
-                data: action.dataMe.data,
-                messages: action.dataMe.messages,
                 isAutorization: true
             }
         }
@@ -37,7 +33,6 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
             return state
     }
 }
-
 
 
 const actions = {

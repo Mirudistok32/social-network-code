@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 export const Logo = () => {
   return (
-    <NavLink to="/" className="logo">
+    <NavLink to="/main" className="logo">
       <img src={logo} alt="logo" />
     </NavLink>
   );

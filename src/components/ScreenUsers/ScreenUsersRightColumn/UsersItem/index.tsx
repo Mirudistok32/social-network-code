@@ -23,7 +23,7 @@ export const UsersItem: React.FC<UserMessagesType> = (props) => {
     photoLarge,
     photoSmall,
     name = "Anonimus",
-    status = "Как дела?",
+    status = "",
     id,
     link = "/messages/",
     follow,

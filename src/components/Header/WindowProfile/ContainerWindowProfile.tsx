@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import './WindowProfile.scss';
 import { WindowProfile } from '.';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { AppStateType } from '../../../redux/store';
 import { setProfileThunk } from '../../../redux/profile-reducer';
 import { GetProfileType } from '../../../api/api';
 import defaultPhoto from '../../../assets/images/default-icon.jpg';
 import { actionsHeaderReducer } from '../../../redux/header-reducer';
+import { Loading } from '../../../utils/Loading/Loading';
 
 //Костыль
 //Создаю профиль по-умолчанию, он будет стоять, пока не придет настоящий профиль с сервера
@@ -35,7 +36,6 @@ const defaultProfile: GetProfileType = {
 
 type OwnerType = {}
 type MapStateType = {
-  id: number | null
   profile: GetProfileType | null
   isActiveWindow: boolean
 }
@@ -48,8 +48,8 @@ type PropsType = OwnerType & MapDispatchType & MapStateType
 const ContainerWindowProfile: React.FC<PropsType> = (props) => {
 
   //Деструктуризация из пропсов
-  const { id, profile, isActiveWindow, setProfileThunk, setActiveWindow } = props
-
+  const { profile, isActiveWindow, setProfileThunk, setActiveWindow } = props
+  const id = useSelector((state: AppStateType) => state.authReducer.id)
 
   //Функция, которая регулирует включения и выключения окна настроек в WindowProfile(в окне профиля),
   //Прокидываю ее в пропсы до элемента кнопки 'открытия настройки'(шестиренки), от куда буду получать объект события e
@@ -58,14 +58,12 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
     setActiveWindow(!isActiveWindow)
   }
 
-  // Как это обойти?
-  // Ведь по-умолчанию, id в state равен null
-  let idd: number = Number(id)
-
-  //Запрашиваб свой профиль
+  //Запрашиваю свой профиль
   useEffect(() => {
-    setProfileThunk(idd)
-  }, [setProfileThunk, idd])
+    if (id) {
+      setProfileThunk(id)
+    }
+  }, [setProfileThunk, id])
 
 
 
@@ -78,23 +76,27 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
 
   //Нормально ли это? Или вариант выше лучше?
   let photos = profile ? profile.photos : defaultProfile.photos,
-    fullName = profile ? profile.fullName : defaultProfile.fullName,
-    userId = profile ? profile.userId : defaultProfile.userId;
+    fullName = profile ? profile.fullName : defaultProfile.fullName
 
 
   return (
-    <WindowProfile
-      photos={photos}
-      fullName={fullName}
-      userId={userId}
-      isActiveWindow={isActiveWindow}
-      setActiveWindowCallback={setActiveWindowCallback}
-    />
+    <>
+      {
+        !id && <Loading />
+      }
+      {
+        id && <WindowProfile
+          photos={photos}
+          fullName={fullName}
+          isActiveWindow={isActiveWindow}
+          setActiveWindowCallback={setActiveWindowCallback}
+        />
+      }
+    </>
   );
 }
 
 const mapStateToProps = (state: AppStateType): MapStateType => ({
-  id: state.authReducer.id,
   profile: state.profileReducer.profile,
   isActiveWindow: state.headerReducer.isActiveWindow
 })
