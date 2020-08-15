@@ -18,6 +18,7 @@ export const App = () => {
   // то отрисовываю все приложение, 
   // а иначе перекидываем на страницу для гостей /login
   const isAuth = useSelector((state: AppStateType) => state.authReducer.isAutorization)
+  const id = useSelector((state: AppStateType) => state.authReducer.id)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -36,8 +37,8 @@ export const App = () => {
             <Route exact path='/friends/' render={() => <ScreenFriends />} />
             <Route exact path='/users/' render={() => <ScreenUsers />} />
 
-            <Route exact path='/main' render={() => <div>Вот так вот</div>} /> {/* !!! Не забыть сделать компоненту*/}
-            <Redirect to="/main" />
+            {/* <Route exact path='/main' render={() => <div>Вот так вот</div>} /> !!! Не забыть сделать компоненту */}
+            <Redirect to={`/profile/${id}`} />
           </Switch>
         </>
       }

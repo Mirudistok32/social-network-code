@@ -24,7 +24,7 @@ export const RightColumn: React.FC<IProps> = (props) => {
   return (
     <div className="right-column">
       {/* Name+Status */}
-      <NameStatus fullName={fullName} status={status} />
+      <NameStatus fullName={fullName} status={status} userId={userId}/>
       {/* Info about user */}
       <InfoUser contacts={contacts} />
       {/* Panel info */}
