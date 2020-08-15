@@ -3,7 +3,6 @@ import { usersReducer } from "./users-reducer";
 import { profileReducer } from "./profile-reducer";
 import { authReducer } from "./auth-reducer";
 import { headerReducer } from './header-reducer'
-
 import thunk from "redux-thunk";
 
 const rootReducers = combineReducers({

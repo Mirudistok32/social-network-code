@@ -11,7 +11,7 @@ import { AppStateType } from '../../../redux/store';
 
 export const ScreenMessagesLeftColumn = () => {
 
-  let id = useSelector((state: AppStateType) => state.authReducer.id)
+  const id = useSelector((state: AppStateType) => state.authReducer.id)
 
   return (
     <div className="screen-messages-left-column">
@@ -32,3 +32,5 @@ export const ScreenMessagesLeftColumn = () => {
     </div>
   );
 }
+
+

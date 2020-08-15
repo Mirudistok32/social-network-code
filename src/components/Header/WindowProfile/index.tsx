@@ -9,21 +9,20 @@ import { PhotosType } from '../../../redux/users-reducer';
 type PropsType = {
   fullName: string | null
   photos: PhotosType
-  userId: number
   isActiveWindow: boolean
   setActiveWindowCallback: () => void
 }
 
 export const WindowProfile: React.FC<PropsType> = (props) => {
 
-  const { fullName, photos, userId, isActiveWindow, setActiveWindowCallback } = props
+  const { fullName, photos, isActiveWindow, setActiveWindowCallback } = props
 
   return (
     <div className='window-profile'>
       {/* name */}
       <UserName fullName={fullName} />
       {/* icon-my-profile */}
-      <IconProfile photos={photos} id={userId} />
+      <IconProfile photos={photos} />
       {/* icon-setting */}
       <UserSettingButton setActiveWindowCallback={setActiveWindowCallback} />
       <UserSetting isActiveWindow={isActiveWindow} />

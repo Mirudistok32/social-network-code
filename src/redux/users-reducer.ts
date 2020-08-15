@@ -22,7 +22,6 @@ const initialState = {
   totalUsersCount: 0,
   isPreloading: false, // Для индикатора загрузки
   isFetchings: [] as Array<number>, // Пока идет запрос подписки или отписки
-  // isFollow: false, //Для профиля
 }
 
 type InitialStateType = typeof initialState
@@ -43,9 +42,6 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
     case 'SN/USERS/SET_IS_PRELOADING': {
       return { ...state, isPreloading: action.isPreloading }
     }
-    // case 'SN/USERS/SET_FOLLOW': {
-    //   return { ...state, isFollow: action.isFollow }
-    // }
     case 'SN/USERS/SET_IS_FETCHINGS': {
       return {
         ...state, isFetchings: action.isFetging ?
@@ -57,6 +53,7 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
       return {
         ...state, users: state.users.map(u => {
           if (u.id === action.id) {
+            // u.followed: true
             return { ...u, followed: true }
           }
           return u
@@ -83,7 +80,6 @@ export const actions = {
   setTotalUsersCount: (totalUsersCount: number) => ({ type: 'SN/USERS/SET_TOTAL_USERS_COUNT', totalUsersCount } as const),
   setCurrentPage: (currentPage: number) => ({ type: 'SN/USERS/SET_CURRENT_PAGE', currentPage } as const),
   setIsPreloading: (isPreloading: boolean) => ({ type: 'SN/USERS/SET_IS_PRELOADING', isPreloading } as const),
-  // setFollow: (isFollow: boolean) => ({ type: 'SN/USERS/SET_FOLLOW', isFollow } as const),
   setIsFetchings: (isFetging: boolean, id: number) => ({ type: 'SN/USERS/SET_IS_FETCHINGS', id, isFetging } as const),
   follow: (id: number) => ({ type: 'SN/USERS/FOLLOW', id } as const),
   unfollow: (id: number) => ({ type: 'SN/USERS/UNFOLLOW', id } as const),
@@ -96,20 +92,14 @@ export const setUsersThunk = (currentPage: number, pageSize: number): ThunkType 
     dispatch(actions.setIsPreloading(true))
 
     let data = await usersAPI.getUsers(currentPage, pageSize)
-    dispatch(actions.setUsers(data.items))
-    dispatch(actions.setTotalUsersCount(data.totalCount))
+    if (!data.error) {
+      dispatch(actions.setUsers(data.items))
+      dispatch(actions.setTotalUsersCount(data.totalCount))
+    }
 
     dispatch(actions.setIsPreloading(false))
   }
 }
-
-// export const setFollowThunk = (userId: number): ThunkType => async (dispatch) => {
-//   let isFollowing = await usersAPI.getFollow(userId);
-
-//   dispatch(actions.setFollow(isFollowing))
-// }
-
-
 
 
 export const followThunk = (userId: number): ThunkType => async (dispatch) => {

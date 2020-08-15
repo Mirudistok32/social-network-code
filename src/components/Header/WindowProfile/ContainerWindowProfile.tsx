@@ -8,6 +8,7 @@ import { setProfileThunk } from '../../../redux/profile-reducer';
 import { GetProfileType } from '../../../api/api';
 import defaultPhoto from '../../../assets/images/default-icon.jpg';
 import { actionsHeaderReducer } from '../../../redux/header-reducer';
+import { Loading } from '../../../utils/Loading/Loading';
 
 //Костыль
 //Создаю профиль по-умолчанию, он будет стоять, пока не придет настоящий профиль с сервера
@@ -35,7 +36,6 @@ const defaultProfile: GetProfileType = {
 
 type OwnerType = {}
 type MapStateType = {
-  id: number | null
   profile: GetProfileType | null
   isActiveWindow: boolean
 }
@@ -69,23 +69,27 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
 
 
   //Нормально ли это? Или вариант выше лучше?
-  let photos = profile ? profile.photos : defaultProfile.photos,
-    userId = id ? id : 0;
+  let photos = profile ? profile.photos : defaultProfile.photos;
 
 
   return (
-    <WindowProfile
-      photos={photos}
-      fullName={fullName}
-      userId={userId}
-      isActiveWindow={isActiveWindow}
-      setActiveWindowCallback={setActiveWindowCallback}
-    />
+    <>
+      {
+        !id && <Loading />
+      }
+      {
+        id && <WindowProfile
+          photos={photos}
+          fullName={fullName}
+          isActiveWindow={isActiveWindow}
+          setActiveWindowCallback={setActiveWindowCallback}
+        />
+      }
+    </>
   );
 }
 
 const mapStateToProps = (state: AppStateType): MapStateType => ({
-  id: state.authReducer.id,
   profile: state.profileReducer.profile,
   isActiveWindow: state.headerReducer.isActiveWindow
 })
