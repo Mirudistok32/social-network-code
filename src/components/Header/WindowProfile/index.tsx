@@ -7,7 +7,7 @@ import { UserSetting } from './UserSetting';
 import { PhotosType } from '../../../redux/users-reducer';
 
 type PropsType = {
-  fullName: string
+  fullName: string | null
   photos: PhotosType
   userId: number
   isActiveWindow: boolean

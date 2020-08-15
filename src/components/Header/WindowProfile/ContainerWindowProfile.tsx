@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './WindowProfile.scss';
 import { WindowProfile } from '.';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { AppStateType } from '../../../redux/store';
 import { setProfileThunk } from '../../../redux/profile-reducer';
 import { GetProfileType } from '../../../api/api';
@@ -48,38 +48,29 @@ type PropsType = OwnerType & MapDispatchType & MapStateType
 const ContainerWindowProfile: React.FC<PropsType> = (props) => {
 
   //Деструктуризация из пропсов
-  const { id, profile, isActiveWindow, setProfileThunk, setActiveWindow } = props
+  const { profile, isActiveWindow, setProfileThunk, setActiveWindow } = props
 
+  let fullName = useSelector((state: AppStateType) => state.authReducer.login)
+  let id = useSelector((state: AppStateType) => state.authReducer.id)
 
   //Функция, которая регулирует включения и выключения окна настроек в WindowProfile(в окне профиля),
   //Прокидываю ее в пропсы до элемента кнопки 'открытия настройки'(шестиренки), от куда буду получать объект события e
   const setActiveWindowCallback = () => {
-    // Временно поставил toggle значение 
     setActiveWindow(!isActiveWindow)
   }
 
-  // Как это обойти?
-  // Ведь по-умолчанию, id в state равен null
-  let idd: number = Number(id)
 
   //Запрашиваб свой профиль
   useEffect(() => {
-    setProfileThunk(idd)
-  }, [setProfileThunk, idd])
+    if (id) {
+      setProfileThunk(id)
+    }
+  }, [setProfileThunk, id])
 
-
-
-  // //Как регулировать приход из пропсов null?
-  // //Здесь я говорю, если profile не null(т.е. тот, который пришел с сервера), то закинь настоящие свойства в пропсы
-  // if (profile) {
-  //   const { photos, fullName, userId }: GetProfileType = profile
-  //   return <WindowProfile photos={photos} fullName={fullName} userId={userId} />
-  // }
 
   //Нормально ли это? Или вариант выше лучше?
   let photos = profile ? profile.photos : defaultProfile.photos,
-    fullName = profile ? profile.fullName : defaultProfile.fullName,
-    userId = profile ? profile.userId : defaultProfile.userId;
+    userId = id ? id : 0;
 
 
   return (

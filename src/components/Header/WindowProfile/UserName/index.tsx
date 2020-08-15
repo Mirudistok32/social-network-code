@@ -2,7 +2,7 @@ import React from 'react';
 import './UserName.scss';
 
 export type UserNameType = {
-  fullName: string
+  fullName: string | null
 }
 
 export const UserName: React.FC<UserNameType> = (props) => {
