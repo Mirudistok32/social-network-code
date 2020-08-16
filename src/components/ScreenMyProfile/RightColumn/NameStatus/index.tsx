@@ -42,7 +42,14 @@ export const NameStatus: React.FC<NameStatusType> = (props) => {
     //Вызываем нашу санку, которая делает put запрос на сервер, и которая отправляет наше значение нар север, для изменения статуса.
     //Обязательно диспатчим
     //Значение вытаскиваем из локального стейта, (valueInput)
-    dispatch(setProfileStatusThunk(valueInput))
+
+    //Использую условия, для подтверждения изменения статуса
+    //Блокируем eslint, чтобы confirm работал
+    // eslint-disable-next-line no-restricted-globals
+    let t = confirm("Вы точно хотите изменить статус?")
+    if(t){
+      dispatch(setProfileStatusThunk(valueInput))
+    }
   }
 
   //Функция, которая будет, срабатывать кадый раз, когда происходят изменения в value нашего импута(поля ввода)
