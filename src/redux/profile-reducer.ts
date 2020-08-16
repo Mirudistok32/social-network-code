@@ -34,11 +34,25 @@ const actions = {
 export const setProfileThunk = (id: number): ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes> => {
 
     return async (dispatch) => {
-        
+
         const status = await profileAPI.getStatusProfile(id)
         const profile = await profileAPI.getProfile(id)
 
         dispatch(actions.setProfile(profile))
         dispatch(actions.setStatusProfile(status))
+    }
+}
+
+
+//Санка для изменения статуса, здесь мы делаем put запрос на сервер
+export const setProfileStatusThunk = (status: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes> => {
+
+    return async (dispatch) => {
+        const statusResult = await profileAPI.setStatusProfile(status)
+        
+        //Если код статуса 0, то все успешно, и мы перезаписываем статус
+        if (statusResult.resultCode === 0) {
+            dispatch(actions.setStatusProfile(status))
+        }
     }
 }
