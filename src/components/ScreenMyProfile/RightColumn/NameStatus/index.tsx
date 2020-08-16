@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent} from 'react';
 import './NameStatus.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppStateType } from '../../../../redux/store';
@@ -33,6 +33,8 @@ export const NameStatus: React.FC<NameStatusType> = (props) => {
     setActive(false)
   }
 
+//This is job! Nice! Ура! Как дела? Все работает! Уиии!
+
   //Функция, которая делает видимость поля ввода неактивным(Скрывает от нас его)
   const setNotActiveHandler = () => {
     setActive(true)
@@ -40,7 +42,12 @@ export const NameStatus: React.FC<NameStatusType> = (props) => {
     //Вызываем нашу санку, которая делает put запрос на сервер, и которая отправляет наше значение на сервер, для изменения статуса.
     //Обязательно диспатчим
     //Значение вытаскиваем из локального стейта, (valueInput)
-    dispatch(setProfileStatusThunk(valueInput))
+
+    //!!!!!! Проблемный код
+    //Делаем проверку, если строка пустая, то ничего не записываем !!!!!!!!!?? Если есть проверка, то невозможно очистить поле вврде
+    if(valueInput){
+      dispatch(setProfileStatusThunk(valueInput))
+    }
   }
 
   //Функция, которая будет, срабатывать кадый раз, когда происходят изменения в value нашего импута(поля ввода)
@@ -50,7 +57,10 @@ export const NameStatus: React.FC<NameStatusType> = (props) => {
     const ourCurrentValue = e.currentTarget.value
   
     //Записываем текущее значение в наш локальный стейт
-    setValueInput(ourCurrentValue)
+    //Делаем проверку, если строка пустая, то ничего не записываем
+    if(ourCurrentValue.trim()){
+      setValueInput(ourCurrentValue)
+    }
   }
 
   //Взависимости от срабатывания события onDoubleClick или onBlur, поля редактирования будет появляться или исчезать
