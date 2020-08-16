@@ -31,10 +31,9 @@ export const NameStatus: React.FC<NameStatusType> = (props) => {
   //Функция, которая делает видимость поля ввода активным(Показывает нам его)
   const setActiveHandler = () => {
     setActive(false)
+    //Устанавливаем локальный стейт, свойством(статусом), которое придет их пропсов, а точнее с сервера 
     setValueInput(status)
   }
-
-  //This is job! Nice! Ура! Как дела? Все работает! Уиии!
 
   //Функция, которая делает видимость поля ввода неактивным(Скрывает от нас его)
   const setNotActiveHandler = () => {
