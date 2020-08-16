@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import './NameStatus.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppStateType } from '../../../../redux/store';
@@ -22,13 +22,11 @@ export const NameStatus: React.FC<NameStatusType> = (props) => {
   //Хук для диспатча
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    // dispatch(setProfileStatusThunk())
-  }, [])
 
   //Хук, который будет регулировать появления поля редактирования статуса
   const [active, setActive] = useState<boolean>(true)
-
+  //Хук, который контролирует наше поле ввода
+  const [valueInput, setValueInput] = useState<string>('')
 
   //Функция, которая делает видимость поля ввода активным(Показывает нам его)
   const setActiveHandler = () => {
@@ -38,12 +36,27 @@ export const NameStatus: React.FC<NameStatusType> = (props) => {
   //Функция, которая делает видимость поля ввода неактивным(Скрывает от нас его)
   const setNotActiveHandler = () => {
     setActive(true)
+
+    //Вызываем нашу санку, которая делает put запрос на сервер, и которая отправляет наше значение на сервер, для изменения статуса.
+    //Обязательно диспатчим
+    //Значение вытаскиваем из локального стейта, (valueInput)
+    dispatch(setProfileStatusThunk(valueInput))
+  }
+
+  //Функция, которая будет, срабатывать кадый раз, когда происходят изменения в value нашего импута(поля ввода)
+  //В нее мы принимает объект события (e), и из него вытаскиваем текущее значения value нашего импута(поля ввода) 
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //Достаем текущее значение
+    const ourCurrentValue = e.currentTarget.value
+  
+    //Записываем текущее значение в наш локальный стейт
+    setValueInput(ourCurrentValue)
   }
 
   //Взависимости от срабатывания события onDoubleClick или onBlur, поля редактирования будет появляться или исчезать
   let myStatus = active ?
     <span className='name-info__status-my' onDoubleClick={setActiveHandler}>{status}</span> :
-    <input type="text" onBlur={setNotActiveHandler} autoFocus />
+    <input type="text" onBlur={setNotActiveHandler} autoFocus value={valueInput} onChange={onChangeHandler}/>
 
   //jsx разметка, показывающая статус пользователя
   let userStatus = <span className='name-info__status-user'>{status}</span>
