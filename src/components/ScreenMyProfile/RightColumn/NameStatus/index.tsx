@@ -29,10 +29,21 @@ export const NameStatus: React.FC<NameStatusType> = (props) => {
   //Хук, который будет регулировать появления поля редактирования статуса
   const [active, setActive] = useState<boolean>(true)
 
-  //Взависимости от срабатывания события onDoubleClick, поля редактирования будет появляться
+
+  //Функция, которая делает видимость поля ввода активным(Показывает нам его)
+  const setActiveHandler = () => {
+    setActive(false)
+  }
+
+  //Функция, которая делает видимость поля ввода неактивным(Скрывает от нас его)
+  const setNotActiveHandler = () => {
+    setActive(true)
+  }
+
+  //Взависимости от срабатывания события onDoubleClick или onBlur, поля редактирования будет появляться или исчезать
   let myStatus = active ?
-    <span className='name-info__status-my' onDoubleClick={() => setActive(false)}>{status}</span> :
-    <input type="text" onBlur={() => setActive(true)} autoFocus />
+    <span className='name-info__status-my' onDoubleClick={setActiveHandler}>{status}</span> :
+    <input type="text" onBlur={setNotActiveHandler} autoFocus />
 
   //jsx разметка, показывающая статус пользователя
   let userStatus = <span className='name-info__status-user'>{status}</span>
