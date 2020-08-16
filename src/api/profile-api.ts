@@ -17,7 +17,7 @@ export const profileAPI = {
     getStatusProfile: (id: number) => {
         return instance.get<string>(`profile/status/${id}`).then(res => res.data)
     },
-    setStatusProfile: (status: string, id: number) => {
-        return instance.put<StatusProfileType>(`profile/status/${id}`, { status }).then(res => res.data)
+    setStatusProfile: (status: string) => {
+        return instance.put<StatusProfileType>(`profile/status/`, { status }).then(res => res.data)
     }
 };
