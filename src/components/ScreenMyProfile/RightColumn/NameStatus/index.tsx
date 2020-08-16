@@ -31,6 +31,7 @@ export const NameStatus: React.FC<NameStatusType> = (props) => {
   //Функция, которая делает видимость поля ввода активным(Показывает нам его)
   const setActiveHandler = () => {
     setActive(false)
+    setValueInput(status)
   }
 
   //This is job! Nice! Ура! Как дела? Все работает! Уиии!
