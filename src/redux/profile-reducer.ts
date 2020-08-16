@@ -51,7 +51,7 @@ export const setProfileThunk = (id: number): ThunkType => {
     }
 }
 
-export const setMyProfilePhotos = (id: number): ThunkType => {
+export const setMyProfilePhotosThunk = (id: number): ThunkType => {
     return async (dispatch) => {
         const profile = await profileAPI.getProfile(id)
         dispatch(actions.setMyPhotoProfile(profile.photos))

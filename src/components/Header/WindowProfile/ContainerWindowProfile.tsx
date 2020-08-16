@@ -6,32 +6,8 @@ import { connect, useSelector } from 'react-redux';
 import { AppStateType } from '../../../redux/store';
 import { setProfileThunk } from '../../../redux/profile-reducer';
 import { GetProfileType } from '../../../api/api';
-import defaultPhoto from '../../../assets/images/default-icon.jpg';
 import { actionsHeaderReducer } from '../../../redux/header-reducer';
 import { Loading } from '../../../utils/Loading/Loading';
-
-//Костыль
-//Создаю профиль по-умолчанию, он будет стоять, пока не придет настоящий профиль с сервера
-const defaultProfile: GetProfileType = {
-  fullName: '',
-  lookingForAJob: false,
-  lookingForAJobDescription: '',
-  photos: {
-    large: defaultPhoto,
-    small: defaultPhoto
-  },
-  userId: 0,
-  contacts: {
-    facebook: '',
-    github: '',
-    instagram: '',
-    mainLink: '',
-    twitter: '',
-    vk: '',
-    website: '',
-    youtube: ''
-  }
-}
 
 
 type OwnerType = {}
@@ -48,7 +24,7 @@ type PropsType = OwnerType & MapDispatchType & MapStateType
 const ContainerWindowProfile: React.FC<PropsType> = (props) => {
 
   //Деструктуризация из пропсов
-  const { profile, isActiveWindow, setProfileThunk, setActiveWindow } = props
+  const {  isActiveWindow, setProfileThunk, setActiveWindow } = props
 
   let fullName = useSelector((state: AppStateType) => state.authReducer.login)
   let id = useSelector((state: AppStateType) => state.authReducer.id)
@@ -59,17 +35,12 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
     setActiveWindow(!isActiveWindow)
   }
 
-
   //Запрашиваб свой профиль
   useEffect(() => {
     if (id) {
       setProfileThunk(id)
     }
   }, [setProfileThunk, id])
-
-
-  //Нормально ли это? Или вариант выше лучше?
-  let photos = profile ? profile.photos : defaultProfile.photos;
 
 
   return (
@@ -79,7 +50,6 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
       }
       {
         id && <WindowProfile
-          photos={photos}
           fullName={fullName}
           isActiveWindow={isActiveWindow}
           setActiveWindowCallback={setActiveWindowCallback}
