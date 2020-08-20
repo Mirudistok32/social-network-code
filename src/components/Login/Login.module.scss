@@ -1,7 +1,33 @@
 .login {
   height: inherit;
-  position: relative;
-  padding-top: 50px;
+  position: absolute;
   overflow: hidden;
   overflow-y: auto;
+  background-color: #2d2d2d;
+  z-index: 500;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  color: snow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__wrap {
+    color: #2d2d2d;
+    max-width: 1000px;
+    max-height: 600px;
+    height: 100%;
+    width: 100%;
+    background-color: snow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 2px #2d2d2d, 0 0 10px 5px snow;
+  }
+  &__title{
+    font-size: 80px;
+  }
 }

@@ -6,7 +6,12 @@ export const Login = () => {
 
   return (
     <div className={s.login} >
-      Надо войти в систему!
+      <div className={s.login__wrap}>
+          <h1 className={s.login__title}>Konnichiwa Samurai!</h1>
+          <div className={s.login__form}>
+
+          </div>
+      </div>
     </div>
   );
 }
