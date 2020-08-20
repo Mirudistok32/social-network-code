@@ -19,7 +19,7 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
         case 'SN/AUTH/SET_DATA_ME': {
             return {
                 ...state,
-                ...action.dataMe.data,
+                ...action.payload.data,
                 isAutorization: true
             }
         }
@@ -27,7 +27,10 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
             return { ...state, isFetching: action.is }
         }
         case 'SN/AUTH/SET_AUTORIZATION': {
-            return { ...state, isAutorization: action.isAutorization }
+            return { ...state, isAutorization: action.payload }
+        }
+        case 'SN/AUTH/SET_USER_ID': {
+            return { ...state, id: action.payload, isAutorization: true }
         }
         default:
             return state
@@ -36,9 +39,10 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
 
 
 const actions = {
-    setDataMe: (dataMe: GetAuthMeType<GetAuthMeDataType>) => ({ type: 'SN/AUTH/SET_DATA_ME', dataMe } as const),
+    setDataMe: (dataMe: GetAuthMeType<GetAuthMeDataType>) => ({ type: 'SN/AUTH/SET_DATA_ME', payload: dataMe } as const),
     setIsFetching: (is: boolean) => ({ type: 'SN/AUTH/SET_IS_FETCHING', is } as const),
-    setAutorization: (isAutorization: boolean) => ({ type: 'SN/AUTH/SET_AUTORIZATION', isAutorization } as const)
+    setAutorization: (isAutorization: boolean) => ({ type: 'SN/AUTH/SET_AUTORIZATION', payload: isAutorization } as const),
+    setUserId: (id: number) => ({ type: 'SN/AUTH/SET_USER_ID', payload: id } as const)
 }
 
 export const setDataMeThunk = (): ThunkType => {
@@ -64,6 +68,16 @@ export const loginOutThunk = (): ThunkType => async (dispatch) => {
 
     if (data.resultCode === 0) {
         dispatch(actions.setAutorization(false))
+    }
+
+}
+
+export const loginInThunk = (email: string, password: string, rememberMe: boolean): ThunkType => async (dispatch) => {
+
+    let data = await authAPI.loginIn(email, password, rememberMe)
+
+    if (data.resultCode === 0) {
+        dispatch(actions.setUserId(data.data.id))
     }
 
 }
