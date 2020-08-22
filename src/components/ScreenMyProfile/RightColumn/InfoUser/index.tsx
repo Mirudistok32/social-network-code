@@ -9,7 +9,7 @@ export type PropsType = {
   contacts: GetProfileContactsType
 }
 
-export const InfoUser: React.FC<PropsType> = (props) => {
+export const InfoUser: React.FC<PropsType> = React.memo((props) => {
 
   //Деструктуризируем свойства из пропса
   const { bithday, city, contacts } = props
@@ -96,4 +96,4 @@ export const InfoUser: React.FC<PropsType> = (props) => {
       </span>
     </div>
   );
-}
+})

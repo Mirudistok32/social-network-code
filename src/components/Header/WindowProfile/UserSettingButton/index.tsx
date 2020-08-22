@@ -5,7 +5,7 @@ type PropsType = {
   setActiveWindowCallback: () => void
 }
 
-export const UserSettingButton: React.FC<PropsType> = (props) => {
+export const UserSettingButton: React.FC<PropsType> = React.memo((props) => {
 
   const { setActiveWindowCallback } = props
 
@@ -25,4 +25,4 @@ export const UserSettingButton: React.FC<PropsType> = (props) => {
       </svg>
     </span>
   );
-}
+})

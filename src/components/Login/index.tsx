@@ -3,7 +3,7 @@ import s from './Login.module.scss';
 import { LoginForm } from './LoginForm';
 
 
-export const Login = () => {
+export const Login = React.memo(() => {
 
   return (
     <div className={s.login} >
@@ -15,4 +15,4 @@ export const Login = () => {
       </div>
     </div>
   );
-}
+})

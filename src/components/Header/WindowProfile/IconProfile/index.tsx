@@ -8,7 +8,7 @@ import { setMyProfilePhotosThunk } from '../../../../redux/profile-reducer';
 
 export type IconProfileType = {
 }
-export const IconProfile: React.FC<IconProfileType> = (props) => {
+export const IconProfile: React.FC<IconProfileType> = React.memo((props) => {
 
   //Из стейта вытаскиваем нужные нам свойства
   const id = useSelector((state: AppStateType) => state.authReducer.id)
@@ -35,4 +35,4 @@ export const IconProfile: React.FC<IconProfileType> = (props) => {
       <img src={photoURL} alt="avatar" />
     </NavLink>
   );
-}
+})

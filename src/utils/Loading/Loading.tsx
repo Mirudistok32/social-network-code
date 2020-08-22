@@ -1,7 +1,7 @@
 import React from 'react';
 import './Loading.scss'
 
-export const Loading = () => {
+export const Loading = React.memo(() => {
 
   return (<>
     <div className="lds-ripple__wrapper">
@@ -11,5 +11,4 @@ export const Loading = () => {
       </div>
     </div>
   </>)
-
-}
+})

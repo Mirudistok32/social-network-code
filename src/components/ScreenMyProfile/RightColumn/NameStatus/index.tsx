@@ -10,7 +10,7 @@ export type NameStatusType = {
   userId: number
 }
 
-export const NameStatus: React.FC<NameStatusType> = (props) => {
+export const NameStatus: React.FC<NameStatusType> = React.memo((props) => {
 
   //Достаем свойства из пропсов
   const { fullName, userId } = props
@@ -82,4 +82,4 @@ export const NameStatus: React.FC<NameStatusType> = (props) => {
       }
     </div>
   );
-}
+})

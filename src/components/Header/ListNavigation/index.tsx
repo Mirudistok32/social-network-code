@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 type PropsType = {
 
 }
-export const ListNavigation: React.FC<PropsType> = (props) => {
+export const ListNavigation: React.FC<PropsType> = React.memo((props) => {
 
   return (
     <ul className="list-navigation">
@@ -18,4 +18,4 @@ export const ListNavigation: React.FC<PropsType> = (props) => {
       </li>
     </ul>
   );
-}
+})

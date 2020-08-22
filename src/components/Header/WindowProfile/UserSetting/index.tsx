@@ -7,7 +7,7 @@ type PropsType = {
   isActiveWindow: boolean
 }
 
-export const UserSetting: React.FC<PropsType> = (props) => {
+export const UserSetting: React.FC<PropsType> = React.memo((props) => {
 
   //Вытаскиваем диспатч из библиотеки react-redux
   const dispatch = useDispatch();
@@ -34,4 +34,4 @@ export const UserSetting: React.FC<PropsType> = (props) => {
       </ul>
     </div>
   );
-}
+})

@@ -9,7 +9,7 @@ type PropsType = {
   fullName: string
 }
 
-export const Wall: React.FC<PropsType> = (props) => {
+export const Wall: React.FC<PropsType> = React.memo((props) => {
 
   const { userId, photos, fullName } = props
 
@@ -28,4 +28,4 @@ export const Wall: React.FC<PropsType> = (props) => {
       <Post userId={userId} photos={photos} fullName={fullName} />
     </div>
   );
-}
+})

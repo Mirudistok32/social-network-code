@@ -2,7 +2,7 @@ import React from 'react';
 import './DeleteSVG.scss';
 
 
-export const DeleteSVG = () => {
+export const DeleteSVG = React.memo(() => {
   return (
     <div className="delete-svg">
       <svg version="1.1" id="Capa_1"
@@ -19,4 +19,4 @@ export const DeleteSVG = () => {
 
     </div >
   );
-}
+})

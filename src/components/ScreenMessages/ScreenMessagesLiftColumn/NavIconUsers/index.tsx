@@ -1,7 +1,7 @@
 import React from 'react';
 import './NavIconUsers.scss';
 
-export const NavIconUsers = () => {
+export const NavIconUsers = React.memo(() => {
   return (
     <div className="nav-icon-users">
       <svg version="1.1"
@@ -44,4 +44,4 @@ export const NavIconUsers = () => {
       </svg>
     </div >
   );
-}
+})

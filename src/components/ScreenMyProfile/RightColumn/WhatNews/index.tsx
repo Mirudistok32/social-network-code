@@ -1,7 +1,7 @@
 import React from 'react';
 import './WhatNews.scss';
 
-export const WhatNews = () => {
+export const WhatNews = React.memo(() => {
   return (
     <div className="what-news">
       <div className="what-news__input-box">
@@ -12,4 +12,4 @@ export const WhatNews = () => {
       </div>
     </div>
   );
-}
+})

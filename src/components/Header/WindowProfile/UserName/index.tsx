@@ -5,11 +5,11 @@ export type UserNameType = {
   fullName: string | null
 }
 
-export const UserName: React.FC<UserNameType> = (props) => {
+export const UserName: React.FC<UserNameType> = React.memo((props) => {
 
   const { fullName } = props
 
   return (
     <span className="user-name">{fullName}</span>
   );
-}
+})

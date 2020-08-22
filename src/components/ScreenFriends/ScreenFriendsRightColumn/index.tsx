@@ -3,7 +3,7 @@ import './ScreenFriendsRightColumn.scss';
 // import { UserMessages } from '../../ScreenMessages/ScreenMessagesRightColumn/UserMessages';
 
 
-export const ScreenFriendsRightColumn = () => {
+export const ScreenFriendsRightColumn = React.memo(() => {
   return (
     <div className="screen-friends-right-column">
       <div className="screen-friends-right-column__header">
@@ -20,4 +20,4 @@ export const ScreenFriendsRightColumn = () => {
       </div>
     </div>
   );
-}
+})

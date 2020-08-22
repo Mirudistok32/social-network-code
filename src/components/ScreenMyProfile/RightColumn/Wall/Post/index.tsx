@@ -18,7 +18,7 @@ const defaultSettings = {
   name: "Anonimus"
 }
 
-export const Post: React.FC<PostType> = (props) => {
+export const Post: React.FC<PostType> = React.memo((props) => {
 
   const { photos, fullName = defaultSettings.name, text = defaultSettings.texts, userId } = props
 
@@ -44,4 +44,4 @@ export const Post: React.FC<PostType> = (props) => {
       </div>
     </div>
   );
-}
+})

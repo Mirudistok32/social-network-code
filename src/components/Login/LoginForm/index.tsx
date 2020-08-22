@@ -13,7 +13,7 @@ type InitialValuesType = {
   rememberMe: boolean
 }
 
-export const LoginForm = () => {
+export const LoginForm = React.memo(() => {
 
   //Блокируем кнопку, пока идет запрос на сервер
   const isFetching = useSelector((state: AppStateType) => state.authReducer.isFetching)
@@ -115,5 +115,5 @@ export const LoginForm = () => {
         disabled={isFetching}>Войти</button>
     </form>
   );
-}
+})
 

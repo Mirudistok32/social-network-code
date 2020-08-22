@@ -16,7 +16,7 @@ interface IProps {
   status: string
 }
 
-export const RightColumn: React.FC<IProps> = (props) => {
+export const RightColumn: React.FC<IProps> = React.memo((props) => {
  
   //Деструктуризируем свойства из пропса
   const { fullName, contacts, userId, photos, status } = props
@@ -35,4 +35,4 @@ export const RightColumn: React.FC<IProps> = (props) => {
       <Wall userId={userId} photos={photos} fullName={fullName} />
     </div>
   );
-}
+})

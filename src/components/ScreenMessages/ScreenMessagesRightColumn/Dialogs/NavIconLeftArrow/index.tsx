@@ -1,7 +1,7 @@
 import React from 'react';
 import './NavIconLeftArrow.scss';
 
-export const NavIconLeftArrow = () => {
+export const NavIconLeftArrow = React.memo(() => {
   return (
     <div className="nav-icon-left-arrow">
       <svg version="1.1"
@@ -16,4 +16,4 @@ export const NavIconLeftArrow = () => {
       </svg>
     </div >
   );
-}
+})

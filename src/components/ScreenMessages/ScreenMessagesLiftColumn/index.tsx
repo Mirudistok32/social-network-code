@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { AppStateType } from '../../../redux/store';
 
 
-export const ScreenMessagesLeftColumn = () => {
+export const ScreenMessagesLeftColumn = React.memo(() => {
 
   const id = useSelector((state: AppStateType) => state.authReducer.id)
 
@@ -31,6 +31,6 @@ export const ScreenMessagesLeftColumn = () => {
       </ul>
     </div>
   );
-}
+})
 
 

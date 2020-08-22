@@ -1,7 +1,7 @@
 import React from 'react';
 import './NavIconFriends.scss';
 
-export const NavIconFriends = () => {
+export const NavIconFriends = React.memo(() => {
   return (
     <div className="nav-icon-friends">
       <svg viewBox="0 -6 512.00088 512"
@@ -37,4 +37,4 @@ export const NavIconFriends = () => {
       </svg>
     </div>
   );
-}
+})
