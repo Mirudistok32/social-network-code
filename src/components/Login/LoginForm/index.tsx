@@ -62,7 +62,6 @@ export const LoginForm = () => {
   //Создаем нашу форму
   const formik = useFormik(config)
 
-  console.log(formik.values)
   return (
     <form className={s['login-form']} onSubmit={formik.handleSubmit}>
 
