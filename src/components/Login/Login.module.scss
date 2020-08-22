@@ -25,9 +25,10 @@
     align-items: center;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 0 5px 2px #2d2d2d, 0 0 10px 5px snow;
+    box-shadow: 0 0 5px 2px #2d2d2d, 0 0 0px 5px snow, 0 0 100px 2px #000;
   }
   &__title{
     font-size: 80px;
+    margin-bottom: 40px;
   }
 }

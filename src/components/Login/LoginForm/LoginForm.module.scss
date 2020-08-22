@@ -1,0 +1,74 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 1px;
+  width: 500px;
+  transition: all 0.4s ease-in-out;
+  box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.185);
+  color: #2d2d2d;
+  &__row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  &__row-checkbox{
+    flex-direction: row;
+    align-items: center;
+    span{
+      font-size: 20px;
+      margin-right: 5px;
+    }
+  }
+  &__mainTitle {
+    font-size: 50px;
+  }
+  &__title {
+    font-size: 24px;
+  }
+  &__input {
+    border-style: none;
+    margin: 1px;
+    padding: 10px;
+    font-size: 21px;
+    border-radius: 5px;
+    transition: all 0.23s ease-in-out;
+    box-shadow: 0 0 0 1px #000;
+    &:focus {
+      box-shadow: 0 0 10px 1px dodgerblue;
+    }
+  }
+  &__button {
+    border-style: none;
+    cursor: pointer;
+    max-width: 100px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    align-self: center;
+    font-size: 21px;
+    transition: all 0.23s ease-in-out;
+    background-color: transparent;
+    box-shadow: 0 0 0 1px #000;
+    &:hover {
+      background-color: #2d2d2d;
+      color: snow;
+    }
+    &:focus {
+      box-shadow: 0 0 10px 1px dodgerblue;
+    }
+  }
+  &__button-disabled{
+    color: slategrey;
+    background-color: silver;
+    box-shadow: 0 0 0 1px slategrey;
+    &:hover {
+      background-color: silver;
+      color: slategrey;
+    }
+  }
+  &__error {
+    color: red;
+  }
+}

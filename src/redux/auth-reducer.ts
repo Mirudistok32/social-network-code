@@ -73,11 +73,14 @@ export const loginOutThunk = (): ThunkType => async (dispatch) => {
 }
 
 export const loginInThunk = (email: string, password: string, rememberMe: boolean): ThunkType => async (dispatch) => {
-
+    dispatch(actions.setIsFetching(true))
+    
     let data = await authAPI.loginIn(email, password, rememberMe)
 
     if (data.resultCode === 0) {
         dispatch(actions.setUserId(data.data.id))
     }
+
+    dispatch(actions.setIsFetching(false))
 
 }
