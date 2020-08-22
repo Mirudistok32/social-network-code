@@ -79,7 +79,7 @@ export const loginInThunk = (email: string, password: string, rememberMe: boolea
     let data = await authAPI.loginIn(email, password, rememberMe)
 
     if (data.resultCode === 0) {
-        dispatch(actions.setUserId(data.data.id))
+        dispatch(actions.setUserId(data.data.userId))
     }
 
     dispatch(actions.setIsFetching(false))
