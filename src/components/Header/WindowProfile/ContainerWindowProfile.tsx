@@ -7,7 +7,6 @@ import { AppStateType } from '../../../redux/store';
 import { setProfileThunk } from '../../../redux/profile-reducer';
 import { GetProfileType } from '../../../api/api';
 import { actionsHeaderReducer } from '../../../redux/header-reducer';
-import { Loading } from '../../../utils/Loading/Loading';
 
 
 type OwnerType = {}
@@ -28,6 +27,7 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
 
   let fullName = useSelector((state: AppStateType) => state.authReducer.login)
   let id = useSelector((state: AppStateType) => state.authReducer.id)
+  let isAuth = useSelector((state: AppStateType) => state.authReducer.isAutorization)
 
   //Функция, которая регулирует включения и выключения окна настроек в WindowProfile(в окне профиля),
   //Прокидываю ее в пропсы до элемента кнопки 'открытия настройки'(шестиренки), от куда буду получать объект события e
@@ -46,10 +46,7 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
   return (
     <>
       {
-        !id && <Loading />
-      }
-      {
-        id && <WindowProfile
+        isAuth && <WindowProfile
           fullName={fullName}
           isActiveWindow={isActiveWindow}
           setActiveWindowCallback={setActiveWindowCallback}

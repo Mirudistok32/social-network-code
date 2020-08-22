@@ -17,13 +17,13 @@ export const App = () => {
   //Проверяю, авторизован ли я или нет. Если да, 
   // то отрисовываю все приложение, 
   // а иначе перекидываем на страницу для гостей /login
-  const isAuth = useSelector((state: AppStateType) => state.authReducer.isAutorization)
   const id = useSelector((state: AppStateType) => state.authReducer.id)
+  const isAuth = useSelector((state: AppStateType) => state.authReducer.isAutorization)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(setDataMeThunk())
-  }, [dispatch])
+  }, [dispatch, id])
 
   return (
     <div className="app" >
@@ -31,6 +31,7 @@ export const App = () => {
         isAuth && <>
           < ContainerHeader />
           <Switch >
+            <Route exact path='/' render={() => <Redirect to={`/profile/${id}`} />} />
             <Route exact path='/profile/:id?' render={() => <ContainerScreenMyProfile />} />
             <Route exact path='/messages/' render={() => <ScreenMessages />} />
             <Route exact path='/messages/:id' render={() => <ScreenMessages />} />
@@ -45,6 +46,7 @@ export const App = () => {
       {
         !isAuth &&
         <Switch>
+          <Route exact path='/' render={() => <Redirect to='/login' />} />
           <Route exact path='/login' render={() => <Login />} /> {/* !!! Не забыть сделать компоненту*/}
           <Redirect to="/login" />
         </Switch>

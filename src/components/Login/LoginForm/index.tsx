@@ -97,7 +97,7 @@ export const LoginForm = () => {
         }
       </label>
 
-      <label className={`${s['login-form__row']} ${s['login-form__row-checkbox']}`}>
+      <label className={`${s['login-form__row-checkbox']}`}>
         <span className={s['login-form__title']}>Запомнить меня</span>
         <input
           className={s['login-form__input']}

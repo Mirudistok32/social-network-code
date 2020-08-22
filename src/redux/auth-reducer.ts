@@ -19,7 +19,9 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
         case 'SN/AUTH/SET_DATA_ME': {
             return {
                 ...state,
-                ...action.payload.data,
+                login: action.payload.data.login,
+                email: action.payload.data.email,
+                id: action.payload.data.id,
                 isAutorization: true
             }
         }
@@ -47,15 +49,14 @@ const actions = {
 
 export const setDataMeThunk = (): ThunkType => {
     return async (dispatch) => {
-        dispatch(actions.setIsFetching(true))
 
+        dispatch(actions.setIsFetching(true))
         let dataMe = await authAPI.getAuthMe()
 
         //А если код 1, т.е. если мы не авторизованы?
         if (dataMe.resultCode === 0) {
             dispatch(actions.setDataMe(dataMe))
         }
-
         dispatch(actions.setIsFetching(false))
     }
 }
@@ -74,7 +75,7 @@ export const loginOutThunk = (): ThunkType => async (dispatch) => {
 
 export const loginInThunk = (email: string, password: string, rememberMe: boolean): ThunkType => async (dispatch) => {
     dispatch(actions.setIsFetching(true))
-    
+
     let data = await authAPI.loginIn(email, password, rememberMe)
 
     if (data.resultCode === 0) {
