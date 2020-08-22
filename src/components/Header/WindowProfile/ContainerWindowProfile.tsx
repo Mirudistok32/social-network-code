@@ -7,6 +7,8 @@ import { AppStateType } from '../../../redux/store';
 import { setProfileThunk } from '../../../redux/profile-reducer';
 import { GetProfileType } from '../../../api/api';
 import { actionsHeaderReducer } from '../../../redux/header-reducer';
+import { getProfileDataSelect } from '../../../selects/profile-select';
+import { getIsActiveWindowSelect } from '../../../selects/header-select';
 
 
 type OwnerType = {}
@@ -57,8 +59,8 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
 }
 
 const mapStateToProps = (state: AppStateType): MapStateType => ({
-  profile: state.profileReducer.profile,
-  isActiveWindow: state.headerReducer.isActiveWindow
+  profile: getProfileDataSelect(state),
+  isActiveWindow: getIsActiveWindowSelect(state)
 })
 
 

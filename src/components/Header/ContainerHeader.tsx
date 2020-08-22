@@ -4,6 +4,7 @@ import { Header } from '.';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/store';
+import { getAuthIsFetchingSelect, getAuthIsAutorizationSelect } from '../../selects/auth-select';
 
 
 type OwnerType = {}
@@ -27,8 +28,8 @@ const ContainerHeader: React.FC<PropsType> = (props) => {
 
 
 const mapStateToProps = (state: AppStateType): MapStateType => ({
-  isFetching: state.authReducer.isFetching,
-  isAutorization: state.authReducer.isAutorization
+  isFetching: getAuthIsFetchingSelect(state),
+  isAutorization: getAuthIsAutorizationSelect(state)
 })
 
 export default compose<React.ComponentType>(

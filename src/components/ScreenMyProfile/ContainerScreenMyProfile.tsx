@@ -6,6 +6,7 @@ import { AppStateType } from '../../redux/store';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { setProfileThunk } from '../../redux/profile-reducer'
 import { Loading } from '../../utils/Loading/Loading';
+import { getProfileDataSelect, getProfileStatusSelect } from '../../selects/profile-select';
 
 type OwnerType = {}
 type MapStateType = ReturnType<typeof mapStateToProps>
@@ -42,8 +43,8 @@ const ContainerScreenMyProfile: React.FC<PropsType> = (props) => {
 
 const mapStateToProps = (state: AppStateType) => {
   return {
-    profile: state.profileReducer.profile,
-    status: state.profileReducer.status
+    profile: getProfileDataSelect(state),
+    status: getProfileStatusSelect(state)
   }
 }
 

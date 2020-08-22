@@ -4,6 +4,14 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../../redux/store';
 import { setUsersThunk, actions, UserType, followThunk, unfollowThunk } from './../../../redux/users-reducer'
+import {
+  getUsersDataSelect,
+  getUsersTotalUsersCountSelect,
+  getUsersCurrentPageSelect,
+  getUsersPageSizeSelect,
+  getUsersIsPreloadingSelect,
+  getUsersIsFetchingsSelect
+} from '../../../selects/users-select';
 
 
 type MapStateType = {
@@ -84,12 +92,12 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = (props) => {
 
 const mapStateToProps = (state: AppStateType) => {
   return {
-    users: state.usersReducer.users,
-    totalUsersCount: state.usersReducer.totalUsersCount,
-    currentPage: state.usersReducer.currentPage,
-    pageSize: state.usersReducer.pageSize,
-    isPreloading: state.usersReducer.isPreloading,
-    isFetchings: state.usersReducer.isFetchings
+    users: getUsersDataSelect(state),
+    totalUsersCount: getUsersTotalUsersCountSelect(state),
+    currentPage: getUsersCurrentPageSelect(state),
+    pageSize: getUsersPageSizeSelect(state),
+    isPreloading: getUsersIsPreloadingSelect(state),
+    isFetchings: getUsersIsFetchingsSelect(state)
   }
 }
 
