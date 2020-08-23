@@ -86,7 +86,7 @@ export const LoginForm = React.memo(() => {
         <span className={s['login-form__title']}>Пароль</span>
         <input
           className={s['login-form__input']}
-          type="text"
+          type="password"
           name="password"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
