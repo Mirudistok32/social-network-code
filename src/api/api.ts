@@ -1,11 +1,6 @@
 import axios from "axios";
-import { UserType, PhotosType } from "../redux/users-reducer";
+import { PhotosType } from "../redux/users-reducer";
 
-export type GetUsersItems = {
-  items: Array<UserType>
-  totalCount: number
-  error: string | null
-}
 
 export type GetProfileContactsType = {
   github: string
