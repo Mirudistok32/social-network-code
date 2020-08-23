@@ -29,7 +29,7 @@ export const LoginForm = React.memo(() => {
 
 
   //Валидационная схема для нашей формы
-  const validationSchemaYup = Yup.object({
+  const validationSchema = Yup.object({
     login: Yup
       .string()
       .required('Обязательное поле')
@@ -51,7 +51,7 @@ export const LoginForm = React.memo(() => {
       password: '',
       rememberMe: false
     },
-    validationSchema: validationSchemaYup,
+    validationSchema,
     onSubmit: (values) => {
       let { login, password, rememberMe } = values
       //Диспатчим нашу санку для входа

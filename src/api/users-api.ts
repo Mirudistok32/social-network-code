@@ -1,9 +1,16 @@
-import { instance, GetUsersItems } from "./api";
+import { instance } from "./api";
+import { UserType } from "../redux/users-reducer";
 
 type FollowingType = {
   resultCode: number
   messages: Array<string>
   data: {}
+}
+
+export type GetUsersItems = {
+  items: Array<UserType>
+  totalCount: number
+  error: string | null
 }
 
 export const usersAPI = {
@@ -14,9 +21,6 @@ export const usersAPI = {
       )
       .then((res) => res.data);
   },
-  // getFollow: (userId: number) => {
-  //   return instance.get<boolean>(`follow/${userId}`).then(res => res.data)
-  // },
   follow: (userId: number) => {
     return instance.post<FollowingType>(`follow/${userId}`).then(res => res.data)
   },
