@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScreenUsersRightColumn } from '.';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -28,11 +28,11 @@ type MapDispatchType = {
   followThunk: (id: number) => void
   unfollowThunk: (id: number) => void
 }
-type OwnerType = {}
+type OwnerType = { porsionSize?: number }
 
 type PropsType = MapStateType & MapDispatchType & OwnerType;
 
-const ContainerScreenUsersRightColumn: React.FC<PropsType> = (props) => {
+const ContainerScreenUsersRightColumn: React.FC<PropsType> = React.memo((props) => {
 
   //Деструктуризация свойств из пропсов
   const {
@@ -45,7 +45,8 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = (props) => {
     setCurrentPage,
     setUsersThunk,
     followThunk,
-    unfollowThunk } = props
+    unfollowThunk,
+    porsionSize = 10 } = props
 
   //Делаю запрос на сервер для получения всех users/ и устанавливаю в стейт 
   useEffect(() => {
@@ -69,6 +70,12 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = (props) => {
     pages.push(i)
   }
 
+  let portionCount = Math.ceil(allPagesCount / porsionSize)
+  let [portionNumber, setPortionNumber] = useState(1);
+  let leftPortionPageNumber = (portionNumber - 1) * porsionSize + 1
+  let rightPortionPageNumber = portionNumber * porsionSize 
+
+
   //Устанавливаю по клику, какая страница сейчас является текущей
   const onSetCurrentPage = (i: number) => {
     setCurrentPage(i)
@@ -85,10 +92,15 @@ const ContainerScreenUsersRightColumn: React.FC<PropsType> = (props) => {
         isFetchings={isFetchings}
         setFollow={setFollow}
         setUnfollow={setUnfollow}
+        leftPortionPageNumber={leftPortionPageNumber}
+        rightPortionPageNumber={rightPortionPageNumber}
+        portionCount={portionCount}
+        portionNumber={portionNumber}
+        setPortionNumber={setPortionNumber}
       />
     </>
   );
-}
+})
 
 const mapStateToProps = (state: AppStateType) => {
   return {

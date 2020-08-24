@@ -39,7 +39,7 @@ export const App = () => {
             <Route exact path='/users/' render={() => <ScreenUsers />} />
 
             {/* <Route exact path='/main' render={() => <div>Вот так вот</div>} /> !!! Не забыть сделать компоненту */}
-            <Redirect to={`/profile/${id}`} />
+            <Redirect to={`/users/`} />
           </Switch>
         </>
       }

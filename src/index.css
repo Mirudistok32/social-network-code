@@ -45,6 +45,10 @@ h6 {
   font-size: inherit;
 }
 
+button{
+  cursor: pointer;
+  border-style: none;
+}
 .container {
   max-width: 940px;
   width: 100%;

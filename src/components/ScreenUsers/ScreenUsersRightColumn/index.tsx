@@ -14,11 +14,30 @@ type PropsType = {
   isFetchings: Array<number>
   setFollow: (id: number) => void
   setUnfollow: (id: number) => void
+  leftPortionPageNumber: number
+  rightPortionPageNumber: number
+  portionNumber: number
+  portionCount: number
+  setPortionNumber: (value: number) => void
 }
 
-export const ScreenUsersRightColumn: React.FC<PropsType> = (props) => {
+export const ScreenUsersRightColumn: React.FC<PropsType> = React.memo((props) => {
 
-  const { title, users, pages, currentPage, onSetCurrentPage, isPreloading, isFetchings, setFollow, setUnfollow } = props
+  const {
+    title,
+    users,
+    pages,
+    currentPage,
+    onSetCurrentPage,
+    isPreloading,
+    isFetchings,
+    setFollow,
+    setUnfollow,
+    leftPortionPageNumber,
+    rightPortionPageNumber,
+    portionNumber,
+    portionCount,
+    setPortionNumber } = props
 
   // console.log(users);
   let usersList = users.map(i => <UsersItem
@@ -35,20 +54,24 @@ export const ScreenUsersRightColumn: React.FC<PropsType> = (props) => {
     setUnfollow={setUnfollow}
   />)
 
-  let pagesBtn = pages.map(i => {
-    let classSpanActive = 'screen__pagination'
-    //Если текущая страница равна текущему элементу, то устанавливаем выделяющий ее класс
-    if (currentPage === i) {
-      classSpanActive += ' screen__pagination-active'
-    }
 
-    //Получаю из пропсов функцию для установления текущего пользователя по клику
-    const setCurrentPage = () => {
-      onSetCurrentPage(i)
-    }
 
-    return (<span key={i} className={classSpanActive} onClick={setCurrentPage}>{i}</span>)
-  })
+  let pagesBtn = pages
+    .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
+    .map(i => {
+      let classSpanActive = 'screen__pagination'
+      //Если текущая страница равна текущему элементу, то устанавливаем выделяющий ее класс
+      if (currentPage === i) {
+        classSpanActive += ' screen__pagination-active'
+      }
+
+      //Получаю из пропсов функцию для установления текущего пользователя по клику
+      const setCurrentPage = () => {
+        onSetCurrentPage(i)
+      }
+
+      return (<span key={i} className={classSpanActive} onClick={setCurrentPage}>{i}</span>)
+    })
 
   return (
     <div className="screen-friends-right-column">
@@ -69,9 +92,15 @@ export const ScreenUsersRightColumn: React.FC<PropsType> = (props) => {
       </div>
       <div className="screen-friends-right-column__pagination">
         {
+          portionNumber > 1 && <button className="screen-friends-right-column__pagination-left" onClick={() => setPortionNumber(portionNumber - 1)}>prev</button>
+        }
+        {
           pagesBtn
+        }
+        {
+          portionCount > portionNumber && <button className="screen-friends-right-column__pagination-right" onClick={() => setPortionNumber(portionNumber + 1)}>next</button>
         }
       </div>
     </div>
   );
-}
+})
