@@ -1,16 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import './App.scss';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import ContainerHeader from '../Header/ContainerHeader';
-import { ScreenMessages } from '../ScreenMessages';
-import { ScreenFriends } from '../ScreenFriends';
-import { ScreenUsers } from '../ScreenUsers';
+// import { ScreenMessages } from '../ScreenMessages';
+// import { ScreenFriends } from '../ScreenFriends';
+// import { ScreenUsers } from '../ScreenUsers';
 import ContainerScreenMyProfile from '../ScreenMyProfile/ContainerScreenMyProfile';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppStateType } from '../../redux/store';
 import { setDataMeThunk } from '../../redux/auth-reducer';
 import { Login } from '../Login';
+import { Loading } from '../../utils/Loading/Loading';
 
+const ScreenUsers = React.lazy(() => import('../ScreenUsers')
+  .then(({ ScreenUsers }) => ({ default: ScreenUsers })),
+);
+
+const ScreenFriends = React.lazy(() => import('../ScreenFriends')
+  .then(({ ScreenFriends }) => ({ default: ScreenFriends })),
+);
+
+const ScreenMessages = React.lazy(() => import('../ScreenMessages')
+  .then(({ ScreenMessages }) => ({ default: ScreenMessages })),
+);
 
 export const App = () => {
 
@@ -33,10 +45,19 @@ export const App = () => {
           <Switch >
             <Route exact path='/' render={() => <Redirect to={`/profile/${id}`} />} />
             <Route exact path='/profile/:id?' render={() => <ContainerScreenMyProfile />} />
-            <Route exact path='/messages/' render={() => <ScreenMessages />} />
+            <Route exact path='/messages/' render={() => (
+              <Suspense fallback={<div><Loading /></div>}>
+                <ScreenMessages />
+              </Suspense>)} />
             <Route exact path='/messages/:id' render={() => <ScreenMessages />} />
-            <Route exact path='/friends/' render={() => <ScreenFriends />} />
-            <Route exact path='/users/' render={() => <ScreenUsers />} />
+            <Route exact path='/friends/' render={() => (
+              <Suspense fallback={<div><Loading /></div>}>
+                <ScreenFriends />
+              </Suspense>)} />
+            <Route exact path='/users/' render={() => (
+              <Suspense fallback={<div><Loading /></div>}>
+                <ScreenUsers />
+              </Suspense>)} />
 
             {/* <Route exact path='/main' render={() => <div>Вот так вот</div>} /> !!! Не забыть сделать компоненту */}
             <Redirect to={`/profile/${id}`} />
