@@ -4,14 +4,35 @@ import { profileAPI } from "../api/profile-api"
 import { ThunkAction } from "redux-thunk"
 import { PhotosType } from "./users-reducer"
 
-
-const initialState = {
-    profile: null as GetProfileType | null,
-    status: '',
-    photoMyProfile: null as PhotosType | null
+type InitialStateType = {
+    profile: GetProfileType,
+    status: string,
 }
 
-type InitialStateType = typeof initialState
+const initialState: InitialStateType = {
+    profile: {
+        contacts: {
+            facebook: '',
+            github: "",
+            instagram: '',
+            mainLink: '',
+            twitter: '',
+            vk: '',
+            website: '',
+            youtube: ''
+        },
+        fullName: '',
+        lookingForAJob: false,
+        lookingForAJobDescription: '',
+        photos: {
+            large: '',
+            small: ''
+        },
+        userId: 0
+    },
+    status: '',
+}
+
 type ActionsTypes = InferActionsTypes<typeof actions>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
@@ -24,7 +45,7 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
             return { ...state, status: action.status }
         }
         case 'SN/PROFILE/SET_MY_PHOTO_PROFILE': {
-            return { ...state, photoMyProfile: action.photos }
+            return { ...state, profile: {...state.profile, photos: action.photos}  }
         }
     }
     return state
@@ -67,6 +88,18 @@ export const setProfileStatusThunk = (status: string): ThunkType => {
         //Если код статуса 0, то все успешно, и мы перезаписываем статус
         if (statusResult.resultCode === 0) {
             dispatch(actions.setStatusProfile(status))
+        }
+    }
+}
+
+//
+export const setPhotoProfileThunk = (file: File): ThunkType => {
+    return async (dispatch) => {
+        const statusResult = await profileAPI.setPhotosProfile(file)
+
+        //Если код статуса 0, то все успешно, и мы перезаписываем статус
+        if (statusResult.resultCode === 0) {
+            dispatch(actions.setMyPhotoProfile(statusResult.data))
         }
     }
 }

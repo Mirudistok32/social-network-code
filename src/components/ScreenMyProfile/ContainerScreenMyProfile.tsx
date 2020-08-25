@@ -28,7 +28,7 @@ const ContainerScreenMyProfile: React.FC<PropsType> = (props) => {
 
   useEffect(() => {
     setProfileThunk(userIdOfURL)
-  }, [userIdOfURL, setProfileThunk]) //Не понимаю почему две зависимости надо
+  }, [userIdOfURL, setProfileThunk, profile])
 
   //Если профиля еще нет(null), то крути прелоудер(загрузку), а когда профиль придет, то отрисовывай рабочую компаненту
   let watchingComponent = !profile ? <Loading /> : <ScreenMyProfile profile={profile} status={status} />

@@ -1,13 +1,14 @@
 import { instance, GetProfileType } from "./api";
+import { PhotosType } from "../redux/users-reducer";
 
 
 type DataType = {
 
 }
-type StatusProfileType = {
+type StatusProfileType<T> = {
     resultCode: number
     messages: Array<string>
-    data: DataType
+    data: T
 }
 
 export const profileAPI = {
@@ -18,6 +19,16 @@ export const profileAPI = {
         return instance.get<string>(`profile/status/${id}`).then(res => res.data)
     },
     setStatusProfile: (status: string) => {
-        return instance.put<StatusProfileType>(`profile/status`, { status }).then(res => res.data)
+        return instance.put<StatusProfileType<DataType>>(`profile/status`, { status }).then(res => res.data)
+    },
+    setPhotosProfile: (file: File) => {
+        const formData = new FormData()
+        formData.append("image", file)
+
+        return instance.put<StatusProfileType<PhotosType>>(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(response => response.data)
     }
 };

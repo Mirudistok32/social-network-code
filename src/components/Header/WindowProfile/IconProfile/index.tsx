@@ -12,7 +12,7 @@ export const IconProfile: React.FC<IconProfileType> = React.memo((props) => {
 
   //Из стейта вытаскиваем нужные нам свойства
   const id = useSelector((state: AppStateType) => state.authReducer.id)
-  const photos = useSelector((state: AppStateType) => state.profileReducer.photoMyProfile)
+  const photos = useSelector((state: AppStateType) => state.profileReducer.profile.photos)
 
   //Запрашиваем свой профиль, из которого вытащим свою фотку.
   useEffect(() => {
