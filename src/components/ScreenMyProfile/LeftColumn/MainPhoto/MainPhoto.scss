@@ -7,4 +7,41 @@
   background-color: snow;
   cursor: pointer;
   margin-bottom: 25px;
+  transition: all 0.23s ease-in-out;
+  &__change {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+  }
+  &:hover .main-photo__change-box {
+    height: 30px;
+    width: 130px;
+    box-shadow: inset 0 0 30px 10px #2d2d2d;
+  }
+  &__change-box {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    right: 0%;
+    color: snow;
+    padding: 5px;
+    font-weight: 600;
+    border-radius: 10px;
+    // transform: translateX(50%);
+    box-shadow: inset 0 0 30px 10px #2d2d2d;
+    cursor: pointer;
+    transition: all 0.23s ease-in-out;
+    &:hover {
+      color: tomato;
+    }
+    height: 0;
+    width: 0;
+    box-shadow: none;
+    overflow: hidden;
+  }
+}
+.main-photo__box {
+  position: relative;
 }
