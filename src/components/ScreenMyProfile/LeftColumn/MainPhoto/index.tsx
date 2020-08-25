@@ -22,7 +22,11 @@ export const MainPhoto: React.FC<PropsType> = (props) => {
     <div className="main-photo main-photo__box" >
       <img className="main-photo" src={photoURL} alt="avatar" />
       {
-        isAuth && <label className="main-photo__change-box">Выбрать фото<input className="main-photo__change" type="file" /></label>
+        isAuth && (
+          <label className="main-photo__change-box">Выбрать фото
+            <input className="main-photo__change" type="file" />
+          </label>
+        )
       }
     </div>
   );
