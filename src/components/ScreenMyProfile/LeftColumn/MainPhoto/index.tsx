@@ -22,6 +22,7 @@ export const MainPhoto: React.FC<PropsType> = React.memo((props) => {
   useEffect(() => {
     if (myId) {
       if (id) {
+        // eslint-disable-next-line eqeqeq
         if (myId == id) setIsShow(true)
       }
     }
