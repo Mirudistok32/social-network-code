@@ -3,16 +3,17 @@ import './IconProfile.scss';
 import iconProfileDefault from '../../../../assets/images/default-icon.jpg'
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { AppStateType } from '../../../../redux/store';
 import { setMyProfilePhotosThunk } from '../../../../redux/profile-reducer';
+import { getProfilePhotosSelect } from '../../../../selects/profile-select';
+import { getAuthIdSelect } from '../../../../selects/auth-select';
 
 export type IconProfileType = {
 }
 export const IconProfile: React.FC<IconProfileType> = React.memo((props) => {
 
   //Из стейта вытаскиваем нужные нам свойства
-  const id = useSelector((state: AppStateType) => state.authReducer.id)
-  const photos = useSelector((state: AppStateType) => state.profileReducer.profile.photos)
+  const id = useSelector(getAuthIdSelect)
+  const photos = useSelector(getProfilePhotosSelect)
 
   //Запрашиваем свой профиль, из которого вытащим свою фотку.
   useEffect(() => {
