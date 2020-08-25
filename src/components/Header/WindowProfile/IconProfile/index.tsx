@@ -4,8 +4,8 @@ import iconProfileDefault from '../../../../assets/images/default-icon.jpg'
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { setMyProfilePhotosThunk } from '../../../../redux/profile-reducer';
-import { getProfilePhotosSelect } from '../../../../selects/profile-select';
-import { getAuthIdSelect } from '../../../../selects/auth-select';
+import { getProfilePhotosSelect } from '../../../../selectors/profile-select';
+import { getAuthIdSelect } from '../../../../selectors/auth-select';
 
 export type IconProfileType = {
 }

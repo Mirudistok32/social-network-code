@@ -6,7 +6,7 @@ import { AppStateType } from '../../redux/store';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { setProfileThunk } from '../../redux/profile-reducer'
 import { Loading } from '../../utils/Loading/Loading';
-import { getProfileDataSelect, getProfileStatusSelect } from '../../selects/profile-select';
+import { getProfileDataSelect, getProfileStatusSelect } from '../../selectors/profile-select';
 
 type OwnerType = {}
 type MapStateType = ReturnType<typeof mapStateToProps>

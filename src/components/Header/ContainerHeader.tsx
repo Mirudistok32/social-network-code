@@ -4,7 +4,7 @@ import { Header } from '.';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/store';
-import { getAuthIsFetchingSelect, getAuthIsAutorizationSelect } from '../../selects/auth-select';
+import { getAuthIsFetchingSelect, getAuthIsAutorizationSelect } from '../../selectors/auth-select';
 
 
 type OwnerType = {}

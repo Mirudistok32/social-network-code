@@ -11,7 +11,7 @@ import {
   getUsersPageSizeSelect,
   getUsersIsPreloadingSelect,
   getUsersIsFetchingsSelect
-} from '../../../selects/users-select';
+} from '../../../selectors/users-select';
 
 
 type MapStateType = {
