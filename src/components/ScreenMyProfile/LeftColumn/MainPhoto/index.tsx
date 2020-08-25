@@ -4,8 +4,8 @@ import avatarDefault from '../../../../assets/images/octopus.svg'
 import { PhotosType } from '../../../../redux/users-reducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { AppStateType } from '../../../../redux/store';
 import { setPhotoProfileThunk } from '../../../../redux/profile-reducer';
+import { getAuthIdSelect } from '../../../../selectors/auth-select';
 // import avatarDefault from '../../assets/images/default-icon.jpg'
 
 export type PropsType = {
@@ -18,7 +18,7 @@ export const MainPhoto: React.FC<PropsType> = React.memo((props) => {
 
   const [isShow, setIsShow] = useState(false)
   const dispatch = useDispatch()
-  const myId = useSelector((state: AppStateType) => state.authReducer.id)
+  const myId = useSelector(getAuthIdSelect)
   const { id } = useParams()
 
   useEffect(() => {
