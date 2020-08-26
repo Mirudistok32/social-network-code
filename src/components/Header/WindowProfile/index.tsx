@@ -8,12 +8,13 @@ import { UserSetting } from './UserSetting';
 type PropsType = {
   fullName: string | null
   isActiveWindow: boolean
-  setActiveWindowCallback: () => void
+  setActiveWindowToggleCallback: () => void
+  setActiveWindow: (isActive: boolean) => void
 }
 
 export const WindowProfile: React.FC<PropsType> = (props) => {
 
-  const { fullName, isActiveWindow, setActiveWindowCallback } = props
+  const { fullName, isActiveWindow, setActiveWindowToggleCallback, setActiveWindow } = props
 
   return (
     <div className='window-profile'>
@@ -22,8 +23,8 @@ export const WindowProfile: React.FC<PropsType> = (props) => {
       {/* icon-my-profile */}
       <IconProfile />
       {/* icon-setting */}
-      <UserSettingButton setActiveWindowCallback={setActiveWindowCallback} />
-      <UserSetting isActiveWindow={isActiveWindow} />
+      <UserSettingButton setActiveWindowToggleCallback={setActiveWindowToggleCallback} />
+      <UserSetting isActiveWindow={isActiveWindow} setActiveWindow={setActiveWindow} />
     </div>
   );
 }

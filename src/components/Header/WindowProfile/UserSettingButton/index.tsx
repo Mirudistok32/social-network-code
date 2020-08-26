@@ -2,16 +2,16 @@ import React from 'react';
 import s from './UserSettingButton.module.scss';
 
 type PropsType = {
-  setActiveWindowCallback: () => void
+  setActiveWindowToggleCallback: () => void
 }
 
 export const UserSettingButton: React.FC<PropsType> = React.memo((props) => {
 
-  const { setActiveWindowCallback } = props
+  const { setActiveWindowToggleCallback } = props
 
   //Проверял работу объекта событий e. Пока оставлю так
   const onClick = () => {
-    setActiveWindowCallback()
+    setActiveWindowToggleCallback()
   }
 
   return (

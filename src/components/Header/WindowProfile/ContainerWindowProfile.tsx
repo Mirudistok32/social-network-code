@@ -33,7 +33,7 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
 
   //Функция, которая регулирует включения и выключения окна настроек в WindowProfile(в окне профиля),
   //Прокидываю ее в пропсы до элемента кнопки 'открытия настройки'(шестиренки), от куда буду получать объект события (e)
-  const setActiveWindowCallback = () => {
+  const setActiveWindowToggleCallback = () => {
     setActiveWindow(!isActiveWindow)
   }
 
@@ -51,7 +51,8 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
         isAuth && <WindowProfile
           fullName={fullName}
           isActiveWindow={isActiveWindow}
-          setActiveWindowCallback={setActiveWindowCallback}
+          setActiveWindowToggleCallback={setActiveWindowToggleCallback}
+          setActiveWindow={setActiveWindow}
         />
       }
     </>

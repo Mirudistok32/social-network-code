@@ -11,6 +11,7 @@ import { AppStateType } from '../../redux/store';
 import { setDataMeThunk } from '../../redux/auth-reducer';
 import { Login } from '../Login';
 import { Loading } from '../../utils/Loading/Loading';
+import { Settings } from '../Settings';
 
 const ScreenUsers = React.lazy(() => import('../ScreenUsers')
   .then(({ ScreenUsers }) => ({ default: ScreenUsers })),
@@ -58,6 +59,7 @@ export const App = () => {
               <Suspense fallback={<div><Loading /></div>}>
                 <ScreenUsers />
               </Suspense>)} />
+              <Route exact path='/settings' render={() => <Settings />} />
 
             {/* <Route exact path='/main' render={() => <div>Вот так вот</div>} /> !!! Не забыть сделать компоненту */}
             <Redirect to={`/profile/${id}`} />
