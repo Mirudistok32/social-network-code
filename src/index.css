@@ -1,10 +1,12 @@
 html,
-body {
+body,
+#root {
+  min-height: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 400;
   position: relative;
   background-color: #39917a52;
@@ -16,15 +18,10 @@ body {
   box-sizing: inherit;
 }
 
-#root {
-  height: inherit;
-  position: inherit;
-}
-
 a {
   text-decoration: none;
   color: inherit;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 300;
 }
 
@@ -45,12 +42,14 @@ h6 {
   font-size: inherit;
 }
 
-button{
+button {
   cursor: pointer;
   border-style: none;
 }
 .container {
   max-width: 940px;
+  min-height: 100%;
+  height: 100%;
   width: 100%;
   padding: 0 10px;
   margin: 0 auto;
