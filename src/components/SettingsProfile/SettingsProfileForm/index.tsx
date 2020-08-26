@@ -16,6 +16,7 @@ type PropsType = {
   vk: string
   website: string
   youtube: string
+  aboutMe: string
   onSubmit: (values: SettingsProfileFormInitialValuesType) => void
 }
 
@@ -33,6 +34,7 @@ export type SettingsProfileFormInitialValuesType = {
     website: string
     youtube: string
   }
+  aboutMe: string
 }
 
 export const SettingsProfileForm: React.FC<PropsType> = (props) => {
@@ -49,6 +51,7 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
     twitter,
     instagram,
     youtube,
+    aboutMe,
     onSubmit
   } = props
 
@@ -56,15 +59,17 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
 
   const maxLinkLength = 100
   const maxNameLength = 30
-  const maxJobDescriptionLength = 600
+  const maxJobDescriptionLength = 300
 
   const validationSchema = Yup.object({
     fullName: Yup
       .string()
+      .required()
       .max(maxNameLength, `Максимальное количество символов ${maxNameLength}`),
 
     lookingForAJobDescription: Yup
       .string()
+      .required()
       .max(maxJobDescriptionLength, `Максимальное количество символов ${maxJobDescriptionLength}`),
 
     contacts: Yup
@@ -111,11 +116,15 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
           .max(maxLinkLength, `Максимальное количество символов ${maxLinkLength}`)
           .url('Некорректный ввод ссылки'),
       }),
+    aboutMe: Yup
+      .string()
+      .required()
+      .max(maxJobDescriptionLength, `Максимальное количество символов ${maxJobDescriptionLength}`),
   })
 
   const config: FormikConfig<SettingsProfileFormInitialValuesType> = {
     initialValues: {
-      fullName: '',
+      fullName: fullName,
       lookingForAJob,
       lookingForAJobDescription: '',
       contacts: {
@@ -127,7 +136,8 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
         twitter: '',
         instagram: '',
         youtube: ''
-      }
+      },
+      aboutMe: ''
     },
     onSubmit: (values) => {
 
@@ -185,6 +195,21 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
         {
           formik.errors.lookingForAJobDescription &&
           <span className={s['settings-profile-form__row-error']}>*{formik.errors.lookingForAJobDescription}</span>
+        }
+      </label>
+
+      <label className={s['settings-profile-form__row']}>
+        <span className={s['settings-profile-form__row-title']}>Обо мне</span>
+        <span>{aboutMe}</span>
+        <textarea
+          className={s['settings-profile-form__row-input']}
+          name="aboutMe"
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          value={formik.values.aboutMe} />
+        {
+          formik.errors.aboutMe &&
+          <span className={s['settings-profile-form__row-error']}>*{formik.errors.aboutMe}</span>
         }
       </label>
 

@@ -3,6 +3,7 @@ import { InferActionsTypes, AppStateType } from "./store"
 import { profileAPI } from "../api/profile-api"
 import { ThunkAction } from "redux-thunk"
 import { PhotosType } from "./users-reducer"
+import { SettingsProfileFormInitialValuesType } from "../components/SettingsProfile/SettingsProfileForm"
 
 type InitialStateType = {
     profile: GetProfileType,
@@ -28,7 +29,8 @@ const initialState: InitialStateType = {
             large: '',
             small: ''
         },
-        userId: 0
+        userId: 0,
+        aboutMe: ''
     },
     status: '',
 }
@@ -45,7 +47,7 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
             return { ...state, status: action.status }
         }
         case 'SN/PROFILE/SET_MY_PHOTO_PROFILE': {
-            return { ...state, profile: {...state.profile, photos: action.photos}  }
+            return { ...state, profile: { ...state.profile, photos: action.photos } }
         }
     }
     return state
@@ -100,6 +102,21 @@ export const setPhotoProfileThunk = (file: File): ThunkType => {
         //Если код статуса 0, то все успешно, и мы перезаписываем статус
         if (statusResult.resultCode === 0) {
             dispatch(actions.setMyPhotoProfile(statusResult.data))
+        }
+    }
+}
+
+
+export const updateProfileThunk = (profile: SettingsProfileFormInitialValuesType): ThunkType => {
+    return async (dispatch, getState) => {
+        let prof: GetProfileType = { ...getState().profileReducer.profile, ...profile }
+
+        const statusResult = await profileAPI.updateProfile(prof)
+
+        if (statusResult.resultCode === 0) {
+            dispatch(actions.setProfile({ ...getState().profileReducer.profile, ...profile }))
+        } else {
+            console.log("Не получилось")
         }
     }
 }

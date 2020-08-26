@@ -3,7 +3,7 @@ import s from './SettingsProfile.module.scss';
 import { SettingsProfileForm, SettingsProfileFormInitialValuesType } from './SettingsProfileForm';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProfileDataSelect } from '../../selectors/profile-select';
-import { setProfileThunk } from '../../redux/profile-reducer';
+import { setProfileThunk, updateProfileThunk } from '../../redux/profile-reducer';
 import { getAuthIdSelect } from '../../selectors/auth-select';
 import { Loading } from '../../utils/Loading/Loading';
 
@@ -25,12 +25,13 @@ export const SettingsProfile: React.FC<PropsType> = React.memo((props) => {
   }, [dispatch, id])
 
   let profile = useSelector(getProfileDataSelect)
-  const { fullName, contacts, lookingForAJobDescription, lookingForAJob } = profile
+  const { fullName, contacts, lookingForAJobDescription, lookingForAJob, aboutMe } = profile
   const { mainLink, website, github, vk, facebook, twitter, instagram, youtube } = contacts
 
 
   const onSubmitHandler = (values: SettingsProfileFormInitialValuesType) => {
-    
+    dispatch(updateProfileThunk(values))
+
   }
 
 
@@ -52,6 +53,7 @@ export const SettingsProfile: React.FC<PropsType> = React.memo((props) => {
               twitter={twitter}
               instagram={instagram}
               youtube={youtube}
+              aboutMe={aboutMe}
               onSubmit={onSubmitHandler}
             /> :
             <Loading />

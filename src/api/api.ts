@@ -20,6 +20,7 @@ export type GetProfileType = {
   fullName: string
   contacts: GetProfileContactsType
   photos: PhotosType
+  aboutMe: string
 }
 
 export const instance = axios.create({
