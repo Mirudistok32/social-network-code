@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import s from './SettingsProfile.module.scss';
-import { SettingsProfileForm } from './SettingsProfileForm';
+import { SettingsProfileForm, SettingsProfileFormInitialValuesType } from './SettingsProfileForm';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProfileDataSelect } from '../../selectors/profile-select';
 import { setProfileThunk } from '../../redux/profile-reducer';
@@ -28,6 +28,12 @@ export const SettingsProfile: React.FC<PropsType> = React.memo((props) => {
   const { fullName, contacts, lookingForAJobDescription, lookingForAJob } = profile
   const { mainLink, website, github, vk, facebook, twitter, instagram, youtube } = contacts
 
+
+  const onSubmitHandler = (values: SettingsProfileFormInitialValuesType) => {
+    
+  }
+
+
   return (
     <div className={s.settings}>
       <div className={s.settings__form}>
@@ -46,6 +52,7 @@ export const SettingsProfile: React.FC<PropsType> = React.memo((props) => {
               twitter={twitter}
               instagram={instagram}
               youtube={youtube}
+              onSubmit={onSubmitHandler}
             /> :
             <Loading />
         }

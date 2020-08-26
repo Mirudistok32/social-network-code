@@ -4,7 +4,7 @@ import { useFormik, FormikConfig } from 'formik';
 import * as Yup from 'yup'
 
 
-export type PropsType = {
+type PropsType = {
   fullName: string
   facebook: string
   lookingForAJob: boolean
@@ -16,6 +16,7 @@ export type PropsType = {
   vk: string
   website: string
   youtube: string
+  onSubmit: (values: SettingsProfileFormInitialValuesType) => void
 }
 
 export type SettingsProfileFormInitialValuesType = {
@@ -47,7 +48,8 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
     facebook,
     twitter,
     instagram,
-    youtube
+    youtube,
+    onSubmit
   } = props
 
 
@@ -128,7 +130,12 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
       }
     },
     onSubmit: (values) => {
-      console.log(values);
+
+      // eslint-disable-next-line no-restricted-globals
+      let isYesNo = confirm("Вы точно хотите изменить свои данные?")
+      if (isYesNo) {
+        onSubmit(values)
+      }
     },
     validationSchema
   }
