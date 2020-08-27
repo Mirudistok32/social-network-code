@@ -78,13 +78,17 @@ export const loginOutThunk = (): ThunkType => async (dispatch) => {
     }
 }
 
-export const loginInThunk = (email: string, password: string, rememberMe: boolean): ThunkType => async (dispatch) => {
+export const loginInThunk = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => async (dispatch) => {
     dispatch(actions.setIsFetching(true))
 
-    let response = await authAPI.loginIn(email, password, rememberMe)
+    let response = await authAPI.loginIn(email, password, rememberMe, captcha)
 
     if (response.resultCode === 0) {
         dispatch(actions.setUserId(response.data.userId))
+    } else {
+        if(response.resultCode === 10){
+            dispatch(getCaptchaSecurityThunk())
+        }
     }
 
     dispatch(actions.setIsFetching(false))
@@ -94,7 +98,7 @@ export const loginInThunk = (email: string, password: string, rememberMe: boolea
 export const getCaptchaSecurityThunk = (): ThunkType => async (dispatch) => {
 
     const response = await securityAPI.getSecurityCaptcha()
-    const captchaURL = response.data.url
+    const captchaURL = response.url
 
     dispatch(actions.setCaptchaURL(captchaURL))
 }
