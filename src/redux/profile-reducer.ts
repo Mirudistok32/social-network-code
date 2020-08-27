@@ -114,7 +114,7 @@ export const updateProfileThunk = (profile: SettingsProfileFormInitialValuesType
         const statusResult = await profileAPI.updateProfile(prof)
 
         if (statusResult.resultCode === 0) {
-            dispatch(actions.setProfile({ ...getState().profileReducer.profile, ...profile }))
+            dispatch(actions.setProfile(prof))
         } else {
             console.log("Не получилось")
         }

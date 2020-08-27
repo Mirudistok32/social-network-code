@@ -126,7 +126,7 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
     initialValues: {
       fullName: fullName,
       lookingForAJob,
-      lookingForAJobDescription: '',
+      lookingForAJobDescription,
       contacts: {
         mainLink: '',
         website: '',
@@ -137,7 +137,7 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
         instagram: '',
         youtube: ''
       },
-      aboutMe: ''
+      aboutMe
     },
     onSubmit: (values) => {
 
