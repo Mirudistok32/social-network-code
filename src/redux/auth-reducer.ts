@@ -78,7 +78,7 @@ export const loginOutThunk = (): ThunkType => async (dispatch) => {
     }
 }
 
-export const loginInThunk = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => async (dispatch) => {
+export const loginInThunk = (email: string, password: string, rememberMe: boolean, captcha: string | null = null): ThunkType => async (dispatch) => {
     dispatch(actions.setIsFetching(true))
 
     let response = await authAPI.loginIn(email, password, rememberMe, captcha)

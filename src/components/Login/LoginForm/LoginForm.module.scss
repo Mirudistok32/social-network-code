@@ -14,10 +14,10 @@
     flex-direction: column;
     margin-bottom: 15px;
   }
-  &__row-checkbox{
+  &__row-checkbox {
     margin-bottom: 15px;
     max-width: 180px;
-    span{
+    span {
       font-size: 20px;
       margin-right: 5px;
     }
@@ -59,7 +59,7 @@
       box-shadow: 0 0 10px 1px dodgerblue;
     }
   }
-  &__button-disabled{
+  &__button-disabled {
     color: slategrey;
     background-color: silver;
     box-shadow: 0 0 0 1px slategrey;
@@ -70,5 +70,11 @@
   }
   &__error {
     color: red;
+  }
+  &__captcha-img {
+    background-color: red;
+    display: inline-block;
+    margin: 0 auto;
+    margin-bottom: 5px;
   }
 }
