@@ -128,14 +128,14 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
       lookingForAJob,
       lookingForAJobDescription,
       contacts: {
-        mainLink: '',
-        website: '',
-        github: '',
-        vk: '',
-        facebook: '',
-        twitter: '',
-        instagram: '',
-        youtube: ''
+        mainLink, 
+        website, 
+        github, 
+        vk, 
+        facebook, 
+        twitter, 
+        instagram, 
+        youtube,
       },
       aboutMe
     },
@@ -217,7 +217,7 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
       <span className={`${s['settings-profile-form__row']} ${s['settings-profile-form__row-contacts']}`}>
 
         <label className={s['settings-profile-form__row']}>
-          <span className={s['settings-profile-form__row-subtitle']}>MainLink:<span>{mainLink}</span></span>
+          <span className={s['settings-profile-form__row-subtitle']}>MainLink: <span>{mainLink}</span></span>
           <input className={s['settings-profile-form__row-input']}
             type="text"
             name="contacts.mainLink"
@@ -232,7 +232,7 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
         </label>
 
         <label className={s['settings-profile-form__row']}>
-          <span className={s['settings-profile-form__row-subtitle']}>Website:<span>{website}</span></span>
+          <span className={s['settings-profile-form__row-subtitle']}>Website: <span>{website}</span></span>
           <input className={s['settings-profile-form__row-input']}
             type="text"
             name="contacts.website"
@@ -247,7 +247,7 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
         </label>
 
         <label className={s['settings-profile-form__row']}>
-          <span className={s['settings-profile-form__row-subtitle']}>Github:<span>{github}</span></span>
+          <span className={s['settings-profile-form__row-subtitle']}>Github: <span>{github}</span></span>
           <input className={s['settings-profile-form__row-input']}
             type="text"
             name="contacts.github"
@@ -262,7 +262,7 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
         </label>
 
         <label className={s['settings-profile-form__row']}>
-          <span className={s['settings-profile-form__row-subtitle']}>Vk:<span>{vk}</span></span>
+          <span className={s['settings-profile-form__row-subtitle']}>Vk: <span>{vk}</span></span>
           <input className={s['settings-profile-form__row-input']}
             type="text"
             name="contacts.vk"
@@ -277,7 +277,7 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
         </label>
 
         <label className={s['settings-profile-form__row']}>
-          <span className={s['settings-profile-form__row-subtitle']}>Facebook:<span>{facebook}</span></span>
+          <span className={s['settings-profile-form__row-subtitle']}>Facebook: <span>{facebook}</span></span>
           <input className={s['settings-profile-form__row-input']}
             type="text"
             name="contacts.facebook"
@@ -292,7 +292,7 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
         </label>
 
         <label className={s['settings-profile-form__row']}>
-          <span className={s['settings-profile-form__row-subtitle']}>Twitter:<span>{twitter}</span></span>
+          <span className={s['settings-profile-form__row-subtitle']}>Twitter: <span>{twitter}</span></span>
           <input className={s['settings-profile-form__row-input']}
             type="text"
             name="contacts.twitter"
@@ -307,7 +307,7 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
         </label>
 
         <label className={s['settings-profile-form__row']}>
-          <span className={s['settings-profile-form__row-subtitle']}>Instagram:<span>{instagram}</span></span>
+          <span className={s['settings-profile-form__row-subtitle']}>Instagram: <span>{instagram}</span></span>
           <input className={s['settings-profile-form__row-input']}
             type="text"
             name="contacts.instagram"
@@ -322,7 +322,7 @@ export const SettingsProfileForm: React.FC<PropsType> = (props) => {
         </label>
 
         <label className={s['settings-profile-form__row']}>
-          <span className={s['settings-profile-form__row-subtitle']}>Youtube:<span>{youtube}</span></span>
+          <span className={s['settings-profile-form__row-subtitle']}>Youtube: <span>{youtube}</span></span>
           <input className={s['settings-profile-form__row-input']}
             type="text"
             name="contacts.youtube"

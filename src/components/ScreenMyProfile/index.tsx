@@ -13,7 +13,7 @@ type PropsType = {
 export const ScreenMyProfile: React.FC<PropsType> = ({ profile, status }) => {
 
   //lookingForAJob, lookingForAJobDescription no use
-  let { photos, fullName, contacts, userId } = profile
+  let { photos, fullName, contacts, userId, aboutMe, lookingForAJobDescription } = profile
 
   return (
     <div className="screen-my-profile">
@@ -21,7 +21,14 @@ export const ScreenMyProfile: React.FC<PropsType> = ({ profile, status }) => {
       <div className="container">
         {/* Левая колонка */}
         <LeftColumn photos={photos} />
-        <RightColumn fullName={fullName} contacts={contacts} userId={userId} photos={photos} status={status}/>
+        <RightColumn
+          fullName={fullName}
+          contacts={contacts}
+          userId={userId}
+          photos={photos}
+          status={status}
+          aboutMe={aboutMe} 
+          lookingForAJobDescription={lookingForAJobDescription} />
         {/* Правая колонка */}
       </div>
     </div>

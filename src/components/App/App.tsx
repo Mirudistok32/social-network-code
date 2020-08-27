@@ -68,7 +68,7 @@ export const App = () => {
               </Suspense>)} />
 
             {/* <Route exact path='/main' render={() => <div>Вот так вот</div>} /> !!! Не забыть сделать компоненту */}
-            <Redirect to={`/settings/profile`} />
+            <Redirect to={`/profile/${id}`} />
             {/* <Redirect to={`/profile/${id}`} /> */}
           </Switch>
         </>

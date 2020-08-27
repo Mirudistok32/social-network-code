@@ -7,12 +7,14 @@ export type PropsType = {
   bithday?: string
   city?: string
   contacts: GetProfileContactsType
+  lookingForAJobDescription: string
+  aboutMe: string
 }
 
 export const InfoUser: React.FC<PropsType> = React.memo((props) => {
 
   //Деструктуризируем свойства из пропса
-  const { bithday, city, contacts } = props
+  const { bithday, city, contacts, lookingForAJobDescription, aboutMe } = props
   let { facebook, github, instagram, mainLink, twitter, vk, website, youtube } = contacts
 
   //Хук, который отвечает за открытия всей информации при нажатии на кнопку"Смотреть всю информацию"
@@ -39,6 +41,22 @@ export const InfoUser: React.FC<PropsType> = React.memo((props) => {
       {
         active &&
         <div className="info-user__row-info">
+          {lookingForAJobDescription &&
+            <div className="info-user__row-website info-user__row">
+              <span>Чем я занимаюсь?</span>
+              <span className="info-user__requestData " >
+                {lookingForAJobDescription}
+              </span>
+            </div>
+          }
+          {aboutMe &&
+            <div className="info-user__row-website info-user__row">
+              <span>Что скажу о себе?</span>
+              <span className="info-user__requestData " >
+                {aboutMe}
+              </span>
+            </div>
+          }
           {facebook &&
             <div className="info-user__row-website info-user__row">
               <span>Facebook:</span>
