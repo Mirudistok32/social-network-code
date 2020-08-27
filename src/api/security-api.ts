@@ -10,6 +10,5 @@ export const securityAPI = {
       .get<SecurityCaptchaResponseType>(
         `security/get-captcha-url`
       )
-      .then((res) => res.data);
   },
 };
