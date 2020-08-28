@@ -1,14 +1,14 @@
 .screen-my-profile {
   padding-top: 25px;
-  height: 100%;
+  min-height: 100%;
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
   .container {
     color: #fff;
     display: flex;
     position: relative;
     justify-content: space-between;
+    min-height: 100%;
   }
 }
