@@ -32,7 +32,6 @@ const ContainerScreenMyProfile: React.FC<PropsType> = React.memo((props) => {
     setProfileThunk(userIdOfURL)
   }, [userIdOfURL, setProfileThunk])
 
-  console.log('object');
   //Если профиля еще нет(null), то крути прелоудер(загрузку), а когда профиль придет, то отрисовывай рабочую компаненту
   let watchingComponent = isLoading ? <Loading /> : <ScreenMyProfile profile={profile} status={status} />
 
