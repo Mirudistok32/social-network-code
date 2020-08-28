@@ -20,7 +20,7 @@ export const ScreenMyProfile: React.FC<PropsType> = ({ profile, status }) => {
       <VideoBackgound />
       <div className="container">
         {/* Левая колонка */}
-        <LeftColumn photos={photos} />
+        <LeftColumn />
         <RightColumn
           fullName={fullName}
           contacts={contacts}

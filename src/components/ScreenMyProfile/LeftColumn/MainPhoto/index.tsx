@@ -1,24 +1,22 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, useCallback } from 'react';
 import './MainPhoto.scss';
 import avatarDefault from '../../../../assets/images/octopus.svg'
-import { PhotosType } from '../../../../redux/users-reducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setPhotoProfileThunk } from '../../../../redux/profile-reducer';
 import { getAuthIdSelect } from '../../../../selectors/auth-select';
-// import avatarDefault from '../../assets/images/default-icon.jpg'
+import { AppStateType } from '../../../../redux/store';
 
 export type PropsType = {
-  photos: PhotosType
 }
 
 export const MainPhoto: React.FC<PropsType> = React.memo((props) => {
 
-  const { photos } = props
 
   const [isShow, setIsShow] = useState(false)
   const dispatch = useDispatch()
   const myId = useSelector(getAuthIdSelect)
+  const photos = useSelector((state: AppStateType) => state.profileReducer.photos)
   const { id } = useParams()
 
   useEffect(() => {
@@ -30,11 +28,10 @@ export const MainPhoto: React.FC<PropsType> = React.memo((props) => {
     }
   }, [myId, id])
 
-
   let photoURL = photos.small ? photos.small : photos.large ? photos.large : avatarDefault
+ 
 
-
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     //Нужно ли проверять тут длинну массива или просто присутствие самого массива хватит?
     if (e.target.files?.length) {
       // eslint-disable-next-line no-restricted-globals
@@ -45,7 +42,7 @@ export const MainPhoto: React.FC<PropsType> = React.memo((props) => {
     } else {
       console.log("Файл пуст!")
     }
-  }
+  }, [dispatch])
 
   return (
     <div className="main-photo main-photo__box" >
