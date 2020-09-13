@@ -7,10 +7,10 @@ import { PhotosType } from '../../../../../redux/users-reducer';
 
 
 export type PostType = {
-  photos: PhotosType
-  fullName: string,
+  photos?: PhotosType
+  fullName?: string,
   text?: string,
-  userId: number
+  userId?: number
 }
 
 const defaultSettings = {
@@ -22,7 +22,10 @@ export const Post: React.FC<PostType> = React.memo((props) => {
 
   const { photos, fullName = defaultSettings.name, text = defaultSettings.texts, userId } = props
 
-  let photoURL = photos.small ? photos.small : photos.large ? photos.large : defaultAvatar
+  let photoURL;
+  if(photos){
+    photoURL = photos.small ? photos.small : photos.large ? photos.large : defaultAvatar
+  }
 
   return (
     <div className="post">

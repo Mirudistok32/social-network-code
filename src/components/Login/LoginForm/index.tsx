@@ -10,14 +10,15 @@ import { loginInThunk } from '../../../redux/auth-reducer';
 type InitialValuesType = {
   login: string,
   password: string,
-  rememberMe: boolean
+  rememberMe: boolean,
+  captcha: string
 }
 
 export const LoginForm = React.memo(() => {
 
   //Блокируем кнопку, пока идет запрос на сервер
   const isFetching = useSelector((state: AppStateType) => state.authReducer.isFetching)
-
+  const captchaURL = useSelector((state: AppStateType) => state.authReducer.captchaURL)
   //Для диспатча наших Thunk или Action Creator
   const dispatch = useDispatch();
 
@@ -41,6 +42,9 @@ export const LoginForm = React.memo(() => {
       .required('Обязательное поле')
       .max(maxPasswordLength, `Максимальное число символов ${maxPasswordLength}`)
       .min(minPasswordLength, `Минимальное количество символов ${minPasswordLength}`),
+    captcha: Yup
+      .string()
+      .max(20, 'Максимальное количество символов 20')
   })
 
 
@@ -49,13 +53,14 @@ export const LoginForm = React.memo(() => {
     initialValues: {
       login: '',
       password: '',
-      rememberMe: false
+      rememberMe: false,
+      captcha: ''
     },
     validationSchema,
     onSubmit: (values) => {
-      let { login, password, rememberMe } = values
+      let { login, password, rememberMe, captcha } = values
       //Диспатчим нашу санку для входа
-      dispatch(loginInThunk(login, password, rememberMe))
+      dispatch(loginInThunk(login, password, rememberMe, captcha))
     }
   }
 
@@ -108,12 +113,31 @@ export const LoginForm = React.memo(() => {
           checked={formik.values.rememberMe}
         />
       </label>
+      {
+        captchaURL &&
+        < label className={s['login-form__row']}>
+          {/* <img src={formik.values.captcha ? formik.values.captcha : ''} alt="captcha" /> */}
+          <img className={s['login-form__captcha-img']} src={captchaURL ? captchaURL : ''} alt="captcha" />
+          <input
+            className={s['login-form__input']}
+            type="text"
+            name="captcha"
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.captcha}
+          />
+          {
+            formik.errors.captcha && <span className={s['login-form__error']}>*{formik.errors.captcha}</span>
+          }
+        </label>
+      }
+
 
       <button
         className={`${s['login-form__button']} ${isFetching && s['login-form__button-disabled']}`}
         type='submit'
         disabled={isFetching}>Войти</button>
-    </form>
+    </form >
   );
 })
 

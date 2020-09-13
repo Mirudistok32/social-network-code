@@ -1,5 +1,6 @@
 .post {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #2d2d2d38;
   &__user {
     display: flex;
     justify-content: space-between;
@@ -8,7 +9,7 @@
   &__user-box {
     display: flex;
   }
-  &__user-delete{
+  &__user-delete {
     display: flex;
     justify-content: center;
     padding-right: 10px;
@@ -40,5 +41,6 @@
   }
   &__content {
     padding: 0 5px;
+    margin-bottom: 10px;
   }
 }

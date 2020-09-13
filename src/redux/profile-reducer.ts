@@ -4,10 +4,19 @@ import { profileAPI } from "../api/profile-api"
 import { ThunkAction } from "redux-thunk"
 import { PhotosType } from "./users-reducer"
 import { SettingsProfileFormInitialValuesType } from "../components/SettingsProfile/SettingsProfileForm"
+import { v1 } from 'uuid'
+
+export type PostsType = {
+    id: string,
+    text: string
+}
 
 type InitialStateType = {
     profile: GetProfileType,
     status: string,
+    posts: Array<PostsType>,
+    loading: boolean,
+    photos: PhotosType
 }
 
 const initialState: InitialStateType = {
@@ -33,31 +42,45 @@ const initialState: InitialStateType = {
         aboutMe: ''
     },
     status: '',
+    posts: [],
+    loading: false,
+    photos: { large: '', small: '' }
 }
 
-type ActionsTypes = InferActionsTypes<typeof actions>
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+type actionsProfileTypes = InferActionsTypes<typeof actionsProfile>
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, actionsProfileTypes>
 
-export const profileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+export const profileReducer = (state = initialState, action: actionsProfileTypes): InitialStateType => {
     switch (action.type) {
         case 'SN/PROFILE/SET_PROFILE': {
-            return { ...state, profile: action.profile }
+            return { ...state, profile: action.profile, photos: action.profile.photos }
         }
         case 'SN/PROFILE/SET_STATUS_PROFILE': {
             return { ...state, status: action.status }
         }
         case 'SN/PROFILE/SET_MY_PHOTO_PROFILE': {
-            return { ...state, profile: { ...state.profile, photos: action.photos } }
+            return { ...state, photos: action.photos }
+        }
+        case 'SN/PROFILE/ADD_NEW_POST': {
+            const newPost: PostsType = {
+                id: v1(), text: action.payload
+            }
+            return { ...state, posts: [newPost, ...state.posts] }
+        }
+        case 'SN/PROFILE/IS_LOADING': {
+            return { ...state, loading: action.payload }
         }
     }
     return state
 }
 
 
-const actions = {
+export const actionsProfile = {
     setProfile: (profile: GetProfileType) => ({ type: 'SN/PROFILE/SET_PROFILE', profile } as const),
     setStatusProfile: (status: string) => ({ type: 'SN/PROFILE/SET_STATUS_PROFILE', status } as const),
-    setMyPhotoProfile: (photos: PhotosType) => ({ type: 'SN/PROFILE/SET_MY_PHOTO_PROFILE', photos } as const)
+    setMyPhotoProfile: (photos: PhotosType) => ({ type: 'SN/PROFILE/SET_MY_PHOTO_PROFILE', photos } as const),
+    addNewPost: (text: string) => ({ type: 'SN/PROFILE/ADD_NEW_POST', payload: text } as const),
+    isLoading: (isLoading: boolean) => ({ type: 'SN/PROFILE/IS_LOADING', payload: isLoading } as const)
 }
 
 
@@ -65,11 +88,14 @@ export const setProfileThunk = (id: number): ThunkType => {
 
     return async (dispatch) => {
 
+        dispatch(actionsProfile.isLoading(true))
         const status = await profileAPI.getStatusProfile(id)
         const profile = await profileAPI.getProfile(id)
 
-        dispatch(actions.setProfile(profile))
-        dispatch(actions.setStatusProfile(status))
+        dispatch(actionsProfile.setProfile(profile))
+        dispatch(actionsProfile.setStatusProfile(status))
+
+        dispatch(actionsProfile.isLoading(false))
 
     }
 }
@@ -77,7 +103,7 @@ export const setProfileThunk = (id: number): ThunkType => {
 export const setMyProfilePhotosThunk = (id: number): ThunkType => {
     return async (dispatch) => {
         const profile = await profileAPI.getProfile(id)
-        dispatch(actions.setMyPhotoProfile(profile.photos))
+        dispatch(actionsProfile.setMyPhotoProfile(profile.photos))
     }
 }
 
@@ -89,19 +115,22 @@ export const setProfileStatusThunk = (status: string): ThunkType => {
 
         //Если код статуса 0, то все успешно, и мы перезаписываем статус
         if (statusResult.resultCode === 0) {
-            dispatch(actions.setStatusProfile(status))
+            dispatch(actionsProfile.setStatusProfile(status))
         }
     }
 }
 
 //
 export const setPhotoProfileThunk = (file: File): ThunkType => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         const statusResult = await profileAPI.setPhotosProfile(file)
+        const id = getState().authReducer.id
 
-        //Если код статуса 0, то все успешно, и мы перезаписываем статус
         if (statusResult.resultCode === 0) {
-            dispatch(actions.setMyPhotoProfile(statusResult.data))
+            if (id) {
+                dispatch(setProfileThunk(id))
+            }
+            dispatch(actionsProfile.setMyPhotoProfile(statusResult.data))
         }
     }
 }
@@ -114,7 +143,7 @@ export const updateProfileThunk = (profile: SettingsProfileFormInitialValuesType
         const statusResult = await profileAPI.updateProfile(prof)
 
         if (statusResult.resultCode === 0) {
-            dispatch(actions.setProfile(prof))
+            dispatch(actionsProfile.setProfile(prof))
         } else {
             console.log("Не получилось")
         }

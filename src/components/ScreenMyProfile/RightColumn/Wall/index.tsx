@@ -2,6 +2,8 @@ import React from 'react';
 import './Wall.scss';
 import { Post } from './Post';
 import { PhotosType } from '../../../../redux/users-reducer';
+import { useSelector } from 'react-redux';
+import { AppStateType } from '../../../../redux/store';
 
 type PropsType = {
   userId: number
@@ -12,6 +14,14 @@ type PropsType = {
 export const Wall: React.FC<PropsType> = React.memo((props) => {
 
   const { userId, photos, fullName } = props
+
+  const posts = useSelector((state: AppStateType) => state.profileReducer.posts)
+
+  const postsWatching = posts.map(p => {
+    return (
+      <Post key={p.id} text={p.text} fullName={fullName} photos={photos} userId={userId} />
+    )
+  })
 
   return (
     <div className="wall">
@@ -25,7 +35,9 @@ export const Wall: React.FC<PropsType> = React.memo((props) => {
       </div>
       {/* Если нет постов, то в плане выводить надпись, что их нет */}
       {/* Post */}
-      <Post userId={userId} photos={photos} fullName={fullName} />
+      {
+        postsWatching
+      }
     </div>
   );
 })

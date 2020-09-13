@@ -21,7 +21,7 @@ export const authAPI = {
     getAuthMe: () => {
         return instance.get<GetAuthMeType<GetAuthMeDataType>>(`auth/me`).then(res => res.data)
     },
-    loginIn: (email: string, password: string, rememberMe: boolean = false) => {
+    loginIn: (email: string, password: string, rememberMe: boolean = false, captcha: null | string = null) => {
         return instance.post<GetAuthMeType<LoginIn>>(`auth/login`, { email, password, rememberMe }).then(res => res.data)
     },
     loginOut: () => {

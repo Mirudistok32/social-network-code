@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { ScreenMyProfile } from '.';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { AppStateType } from '../../redux/store';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { setProfileThunk } from '../../redux/profile-reducer'
@@ -19,19 +19,21 @@ type PathParamsType = {
 }
 type PropsType = OwnerType & MapStateType & MapDispatchType & RouteComponentProps<PathParamsType>
 
-const ContainerScreenMyProfile: React.FC<PropsType> = (props) => {
+const ContainerScreenMyProfile: React.FC<PropsType> = React.memo((props) => {
 
   //Деструктуризируем свойства из пропс
   const { setProfileThunk, match, profile, status } = props
 
-  let userIdOfURL = +match.params.id //Не забывать смотреть название параметров в match
+  // let userIdOfURL = +match.params.id //Не забывать смотреть название параметров в match
+  let userIdOfURL = useMemo(() => +match.params.id, [match.params.id])
+  const isLoading = useSelector((state: AppStateType) => state.profileReducer.loading)
 
   useEffect(() => {
     setProfileThunk(userIdOfURL)
-  }, [userIdOfURL, setProfileThunk, profile])
+  }, [userIdOfURL, setProfileThunk])
 
   //Если профиля еще нет(null), то крути прелоудер(загрузку), а когда профиль придет, то отрисовывай рабочую компаненту
-  let watchingComponent = !profile ? <Loading /> : <ScreenMyProfile profile={profile} status={status} />
+  let watchingComponent = isLoading ? <Loading /> : <ScreenMyProfile profile={profile} status={status} />
 
   return (<>
     {
@@ -39,7 +41,7 @@ const ContainerScreenMyProfile: React.FC<PropsType> = (props) => {
     }
   </>)
 
-}
+})
 
 const mapStateToProps = (state: AppStateType) => {
   return {
