@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Dialogs } from './Dialogs';
 
 
-export const ScreenMessagesRightColumn = () => {
+export const ScreenMessagesRightColumn = React.memo(() => {
   return (
     <div className="screen-messages-right-column">
       <Switch>
@@ -17,4 +17,4 @@ export const ScreenMessagesRightColumn = () => {
       </Switch>
     </div>
   );
-}
+})

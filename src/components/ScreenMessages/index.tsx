@@ -4,7 +4,7 @@ import { ScreenMessagesLeftColumn } from './ScreenMessagesLiftColumn';
 import { ScreenMessagesRightColumn } from './ScreenMessagesRightColumn';
 
 
-export const ScreenMessages = () => {
+export const ScreenMessages = React.memo(() => {
   return (
     <div className="screen-messages">
       <div className="container">
@@ -17,4 +17,4 @@ export const ScreenMessages = () => {
       </div>
     </div>
   );
-}
+})

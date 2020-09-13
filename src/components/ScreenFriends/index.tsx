@@ -11,7 +11,7 @@ export type DialogsType = {
   id?: string
 }
 
-export const ScreenFriends: React.FC<DialogsType> = (props) => {
+export const ScreenFriends: React.FC<DialogsType> = React.memo((props) => {
 
   // const { } = props
   
@@ -25,4 +25,4 @@ export const ScreenFriends: React.FC<DialogsType> = (props) => {
       </div>
     </div>
   );
-}
+})

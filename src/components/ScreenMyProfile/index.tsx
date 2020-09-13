@@ -10,7 +10,7 @@ type PropsType = {
   status: string
 }
 
-export const ScreenMyProfile: React.FC<PropsType> = ({ profile, status }) => {
+export const ScreenMyProfile: React.FC<PropsType> = React.memo(({ profile, status }) => {
 
   //lookingForAJob, lookingForAJobDescription no use
   let { photos, fullName, contacts, userId, aboutMe, lookingForAJobDescription } = profile
@@ -33,4 +33,4 @@ export const ScreenMyProfile: React.FC<PropsType> = ({ profile, status }) => {
       </div>
     </div>
   );
-}
+})
