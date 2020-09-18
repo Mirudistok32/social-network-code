@@ -1,8 +1,9 @@
 import React, { useState, ChangeEvent } from 'react';
 import './NameStatus.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppStateType } from '../../../../redux/store';
 import { setProfileStatusThunk } from '../../../../redux/profile-reducer';
+import { getAuthIdSelect } from '../../../../selectors/auth-select';
+import { getProfileStatusSelect } from '../../../../selectors/profile-select';
 
 export type NameStatusType = {
   fullName: string,
@@ -16,8 +17,8 @@ export const NameStatus: React.FC<NameStatusType> = React.memo((props) => {
   const { fullName, userId } = props
 
   //Достаем свойства из стейта
-  const myId = useSelector((state: AppStateType) => state.authReducer.id)
-  const status = useSelector((state: AppStateType) => state.profileReducer.status)
+  const myId = useSelector(getAuthIdSelect)
+  const status = useSelector(getProfileStatusSelect)
 
   //Хук для диспатча
   const dispatch = useDispatch()
