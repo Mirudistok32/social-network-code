@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import './Wall.scss';
 import { Post } from './Post';
 import { PhotosType } from '../../../../redux/users-reducer';
@@ -17,11 +17,11 @@ export const Wall: React.FC<PropsType> = React.memo((props) => {
 
   const posts = useSelector((state: AppStateType) => state.profileReducer.posts)
 
-  const postsWatching = posts.map(p => {
+  const postsWatching = useMemo(() => posts.map(p => {
     return (
       <Post key={p.id} text={p.text} fullName={fullName} photos={photos} userId={userId} />
     )
-  })
+  }), [posts, fullName, photos, userId])
 
   return (
     <div className="wall">

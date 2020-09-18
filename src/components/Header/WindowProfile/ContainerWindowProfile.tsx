@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './WindowProfile.scss';
 import { WindowProfile } from '.';
 import { compose } from 'redux';
@@ -33,9 +33,9 @@ const ContainerWindowProfile: React.FC<PropsType> = (props) => {
 
   //Функция, которая регулирует включения и выключения окна настроек в WindowProfile(в окне профиля),
   //Прокидываю ее в пропсы до элемента кнопки 'открытия настройки'(шестиренки), от куда буду получать объект события (e)
-  const setActiveWindowToggleCallback = () => {
+  const setActiveWindowToggleCallback = useCallback(() => {
     setActiveWindow(!isActiveWindow)
-  }
+  },[isActiveWindow,setActiveWindow])
 
   //Запрашиваб свой профиль
   useEffect(() => {
