@@ -48,6 +48,7 @@ const initialState: InitialStateType = {
 }
 
 type actionsProfileTypes = InferActionsTypes<typeof actionsProfile>
+
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, actionsProfileTypes>
 
 export const profileReducer = (state = initialState, action: actionsProfileTypes): InitialStateType => {

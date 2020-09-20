@@ -12,11 +12,12 @@ const rootReducers = combineReducers({
     headerReducer
 })
 
-type RootReducersType = typeof rootReducers
-export type AppStateType = ReturnType<RootReducersType>;
+export type AppStateType = ReturnType<typeof rootReducers>;
 
 type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never
+// type MyReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer P ? P : any
 export type InferActionsTypes<T extends { [key: string]: (...args: any[]) => any }> = ReturnType<PropertiesTypes<T>>
+// export type InferActionsTypes<T extends { [key: string]: (...args: any[]) => any }> = T extends (...args: any) => infer P ? P extends { [key: string]: infer U } ? U : never : any
 
 // Расширение для Redux devtools
 //@ts-ignore
