@@ -1,5 +1,5 @@
 import { GetProfileType } from "../api/api"
-import { InferActionsTypes, AppStateType } from "./store"
+import {InferActionsTypes, AppStateType } from "./store"
 import { profileAPI } from "../api/profile-api"
 import { ThunkAction } from "redux-thunk"
 import { PhotosType } from "./users-reducer"
